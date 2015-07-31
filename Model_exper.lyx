@@ -1,0 +1,1451 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\input{PaperFigures/preamble.tex}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip smallskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Model: Experience profiles in Ben-Porath
+\end_layout
+
+\begin_layout Standard
+Accounting for changing experience profiles in Ben-Porath.
+\end_layout
+
+\begin_layout Standard
+Based on sojt.
+\end_layout
+
+\begin_layout Section
+Tasks
+\end_layout
+
+\begin_layout Paragraph
+if a model with essentially constant hc fits so well, how far can I go with
+ a model that has constant hc?
+\end_layout
+
+\begin_layout Standard
+have figures in slides that show that a model with const exper profiles
+ fits extremely well
+\end_layout
+
+\begin_layout Standard
+hasn't anyone noticed this?
+\end_layout
+
+\begin_layout Standard
+formally compare fit with model
+\end_layout
+
+\begin_layout Standard
+is there a metric that says how much better one could do? R^2? Should one
+ test whether one can reject that model = data?
+\end_layout
+
+\begin_layout Standard
+if such a model fits so well, why do people claim that cross-sectional wage
+ profiles change over time.
+\end_layout
+
+\begin_layout Standard
+Juhn Murphy Pierce (1993): return to experience rises since about 1970.
+ From a decomposition.
+\end_layout
+
+\begin_layout Standard
+Kambourov / Manovskii mention steepening of cross-sectional wage profiles.
+ No clear reference.
+\end_layout
+
+\begin_layout Standard
+results_cpsojt.cs_profiles shows cross-sectional profiles
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+my assumption about skill weights (SBTC) is not consistent with my assumption
+ about labor supplies (constant)
+\end_layout
+
+\begin_layout Standard
+I need to switch SBTC on at some date and off at another
+\end_layout
+
+\begin_layout Standard
+Look at Guvenen/Kuruscu; Katz/Murphy.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+need to better understand age specific college premium.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+add break in sbtc
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+show fit
+\end_layout
+
+\begin_layout Standard
+histogram of residuals
+\end_layout
+
+\begin_layout Standard
+and of data errors (draws from N(0, sigma of estimates of log median wages))
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+compute aggregates in model and data to be comparable
+\end_layout
+
+\begin_layout Standard
+use only modeled cohorts
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+Questions about current results
+\end_layout
+
+\begin_layout Standard
+key: if the model fits the age-wage profiles, why does it not fit the aggregates
+?
+\end_layout
+
+\begin_layout Standard
+there must be a difference in the way the aggregates are constructed - data
+ vs model
+\end_layout
+
+\begin_layout Standard
+check for a given year what I don't match
+\end_layout
+
+\begin_layout Itemize
+weights by [age, school] are the same for model and data by construction
+\end_layout
+
+\begin_layout Itemize
+look at wage by [age, school] model vs data for a single year (e.g.
+ 2000) -- where is the discrepancy; and why does it not show up in the wage
+ profiles?
+\end_layout
+
+\begin_layout Standard
+currently modified code (marked by +++++) to set non-modeled cohorts equal
+ to nearest modeled cohort.
+ That fixes the aggregates for the most part.
+\end_layout
+
+\begin_layout Standard
+probably best solution:
+\end_layout
+
+\begin_layout Itemize
+non-modeled cohorts are not computed at all
+\end_layout
+
+\begin_layout Itemize
+to compute aggregates: use data to infer labor inputs of non-modeled cohorts
+\end_layout
+
+\begin_layout Standard
+observations:
+\end_layout
+
+\begin_layout Enumerate
+young cwp keeps rising after 1995 - why
+\end_layout
+
+\begin_layout Enumerate
+model implies big out of sample rise in skill prices - why?
+\end_layout
+
+\begin_layout Enumerate
+does not fit timing of aggregate wage series, even though it fits the cohort
+ profiles - reconcile
+\end_layout
+
+\begin_layout Standard
+Just forget about computing Card-Lemieux.
+ You cant do that cleanly in the model
+\end_layout
+
+\begin_layout Standard
+phase in SBTC as in Katz/Murphy.
+ That will fit the coll wp up to 1980 better.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+for cohorts born before 1930: take schooling from census data
+\end_layout
+
+\begin_layout Standard
+the fact that schooling is rising fast during this period could matter
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+data:
+\end_layout
+
+\begin_layout Standard
+cohort hours fitted: levels differ too much across groups.
+ Not consistent with cohort profiles.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+why does h grow over time even though endowments are fixed?
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+Aggr labor inputs model: LS_astM
+\end_layout
+
+\begin_layout Standard
+to be consistent with the way data inputs are constructed: 
+\end_layout
+
+\begin_layout Enumerate
+where model cohorts observed (inside observed year range with wages): use
+ that
+\end_layout
+
+\begin_layout Enumerate
+in year range with wages where model cohorts not present: use data labor
+ inputs
+\end_layout
+
+\begin_layout Enumerate
+outside year range with wages: use steady state model solution (only to
+ get skill prices there)
+\end_layout
+
+\begin_layout Standard
+To use data inputs:
+\end_layout
+
+\begin_layout Enumerate
+get mean wage per hour w_astM; in model units
+\end_layout
+
+\begin_layout Enumerate
+compute labor input as LS_astM = w_astM ./ skillPrice_astM (from the model)
+\end_layout
+
+\begin_layout Standard
+should then push 1st cohort 10 years earlier
+\end_layout
+
+\begin_layout Standard
+could fit a quartic to the cross section and use that.
+ Less noise.
+ 
+\end_layout
+
+\begin_layout Standard
+Need to check that data labor inputs are close to model labor inputs once
+ model has converged.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+no need for 3 year cohorts
+\end_layout
+
+\begin_layout Standard
+can compute more early / late cohorts
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+how to compute an equilibrium without calibration
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+cal_check
+\end_layout
+
+\begin_layout Standard
+test really everything
+\end_layout
+
+\begin_layout Standard
+test that skill price growth rates are correct; including g(collPrem)
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Subsection
+Model
+\end_layout
+
+\begin_layout Subsubsection
+School choice
+\end_layout
+
+\begin_layout Standard
+sequential choice might work better
+\end_layout
+
+\begin_layout Standard
+does it still get stuck at corners, even with the type I shocks?
+\end_layout
+
+\begin_layout Standard
+better way of calibrating school choice params?
+\end_layout
+
+\begin_layout Standard
+better way of specifying school costs?
+\end_layout
+
+\begin_layout Itemize
+set bounds for school costs to ensure that the median person chooses each
+ level with positive probability?
+\end_layout
+
+\begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Standard
+std error bands where I show fit by cohort
+\end_layout
+
+\begin_layout Subsection
+Computation
+\end_layout
+
+\begin_layout Standard
+try gradient based algorithm for parallel
+\end_layout
+
+\begin_layout Subsection
+Identification
+\end_layout
+
+\begin_layout Standard
+Trouble with 
+\begin_inset Formula $\pi$
+\end_inset
+
+and 
+\begin_inset Formula $\gamma_{ap}$
+\end_inset
+
+.
+ Probably need to fix one.
+ Both play a similar role
+\end_layout
+
+\begin_layout Standard
+For identifying objects other than selection, can set 
+\begin_inset Formula $\gamma_{ap}=0$
+\end_inset
+
+.
+ For selection, need to add IQ targets back in.
+\end_layout
+
+\begin_layout Subsection
+Fix in sost programs
+\end_layout
+
+\begin_layout Standard
+skill price computation: nodes are wrong (b/c I changed wageYearV to be
+ length 2)
+\end_layout
+
+\begin_layout Section
+Features
+\end_layout
+
+\begin_layout Standard
+GE.
+ Deterministic.
+ School Choice.
+\end_layout
+
+\begin_layout Standard
+Essentially a deterministic version of the SOST model.
+\end_layout
+
+\begin_layout Section
+Endowments
+\end_layout
+
+\begin_layout Subsection
+Insights
+\end_layout
+
+\begin_layout Subsubsection
+Endowments on a grid
+\end_layout
+
+\begin_layout Standard
+Not a good choice? 
+\end_layout
+
+\begin_layout Standard
+Would not have to simulate, but computing stats becomes much more complicated
+ (or perhaps not; if I know the mass of each grid point by schooling, it's
+ easy).
+\end_layout
+
+\begin_layout Section
+School Choice
+\end_layout
+
+\begin_layout Standard
+Calibrate for each cohort:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ for each graduation probability function
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\prefShockEntryMean$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To match school fractions.
+\end_layout
+
+\begin_layout Section
+OJT part
+\end_layout
+
+\begin_layout Standard
+Solved using 
+\family typewriter
+BenPorathLH
+\family default
+ class.
+\end_layout
+
+\begin_layout Subsection
+Closed form solution
+\end_layout
+
+\begin_layout Standard
+See notes on BenPorath code in Matlab
+\end_layout
+
+\begin_layout Section
+Aggregation
+\end_layout
+
+\begin_layout Standard
+We want labor supply in efficiency units by 
+\begin_inset Formula $[s,\pYear]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\lSupply_{s,\pYear}=\sum_{\age}\aggrHours_{\age,s,\bYear\left(\age,\pYear\right)}\effUnits$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Data: 1964+
+\end_layout
+
+\begin_layout Itemize
+hours worked by 
+\begin_inset Formula $[\age,s,\pYear]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Model: selected cohorts
+\end_layout
+
+\begin_layout Itemize
+mean efficiency per hours worked by 
+\begin_inset Formula $\left[\bYear,s,\age\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assumption: for years not observed, hours worked look like closest cohort
+\end_layout
+
+\begin_layout Itemize
+now we have hours for all skill price years
+\end_layout
+
+\begin_layout Standard
+Assumption: for cohorts not modeled, efficiency looks like the nearest 
+\begin_inset Formula $n$
+\end_inset
+
+ modeled cohorts
+\end_layout
+
+\begin_layout Itemize
+now we have efficiency for all cohorts needed.
+\end_layout
+
+\begin_layout Section
+Calibration
+\end_layout
+
+\begin_layout Subsection
+Checking convergence
+\end_layout
+
+\begin_layout Standard
+Matlab's multistart algorithms are not very useful.
+\end_layout
+
+\begin_layout Standard
+Easiest way of checking convergence is with a grid (cS.gridTest).
+ 8 identical sets.
+ Perturb guesses, except for 1st set.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+globalsearch_lh
+\end_layout
+
+\begin_layout Itemize
+needs to be fixed for parallel
+\end_layout
+
+\begin_layout Itemize
+make sure nothing is loaded or saved inside the iteration function (random
+ vars, guesses, history)
+\end_layout
+
+\begin_layout Subsection
+Algorithm 1: N-M + G-S
+\end_layout
+
+\begin_layout Standard
+Outer loop
+\end_layout
+
+\begin_layout Enumerate
+Iterate over all model params, including skill bias params
+\end_layout
+
+\begin_layout Enumerate
+Solve model for given params
+\end_layout
+
+\begin_layout Enumerate
+Update using gradient free method
+\end_layout
+
+\begin_layout Standard
+Inner loop
+\end_layout
+
+\begin_layout Enumerate
+Iterate over skill price paths
+\end_layout
+
+\begin_layout Enumerate
+Solve model for given skill prices
+\end_layout
+
+\begin_layout Enumerate
+Update using Gauss-Seidel
+\end_layout
+
+\begin_layout Standard
+Benefits:
+\end_layout
+
+\begin_layout Itemize
+easy to program
+\end_layout
+
+\begin_layout Standard
+Drawbacks:
+\end_layout
+
+\begin_layout Itemize
+could be quite slow; both loops are gradient free
+\end_layout
+
+\begin_layout Standard
+Alternative: solve Gauss-Seidel precisely; then use gradient based outer
+ loop.
+ Algorithm needs to have substantial step size (imfil).
+\end_layout
+
+\begin_layout Subsection
+Algorithm 2: N-M + Spline [use this]
+\end_layout
+
+\begin_layout Standard
+Loop:
+\end_layout
+
+\begin_layout Enumerate
+Iterate over model params + spline params
+\end_layout
+
+\begin_layout Enumerate
+Solve model for given skill prices
+\end_layout
+
+\begin_layout Enumerate
+Penalize deviation from spline and model implied skill prices
+\end_layout
+
+\begin_layout Enumerate
+Update using N-M.
+ Cannot do gradient based method b/c dimensionality too high
+\end_layout
+
+\begin_layout Standard
+Benefits:
+\end_layout
+
+\begin_layout Itemize
+easy to program (current code)
+\end_layout
+
+\begin_layout Standard
+Drawbacks:
+\end_layout
+
+\begin_layout Itemize
+not exactly correct skill prices
+\end_layout
+
+\begin_layout Subsection
+Skill prices
+\end_layout
+
+\begin_layout Standard
+Params are simply skill prices at spline nodes.
+\end_layout
+
+\begin_layout Subsubsection
+Out of sample
+\end_layout
+
+\begin_layout Standard
+Assume constant schooling of all future cohorts
+\end_layout
+
+\begin_layout Standard
+Assume constant relative skill weights after 2010
+\end_layout
+
+\begin_layout Standard
+If GE: number of skill price spline params gets much larger.
+\end_layout
+
+\begin_layout Enumerate
+Solve the problems of a fixed number of cohorts.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Afterwards, assume that future cohorts look like some form of steady state.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Assume that all future cohorts look like an average of model cohorts
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+but not internally consistent
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+Compute transition to steady state
+\end_layout
+
+\begin_layout Standard
+This is the cleanest approach.
+\end_layout
+
+\begin_layout Standard
+Assume:
+\end_layout
+
+\begin_layout Enumerate
+schooling is constant for all cohorts not in sample
+\end_layout
+
+\begin_layout Enumerate
+relative skill weights are constant for out of sample periods
+\end_layout
+
+\begin_layout Standard
+Then the model starts and ends in a known (given params) steady state.
+ Compute the initial and terminal ss.
+\end_layout
+
+\begin_layout Standard
+Compute a large number of cohorts around the sample period.
+ Large enough that the first / last cohorts look like steady state.
+\end_layout
+
+\begin_layout Standard
+Read about computational approaches for this.
+ How to handle skill prices? +++
+\end_layout
+
+\begin_layout Paragraph
+Gauss Seidel 1
+\end_layout
+
+\begin_layout Enumerate
+Guess params
+\end_layout
+
+\begin_layout Enumerate
+Solve model conditional on params
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Guess skill prices (constant out of extended sample period)
+\end_layout
+
+\begin_layout Enumerate
+Solve agents' problems
+\end_layout
+
+\begin_layout Enumerate
+Compute aggregates
+\end_layout
+
+\begin_layout Enumerate
+Update skill prices and iterate
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Update params
+\end_layout
+
+\begin_layout Enumerate
+Drawback: Outer loop is not precise (b/c it nests the gauss-seidel).
+ Cannot use derivative based methods
+\end_layout
+
+\begin_layout Enumerate
+Benefits: Easy to program.
+ Easy to implement counterfactuals.
+\end_layout
+
+\begin_layout Enumerate
+This is worth trying.
+\end_layout
+
+\begin_layout Paragraph
+Gauss Seidel 2
+\end_layout
+
+\begin_layout Enumerate
+Guess skill prices.
+ Constant out of extended sample period.
+\end_layout
+
+\begin_layout Enumerate
+Calibrate all model params, given skill prices
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Guess params
+\end_layout
+
+\begin_layout Enumerate
+Solve agents' problems, given skill prices.
+ Compute aggregates
+\end_layout
+
+\begin_layout Enumerate
+Deviations: measured wages; deviation from given skill prices
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Gauss-Seidel update skill prices
+\end_layout
+
+\begin_layout Enumerate
+Benefits: Calibration can use derivative based methods.
+ Still easy to compute.
+\end_layout
+
+\begin_layout Enumerate
+Drawbacks: Gauss-Seidel may not converge well.
+\end_layout
+
+\begin_layout Enumerate
+This is worth trying.
+\end_layout
+
+\begin_layout Subsection
+Calibrating as a GE model
+\end_layout
+
+\begin_layout Standard
+No need for 2 loops.
+ Iterate over guesses of skill prices (as I do in partial equilibrium model).
+ Back out implied skill weights.
+ Add deviation from exogenous restrictions on skill weights to deviation
+ function (e.g.
+ constant growth).
+\end_layout
+
+\begin_layout Standard
+There is hardly any need to change the code! It's just additional restrictions
+ on skill prices.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Subsubsection
+Initial / terminal conditions:
+\end_layout
+
+\begin_layout Enumerate
+Assume that spline skill prices remain constant (with constant growth) out
+ of sample
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Very fast to compute
+\end_layout
+
+\begin_layout Enumerate
+Potential drawback: Changing the spline changes out of sample household
+ behavior.
+ But: OJT is not affected.
+ Just school choice.
+ OJT just depends on wage growth rate.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Assume that steady state skill prices match cross-sectional age-wage distributio
+n in year 1 / N of wage data.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Expensive.
+ It takes a long time to find the skill prices that match those wage profiles.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Computing as transition between true steady states
+\end_layout
+
+\begin_layout Standard
+Involves adding a lot more cohorts at the start/end.
+\end_layout
+
+\begin_layout Standard
+Need assumptions about skill weight growth rates.
+\end_layout
+
+\begin_layout Standard
+Really does not make any sense.
+ The assumptions drive everything.
+\end_layout
+
+\begin_layout Standard
+Since there are no major changes in experience profiles, assuming that non-model
+ed cohorts are in steady state seems the least harmful (and computationally
+ cheap).
+\end_layout
+
+\begin_layout Section
+Steady State
+\end_layout
+
+\begin_layout Standard
+Useful for initial / terminal conditions.
+\end_layout
+
+\begin_layout Standard
+Assumptions:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $g\left(h_{1}\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $g\left(\omega_{s}\right)=\bar{g}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+schooling is constant
+\end_layout
+
+\begin_layout Enumerate
+zero population growth
+\end_layout
+
+\begin_layout Enumerate
+all cohorts have the same hours profile.
+\end_layout
+
+\begin_layout Standard
+Implications:
+\end_layout
+
+\begin_layout Enumerate
+All cohorts supply the same amount of labor - they are totally identical
+\end_layout
+
+\begin_layout Enumerate
+Skill prices grow at rate 
+\begin_inset Formula $\bar{g}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Job training, given 
+\begin_inset Formula $\left(a,h_{1}\right)$
+\end_inset
+
+ is independent of the level of skill prices
+\end_layout
+
+\begin_layout Standard
+Algorithm:
+\end_layout
+
+\begin_layout Enumerate
+Guess relative skill prices.
+ Levels are irrelevant.
+\end_layout
+
+\begin_layout Enumerate
+Solve the problem of a representative cohort.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+can precompute the OJT part - it never changes
+\end_layout
+
+\begin_layout Enumerate
+incl calibration of school costs
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Compute aggregate labor supplies.
+ Simply the sum over the representative cohorts' ages.
+\end_layout
+
+\begin_layout Enumerate
+Compute implied skill prices
+\end_layout
+
+\begin_layout Enumerate
+Update guesses.
+\end_layout
+
+\begin_layout Standard
+Details:
+\end_layout
+
+\begin_layout Enumerate
+hours profiles: use the profile for the adjacent cohort
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bar{g}$
+\end_inset
+
+: set to 2%; average wage growth rate over the post-war period
+\end_layout
+
+\begin_layout Enumerate
+schooling: use the fractions of the adjacent cohort
+\end_layout
+
+\begin_layout Enumerate
+skill prices: match the 1964 or 2010 cross sectional age profiles
+\end_layout
+
+\begin_layout Subsection
+Steady state equations
+\end_layout
+
+\begin_layout Section
+Representative Agent Model
+\end_layout
+
+\begin_layout Standard
+What if we try a much simpler model?
+\end_layout
+
+\begin_layout Standard
+For each school group, there is a representative household, endowed with
+ h1, a.
+\end_layout
+
+\begin_layout Standard
+There is no school choice.
+\end_layout
+
+\begin_layout Standard
+Everything else is the same.
+\end_layout
+
+\begin_layout Standard
+This model may have a shot because selection effects seem weak.
+\end_layout
+
+\begin_layout Itemize
+mean ability falls for all groups; also mean h1
+\end_layout
+
+\begin_layout Itemize
+if constant fails, could have a constant trend in h1/a (the trends in h1
+ and a don't matter separately)
+\end_layout
+
+\begin_layout Itemize
+or one could make mean 
+\begin_inset Formula $a$
+\end_inset
+
+ a function of cohort schooling
+\end_layout
+
+\begin_layout Standard
+Very transparent.
+ Easy to solve.
+\end_layout
+
+\begin_layout Section
+Kure
+\end_layout
+
+\begin_layout Standard
+General notes: matlab_docu
+\end_layout
+
+\begin_layout Standard
+Program dir set in iniglob_so1
+\end_layout
+
+\begin_layout Standard
+evernote has commands
+\end_layout
+
+\begin_layout Section
+Notation
+\end_layout
+
+\begin_layout Standard
+subscript order: [age, year, ability, school, cohort]
+\end_layout
+
+\begin_layout Subsection
+lower roman
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $c\left(t,\tau\right)$
+\end_inset
+
+: cohort
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $g$
+\end_inset
+
+: growth rates
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $h$
+\end_inset
+
+: human capital (individual)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $l$
+\end_inset
+
+: study time
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p$
+\end_inset
+
+: preference shock
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $s$
+\end_inset
+
+: schooling
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $t$
+\end_inset
+
+: age
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w$
+\end_inset
+
+: skill price
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $y$
+\end_inset
+
+: earnings
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $z$
+\end_inset
+
+: measured wage
+\end_layout
+
+\begin_layout Subsection
+upper roman
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $A,B$
+\end_inset
+
+: productivity parameters
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $G$
+\end_inset
+
+: unskilled labor aggregator
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $L_{s,t}$
+\end_inset
+
+: effective labor supply
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $N$
+\end_inset
+
+: cohort size
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q$
+\end_inset
+
+: aggregate output
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $T$
+\end_inset
+
+: life span
+\end_layout
+
+\begin_layout Subsection
+lower greek
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+: hc production function curvature
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\gamma$
+\end_inset
+
+: parameters that determine correlations of 
+\begin_inset Formula $a,h_{1},p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\delta$
+\end_inset
+
+: depreciation rate
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+: error terms
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\phi$
+\end_inset
+
+: curvature of school prod fct
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\lambda_{s}$
+\end_inset
+
+: weights in 
+\begin_inset Formula $Y$
+\end_inset
+
+ production function
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mu_{s,\tau}$
+\end_inset
+
+: school costs
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\pi_{\tau}$
+\end_inset
+
+: scale parameter for 
+\begin_inset Formula $p$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\rho$
+\end_inset
+
+: subst elast of labor inputs
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\sigma$
+\end_inset
+
+: std dev
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\theta$
+\end_inset
+
+: scale param for 
+\begin_inset Formula $a$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\tau$
+\end_inset
+
+: date
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\omega_{t}$
+\end_inset
+
+: production function parameters.
+\end_layout
+
+\begin_layout Subsection
+upper greek
+\end_layout
+
+\begin_layout Section
+eof
+\end_layout
+
+\end_body
+\end_document

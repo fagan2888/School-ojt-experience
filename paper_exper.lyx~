@@ -1,0 +1,3233 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\input{/Users/lutz/Dropbox/data/software/lyx/paper_preamble.tex}
+
+% Constants and notation
+\input{PaperFigures/preamble.tex}
+
+% Shared constants
+%\input{/Users/lutz/Dropbox/hc/school_ojt/shared/out/preamble_so}
+% CPS constants + results
+%\input{/Users/lutz/Documents/econ/hc/school_ojt/cps/out/set005/preamble_cpsojt}
+% Group specific params
+%\input{/Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set901/preamble_so1}
+% Model specific params
+%\input{/Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/preamble_so1}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Accounting for Changing Returns to Experience
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For helpful comments I thank Shouyong Shi and seminar participants at the
+ University of Houston and University of Toronto.
+ The usual disclaimer applies.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Lutz Hendricks
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+University of North Carolina, Chapel Hill; lutz@lhendricks.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+Preliminary and incomplete.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Abstract
+To be written.
+\end_layout
+
+\begin_layout Abstract
+JEL: E24, J24 (human capital), I21 (analysis of education).
+\end_layout
+
+\begin_layout Abstract
+Key words: Education.
+ College wage premium.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Paragraph
+Related Literature:
+\end_layout
+
+\begin_layout Standard
+Large literature documenting changes in U.S.
+ wage distribution.
+ Recent surveys include 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "eckstein2004"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HeathcotePV2010"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Two previous approaches that study the evolution of U.S.
+ wages through the lens of human capital theory
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HeckmanLochnerT1998"
+
+\end_inset
+
+ - need to say clearly how this is different
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet
+key "guvenen2010nber"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+One innovation: show that the model accounts for cohort specific age wage
+ profiles.
+ More comprehensive comparison with data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Jeong2012"
+
+\end_inset
+
+ account for changing experience wage profiles based on changing relative
+ prices of experience and raw labor.
+\end_layout
+
+\begin_layout Section
+The Model
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Model"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The Environment
+\end_layout
+
+\begin_layout Standard
+I study a general equilibrium overlapping generations model.
+ The model abstracts from physical capital.
+ Agents can borrow and lend at an exogenous interest rate (as in a small
+ open economy).
+\end_layout
+
+\begin_layout Paragraph
+Demographics:
+\end_layout
+
+\begin_layout Standard
+In each period 
+\begin_inset Formula $\birthYear$
+\end_inset
+
+, 
+\begin_inset Formula $N_{\birthYear}$
+\end_inset
+
+ households are born.
+ Each lives for 
+\begin_inset Formula $\lifeSpan$
+\end_inset
+
+ periods.
+ Denote the year in which a person of cohort 
+\begin_inset Formula $c$
+\end_inset
+
+ is aged 
+\begin_inset Formula $\age$
+\end_inset
+
+ by 
+\begin_inset Formula $\pYear(\birthYear,\age)=\birthYear+\age-1$
+\end_inset
+
+.
+ Denote the cohort aged 
+\begin_inset Formula $\age$
+\end_inset
+
+ in year 
+\begin_inset Formula $\pYear$
+\end_inset
+
+ by 
+\begin_inset Formula $\birthYear(\age,\pYear)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Endowments:
+\end_layout
+
+\begin_layout Standard
+At birth, agents draw three random endowments: 
+\begin_inset Formula $\ability$
+\end_inset
+
+ , 
+\begin_inset Formula $h_{1}$
+\end_inset
+
+, and 
+\begin_inset Formula $p_{s}$
+\end_inset
+
+.
+ Learning ability 
+\begin_inset Formula $\ability$
+\end_inset
+
+ determines how efficiently the agent produces human capital in school or
+ on the job.
+ 
+\begin_inset Formula $h_{1}$
+\end_inset
+
+ denotes the age 1 endowment of human capital, which I think of as produced
+ during childhood prior to age 1.
+ 
+\begin_inset Formula $\ability$
+\end_inset
+
+ and 
+\begin_inset Formula $\ln(h_{1})$
+\end_inset
+
+ are drawn from a joint Normal distribution
+\begin_inset Formula 
+\begin{equation}
+\left[\begin{array}{c}
+a\\
+\ln(h_{1})
+\end{array}\right]\sim N\left(\left[\begin{array}{c}
+0\\
+0
+\end{array}\right],\left[\begin{array}{cc}
+1 & \rho_{a,h1}\\
+\rho_{a,h1} & \sigma_{h1}^{2}
+\end{array}\right]\right)
+\end{equation}
+
+\end_inset
+
+I normalize 
+\begin_inset Formula $\mathbb{E}(a)=\mathbb{E}\ln\left(h_{1}\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $Var(a)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p_{s}$
+\end_inset
+
+ is a 
+\begin_inset Quotes eld
+\end_inset
+
+psychic cost
+\begin_inset Quotes erd
+\end_inset
+
+ that determines how much the individual enjoys schooling level 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ 
+\begin_inset Formula $p_{s}$
+\end_inset
+
+ is drawn from a Gumbel distribution, which simplifies the school choice
+ problem.
+ +++
+\end_layout
+
+\begin_layout Standard
+In each period, a person supplies 
+\begin_inset Formula $\tEndow_{s,\birthYear,\pYear}$
+\end_inset
+
+ market hours.
+ They can be used for work or study.
+\end_layout
+
+\begin_layout Paragraph
+Preferences:
+\end_layout
+
+\begin_layout Standard
+Upon entering the labor market, individuals maximize the discounted present
+ value of lifetime earnings.
+ Equivalently, individuals maximize the present value of utility derived
+ from consumption subject to a lifetime budget constraint with perfect credit
+ markets.
+ There is no need to specify the utility function.
+ School choice is also affected by the psychic costs 
+\begin_inset Formula $p_{s}$
+\end_inset
+
+ (details below).
+\end_layout
+
+\begin_layout Paragraph
+Human capital production:
+\end_layout
+
+\begin_layout Standard
+Human capital is produced in school and on the job.
+ Agents choose from 
+\begin_inset Formula $S$
+\end_inset
+
+ discrete school levels.
+ Level 
+\begin_inset Formula $s$
+\end_inset
+
+ lasts 
+\begin_inset Formula $\sDuration$
+\end_inset
+
+ years and results in 
+\begin_inset Formula $h_{\sDuration+1}=F(h_{1},\ability,s)$
+\end_inset
+
+ units of type 
+\begin_inset Formula $s$
+\end_inset
+
+ human capital at the start of work (at age 
+\begin_inset Formula $1+\sDuration$
+\end_inset
+
+).
+ On the job, human capital is produced from human capital and study time
+ 
+\begin_inset Formula $l_{t}$
+\end_inset
+
+ according to
+\begin_inset Formula 
+\begin{equation}
+h_{t+1}=(1-\delta_{s})h_{t}+\pProduct(\ability,s)(h_{t}l_{t})^{\alpha_{s}}\label{eq:OJT}
+\end{equation}
+
+\end_inset
+
+where learning ability affects productivity according to 
+\begin_inset Formula $\pProduct(a,s)=e^{\pProduct_{s}+\abilScale\ability}$
+\end_inset
+
+.
+ Each worker's effective labor supply is given by 
+\begin_inset Formula 
+\begin{equation}
+\effUnits_{i,s,c,t}=h_{i,s,c,t}(\tEndow_{s,c,t}-l_{i,s,c,t})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Aggregate output and skill prices:
+\end_layout
+
+\begin_layout Standard
+Output is produced from human capital augmented labor according to
+\begin_inset Formula 
+\begin{equation}
+Q_{\tau}=\left[G_{\tau}^{\rho_{CG}}+(\omega_{CG,\tau}L_{CG,\tau})^{\rho_{CG}}\right]^{1/\rho_{CG}}
+\end{equation}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\begin{equation}
+G_{\tau}=\left[\sum_{s=HSD}^{CD}(\omega_{s,\tau}L_{s,\tau})^{\rho_{HS}}\right]^{1/\rho_{HS}}
+\end{equation}
+
+\end_inset
+
+is a CES aggregator for unskilled labor (with less than a college degree).
+ Skill prices equal marginal products: 
+\begin_inset Formula $\sPrice\left(s,\pYear\right)=\partial Q_{\tau}/\partial L_{s,\tau}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $L_{s,\tau}$
+\end_inset
+
+ denotes aggregate labor supply in efficiency units 
+\begin_inset Formula $(e_{s,c,t})$
+\end_inset
+
+ of school group 
+\begin_inset Formula $s$
+\end_inset
+
+ in year 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ Slightly abusing notation, this is given by
+\begin_inset Formula 
+\begin{equation}
+L_{s,\tau}=\sum_{t=T_{s}+1}^{T}\sum_{i=1}^{N_{c(t,\tau)}}p_{i,s,c}e_{i,s,c,t}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $p_{i,s,c}$
+\end_inset
+
+ is the (endogenous) probability that agent 
+\begin_inset Formula $i$
+\end_inset
+
+ chooses schooling level 
+\begin_inset Formula $s$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Household Problem
+\end_layout
+
+\begin_layout Standard
+The household is born at age 1 with endowments 
+\begin_inset Formula $\ability,h_{1}$
+\end_inset
+
+ .
+ 
+\end_layout
+
+\begin_layout Standard
+He first chooses a school level 
+\begin_inset Formula $s$
+\end_inset
+
+ and then spends 
+\begin_inset Formula $T_{s}$
+\end_inset
+
+ years in school, where he produces human capital 
+\begin_inset Formula $h_{T_{s}+1}$
+\end_inset
+
+.
+ Upon graduation, he begins work at age 
+\begin_inset Formula $T_{s}+1$
+\end_inset
+
+.
+ In each working period, he divides his time endowment between job-training
+ and work.
+ He retires at age 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Work phase:
+\end_layout
+
+\begin_layout Standard
+At the start of work, the agent is endowed with 
+\begin_inset Formula $h_{T_{s}+1}$
+\end_inset
+
+ units of type 
+\begin_inset Formula $s$
+\end_inset
+
+ human capital and with ability 
+\begin_inset Formula $\ability$
+\end_inset
+
+.
+ He maximizes the discounted present value of lifetime earnings
+\begin_inset Formula 
+\begin{equation}
+V(h_{T_{s}+1},\ability,s,\bYear)=\mbox{\max}_{\{l_{t}\}}\sum_{\age=\sDuration+1}^{\lifeSpan}R^{-\age}\earn(l_{\age},h_{\age},\age,s,\bYear)
+\end{equation}
+
+\end_inset
+
+subject to the law of motion for 
+\begin_inset Formula $h$
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:OJT"
+
+\end_inset
+
+ and the time constraint 
+\begin_inset Formula $0\le l\le\tEndow_{\age,s,\bYear}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $R$
+\end_inset
+
+ denotes the exogenous gross interest rate.
+ Period earnings are given by 
+\begin_inset Formula 
+\begin{equation}
+\earn\left(l,h,\age,s,\bYear\right)=\sPrice_{s,\tau(c,t)}h(\ell_{t,s,c}-l)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This problem can be solved analytically using a minor extension of the solution
+ given in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Huggett2006"
+
+\end_inset
+
+.
+ Assuming that study time is interior, optimal human capital investment
+ is given by (suppressing schooling and cohort subscripts for ease of notation)
+ 
+\begin_inset Formula 
+\begin{equation}
+(l_{t}h_{t})^{1-\alpha_{s}}=\pProduct d_{t}\label{eq:optInvest}
+\end{equation}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\begin{equation}
+d_{t}=\frac{\alpha_{s}}{Rw_{t}}\sum_{j=1}^{T-t}w_{t+j}\ell_{t+j}\left(\frac{1-\delta_{s}}{R}\right)^{j-1}
+\end{equation}
+
+\end_inset
+
+with 
+\begin_inset Formula $d_{T}=0$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{eqnarray}
+A(l_{t}h_{t})^{\alpha} & = & A(Ad_{t})^{\alpha/(1-\alpha)}\\
+ & = & A^{1/(1-\alpha)}d_{t}^{\alpha/(1-\alpha)}
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so that human capital is given by
+\begin_inset Formula 
+\begin{equation}
+h_{t}=h_{1}(1-\delta_{s})^{t-1}+A^{1/(1-\alpha)}x_{t}
+\end{equation}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\begin{equation}
+x_{t}=\sum_{j=1}^{t-1}d_{j}^{\alpha/(1-\alpha)}(1-\delta_{s})^{t-1-j}
+\end{equation}
+
+\end_inset
+
+with 
+\begin_inset Formula $x_{1}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The fact that 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ is common to all agents dramatically simplifies the numerical solution
+ of the model.
+\end_layout
+
+\begin_layout Standard
+Corner solutions need not be considered, given that the model will be calibrated
+ to match observed age-wage profiles.
+ Setting 
+\begin_inset Formula $l=\ell$
+\end_inset
+
+ would imply a wage rate of zero and an infinite deviation from the calibration
+ targets.
+\end_layout
+
+\begin_layout Subsubsection
+School phase:
+\end_layout
+
+\begin_layout Standard
+School choice is sequential.
+\end_layout
+
+\begin_layout Standard
+Individuals start their lives as high school students.
+\end_layout
+
+\begin_layout Standard
+While in school, human capital accumulation is described by the function
+ 
+\begin_inset Formula $h_{s}\left(h_{1},\ability,\bYear\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+They graduate with probability 
+\begin_inset Formula $\probHSG\left(\ability\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Then they decide whether or not to enter college.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\max\left\{ V\left(h_{HSG}\left(h_{1},\ability,\bYear\right),\ability,HSG,\bYear\right)+\prefShockEntryMean-\prefScale\prefShockEntry,V_{coll}\left(h_{1},\ability,\bYear\right)-\prefScale\prefShockEntry\right\} 
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\prefShockEntry$
+\end_inset
+
+ are independent type I extreme value shocks.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\prefShockEntryMean$
+\end_inset
+
+ is a constant that governs college entry rates.
+\end_layout
+
+\begin_layout Standard
+In college: stay for 2 years.
+ Then a dropout shock is realized.
+ With probability 
+\begin_inset Formula $\probCG\left(\ability\right)$
+\end_inset
+
+, a student remains in college for another 2 years and then graduates.
+ With complementary probability, the student must drop out and work as college
+ dropout.
+\end_layout
+
+\begin_layout Standard
+The value of college entry is therefore given by
+\begin_inset Formula 
+\begin{equation}
+V_{coll}\left(h_{1},\ability,\bYear\right)=\probCG\left(\ability\right)R^{-4}V\left(h_{CG}\left(h_{1},\ability,\bYear\right),\ability,\bYear\right)+\left(1-\probCG\left[\ability\right]\right)R^{-2}V\left(h_{CD}\left(h_{1},\ability,\bYear\right),\ability,\bYear\right)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Equilibrium
+\end_layout
+
+\begin_layout Standard
+A competitive equilibrium consists of an allocation and a price system 
+\begin_inset Formula $\left\{ w_{s,\tau}\right\} _{s=1}^{S}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\tau$
+\end_inset
+
+ that satisfy:
+\end_layout
+
+\begin_layout Enumerate
+Skill prices equal marginal products.
+\end_layout
+
+\begin_layout Enumerate
+Given skill prices, households optimally choose schooling and on-the-job
+ training.
+\end_layout
+
+\begin_layout Enumerate
+Labor markets clear [improve this +++]
+\end_layout
+
+\begin_layout Section
+Data and Calibration
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Calibration"
+
+\end_inset
+
+ [old +++]
+\end_layout
+
+\begin_layout Subsection
+Target Moments
+\end_layout
+
+\begin_layout Standard
+The main calibration targets are constructed from the March CPS files for
+ 
+\begin_inset Formula $\dataYearOne-\dataYearEnd$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ipums_cps"
+
+\end_inset
+
+.
+ They characterize men born between 
+\begin_inset Formula $\bYearFirst$
+\end_inset
+
+ and 
+\begin_inset Formula $\bYearLast$
+\end_inset
+
+.
+ To increase sample sizes, I divide the population into 
+\begin_inset Formula $\nCohorts$
+\end_inset
+
+ equally spaced birth cohorts.
+ For each cohort, I calculate 
+\end_layout
+
+\begin_layout Enumerate
+the fraction of persons that attains each of 4 school levels (high school
+ dropouts, high school graduates, college dropouts, college graduates and
+ more);
+\end_layout
+
+\begin_layout Enumerate
+log median wages by age and school group.
+\end_layout
+
+\begin_layout Standard
+Details of the CPS data are described in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AppCPS"
+
+\end_inset
+
+.
+ Additional moments that characterize the relationship between cognitive
+ test scores, schooling, and wages are needed to identify the dispersion
+ of ability 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and school sorting by ability:
+\end_layout
+
+\begin_layout Enumerate
+The mean cognitive test scores of college educated and non-college educated
+ workers for each cohort, taken from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "LHAbil"
+
+\end_inset
+
+ (see 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Model-FitIQ"
+
+\end_inset
+
+).
+ These are informative about the ability gaps between school groups and
+ their evolution over time.
+\end_layout
+
+\begin_layout Enumerate
+The coefficients obtained by regressing log wages on standard normal AFQT
+ scores and their interaction with a quadratic experience polynomial.
+ The regression also contain school dummies as controls.
+ This is based on NLSY79 data which are described in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:NLSY79-Data"
+
+\end_inset
+
+.
+ These are shown in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FitBetaIq"
+
+\end_inset
+
+.
+ How the association between wages and AFQT scores changes with experience
+ contains information about the effective dispersion of abilities 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and the correlation of abilities and human capital.
+ For example, if 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $\ln h_{1}$
+\end_inset
+
+ were uncorrelated, then the correlation between wages and AFQT would be
+ negative at the start of work and rise thereafter.
+\end_layout
+
+\begin_layout Standard
+In the model, I assume that cognitive test scores (labeled 
+\begin_inset Formula $IQ$
+\end_inset
+
+) are a noisy signal of ability:
+\begin_inset Formula 
+\begin{equation}
+IQ=a+\sigma_{IQ}\varepsilon_{IQ}\label{eq:IQ}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FitIQ"
+
+\end_inset
+
+ shows that the calibrated model matches both sets of moments reasonably
+ well.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Model fit: IQ targets
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:FitIQ"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/iq_model_data.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Model Fit
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Model-FitIQ"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/iq_wage_beta.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Model Fit
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:FitBetaIq"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Assumptions
+\end_layout
+
+\begin_layout Paragraph
+Functional forms:
+\end_layout
+
+\begin_layout Standard
+The production function for schooling is the same as that for job-training.
+ That is, 
+\begin_inset Formula $F(h_{1},a,s,\tau)$
+\end_inset
+
+ is found by iterating over 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:OJT"
+
+\end_inset
+
+ with 
+\begin_inset Formula $l_{t}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+with CG parameters -- highly arbitrary.
+\end_layout
+
+\begin_layout Standard
+Probability of high school graduation: logistic
+\end_layout
+
+\begin_layout Standard
+Probability of college graduation: logistic
+\end_layout
+
+\begin_layout Paragraph
+Demographics:
+\end_layout
+
+\begin_layout Standard
+The size of each cohort, 
+\begin_inset Formula $N_{\tau}$
+\end_inset
+
+, is calculated from CPS data (see 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AppCPS"
+
+\end_inset
+
+).
+ Students enter the model at physical age 
+\begin_inset Formula $\ageOne$
+\end_inset
+
+ (model age 1).
+ They work until physical age 
+\begin_inset Formula $\ageRetire$
+\end_inset
+
+ (
+\begin_inset Formula $T=\ageRetire-\ageOne$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Paragraph
+Endowments:
+\end_layout
+
+\begin_layout Standard
+An easy way of drawing joint Normal random variables is as follows.
+ First, I draw 
+\begin_inset Formula $a,\eta$
+\end_inset
+
+ from independent standard Normal distributions.
+ Then I define 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\ln h_{1}=\sigma_{h1}\frac{\gamma_{ah}a+\eta}{(1+\gamma_{ah}^{2})^{1/2}}
+\end{equation}
+
+\end_inset
+
+Varying 
+\begin_inset Formula $\gamma_{ah}\ge0$
+\end_inset
+
+ controls the correlation of 
+\begin_inset Formula $\ln h_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\sigma_{h1}$
+\end_inset
+
+ is the standard deviation of 
+\begin_inset Formula $\ln h_{1}$
+\end_inset
+
+ in each cohort.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Fixed parameters:
+\end_layout
+
+\begin_layout Standard
+Wages are expressed in year 
+\begin_inset Formula $\cpiBaseYear$
+\end_inset
+
+ prices.
+ The gross interest rate is set to 
+\begin_inset Formula $R=\grossInt$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Average market hours 
+\begin_inset Formula $\ell_{s,t,\tau}$
+\end_inset
+
+ are measured from CPS data (see 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AppCPS"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+School durations 
+\begin_inset Formula $T_{s}$
+\end_inset
+
+ are set such that high school graduates start working at age 
+\begin_inset Formula $\ageOneHSG$
+\end_inset
+
+ and college graduates start working at age 
+\begin_inset Formula $\ageOneCG$
+\end_inset
+
+.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:ParamFixed"
+
+\end_inset
+
+ summarizes these parameter values.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fixed parameters
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:ParamFixed"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset CommandInset include
+LatexCommand include
+filename "so1/set006/out/param_fixed_tb.tex"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Aggregation:
+\end_layout
+
+\begin_layout Standard
+The algorithm computes equilibrium prices and quantities for all years during
+ which one of the model cohorts works (
+\begin_inset Formula $\spYearOne-\spYearEnd$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+In a given year, cohorts that are not modeled contribute to aggregate labor
+ supply.
+ Notably, in 
+\begin_inset Formula $\wageYearOne$
+\end_inset
+
+ the oldest model cohort is +++ years old.
+ 
+\end_layout
+
+\begin_layout Standard
+Assumptions:
+\end_layout
+
+\begin_layout Enumerate
+skill weights:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+during the lifetimes of the model agents, 
+\begin_inset Formula $\spYearOne-\spYearEnd$
+\end_inset
+
+, relative skill weights grow at a constant rate (constant SBTC)
+\end_layout
+
+\begin_layout Enumerate
+outside of the period 
+\begin_inset Formula $\wageYearOne-\wageYearEnd$
+\end_inset
+
+, skill weights grow at a constant rate
+\end_layout
+
+\begin_layout Enumerate
+these rates are set to the model implied average skill weight growth rates
+ over the period 
+\begin_inset Formula $\wageYearOne-\wageYearEnd$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+workers born before 
+\begin_inset Formula $\bYearFirst$
+\end_inset
+
+ or after 
+\begin_inset Formula $\bYearLast$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+have the same schooling as the nearest model cohort (by setting school costs)
+\end_layout
+
+\begin_layout Enumerate
+face constant skill prices
+\end_layout
+
+\begin_layout Enumerate
+relative skill prices are set at the levels 
+\begin_inset Formula $\spYearOne$
+\end_inset
+
+ and 
+\begin_inset Formula $\spYearEnd$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Calibration Algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:CalibratedParams"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following parameters are calibrated jointly:
+\end_layout
+
+\begin_layout Itemize
+endowment distributions: 
+\begin_inset Formula $\sigma_{h1}$
+\end_inset
+
+, 
+\begin_inset Formula $\sigma_{IQ}$
+\end_inset
+
+, 
+\begin_inset Formula $\pi_{1},g_{\pi}$
+\end_inset
+
+, and the correlation parameters 
+\begin_inset Formula $(\gamma_{ap},\gamma_{ah})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+human capital technologies: 
+\begin_inset Formula $\alpha_{s},\delta_{s},\theta,A_{s}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+school costs 
+\begin_inset Formula $\mu_{s,\tau}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mu_{1,\tau}$
+\end_inset
+
+ may be normalized to 0.
+\end_layout
+
+\begin_layout Itemize
+skill weights: 
+\begin_inset Formula $\omega_{s,1}$
+\end_inset
+
+ and growth rates +++.
+ 
+\end_layout
+
+\begin_layout Standard
+These parameters are jointly calibrated using a simulated method of moments.
+ I search over the parameter space.
+ For each parameter guess, I solve the model and simulate 
+\begin_inset Formula $\nSim$
+\end_inset
+
+ individuals.
+ The values of 
+\begin_inset Formula $\mu_{s,\tau}$
+\end_inset
+
+ are chosen so that the model exactly matches the school choices of each
+ cohort.
+ 
+\end_layout
+
+\begin_layout Standard
+Rather than directly iterating over the parameters governing skill weights,
+ the algorithm iterates over skill prices, which are approximated by a cubic
+ spline with 
+\begin_inset Formula $\nSpNodes$
+\end_inset
+
+ nodes for each school group.
+ The algorithm ensures that skill prices are consistent with constant skill-bias
+ed technical change through a penalty function.
+ This approach is more efficient than iterating over skill bias parameters,
+ in which case it would be necessary to solve a fixed point problem during
+ each iteration (finding the skill prices that are consistent with market
+ clearing and household optimization).
+\end_layout
+
+\begin_layout Standard
+The algorithm minimizes a weighted sum of squared deviations between the
+ model and data moments described above.
+ Deviations from log median wages are weighted by the square root of the
+ number of observations in each data cell.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Params"
+
+\end_inset
+
+ shows the values of the calibrated parameters.
+ The curvature of the human capital production function is unusually low.
+ Common estimates place 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ near 0.8 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BrowningHb1999"
+
+\end_inset
+
+.
+ The calibrated values are between 
+\begin_inset Formula $\alphaLow$
+\end_inset
+
+ and 
+\begin_inset Formula $\alphaHigh$
+\end_inset
+
+.
+ This may reflect a difference in the way 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is estimated here.
+ Earlier work, such as 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Heckman1976"
+
+\end_inset
+
+ treats the cross-sectional age profile of earnings as representing the
+ longitudinal profile for a hypothetical cohort.
+ The resulting earnings profile is strongly hump-shaped (see Figure 13 in
+ 
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "Heckman1976"
+
+\end_inset
+
+), which contrasts with the longitudinal profiles observed in CPS data.
+ More recent work, such as 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HeckmanLochnerT1998"
+
+\end_inset
+
+, uses longitudinal data for a single cohort; in this case the cohort born
+ in 1960 and observed until age 35.
+ My estimate uses longitudinal wage profiles for several cohorts, most of
+ which are observed until age 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+wageAgeRangeTwo
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The depreciation rate of human capital range from 
+\begin_inset Formula $\ddhLow$
+\end_inset
+
+% to 
+\begin_inset Formula $\ddhHigh$
+\end_inset
+
+%.
+ These are higher than common estimates found in the literature.
+ Notably, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HeckmanLochnerT1998"
+
+\end_inset
+
+ set 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+ based on the observation that age-wage profiles seem roughly flat at older
+ ages when theory suggests that training investment should be zero.
+ Due to the lower value of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, training investment remains positive until the agent approaches retirement
+ (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:ResultHInvest"
+
+\end_inset
+
+).
+ Accounting for roughly flat wages then requires positive depreciation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Calibrated parameters
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Params"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset CommandInset include
+LatexCommand include
+filename "so1/set006/out/param_tb.tex"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Results
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Results"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Accounting for Cohort Wage Profiles
+\end_layout
+
+\begin_layout Standard
+Show that model does a good job replicating age wage profiles for all cohorts
+ and school groups.
+\end_layout
+
+\begin_layout Standard
+Measure fit by 
+\begin_inset Formula $R^{2}=1-RSS/TSS$
+\end_inset
+
+ where 
+\begin_inset Formula $RSS$
+\end_inset
+
+ is the weighted sum of squared model residuals (model log median wage -
+ data log median wage) and 
+\begin_inset Formula $TSS$
+\end_inset
+
+ is the weighted total sum of squared residuals in the data.
+ Weights are square root of number of observations in each (age, school,
+ cohort) cell.
+\end_layout
+
+\begin_layout Standard
+Overall fit is 0.95 +++
+\end_layout
+
+\begin_layout Standard
+Std dev of residuals = 0.05
+\end_layout
+
+\begin_layout Standard
+By school group 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ ranges from 0.84+++ for HSG to 0.92+++ for CG (cal_fit_so1).
+\end_layout
+
+\begin_layout Standard
+std dev of residuals ranges from 0.05+++ for CG to 0.08 for HSG.
+ [make a table]
+\end_layout
+
+\begin_layout Standard
+could ask: how good is that fit relative to stat models: fixed exper effects;
+ no cohort effects +++
+\end_layout
+
+\begin_layout Standard
+Visual assessment of fit is provided in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Model-Fit-HSG"
+
+\end_inset
+
+, which compares the model generated age wage profiles with their data counterpa
+rts for HSG.
+ 9 of the 
+\begin_inset Formula $\nCohorts$
+\end_inset
+
+ model cohorts.
+ The same for CG in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Model-Fit-CG"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+plots for other groups in Appendix.
+\end_layout
+
+\begin_layout Standard
+Key data feature for both groups: shape of wage profiles changes over time.
+ Model replicates these changes.
+\end_layout
+
+\begin_layout Standard
+It is apparent that some of the profiles are not consistent with human capital
+ theory and constant skill prices.
+ The age profiles for those not college educated are essentially flat.
+ Those for college graduates are not concave.
+ Note also that the longitudinal wage profiles look very different from
+ cross-sectional profiles that are sometimes used in their stead.
+ They also look very different from the age wage profiles that sometimes
+ estimated using panel data and imposing that a fixed age profile, combined
+ with either year effects or cohort effects, characterizes all cohorts (e.g.,
+ Figure 3 in 
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "Huggett2006"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/fit_wage_meanlog_ac_s2.pdf
+	width 100col%
+	groupId fig4
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Model Fit HSG
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Model-Fit-HSG"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/fit_wage_meanlog_ac_s4.pdf
+	width 100col%
+	groupId fig4
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Model Fit HSG
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Model-Fit-CG"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To see changes in shapes more clearly, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:InterceptsSlopes"
+
+\end_inset
+
+ show intercepts and slopes of cohort specific profiles.
+ For all school groups, slopes have a U shape with min near 1950 birth cohort.
+ Intercepts decline over most of the period.
+\end_layout
+
+\begin_layout Standard
+Intercepts and slopes are inversely related.
+ During the expansion of U.S.
+ education up to the cohorts born in the early 1950s, all wage profiles
+ became flatter over time, while their intercepts increased.
+ After the early 1950s birth cohorts, U.S.
+ education growth essentially stopped.
+ During this period, wage profiles became steeper with lower intercepts.
+ 
+\end_layout
+
+\begin_layout Standard
+Model replicates without cohort effects.
+\end_layout
+
+\begin_layout Standard
+Explain later how this works.
+ Roughly: cohorts born in periods of fast skill price growth invest a lot
+ in human capital.
+ Their wage profiles have low intercepts and high slopes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Cohort Intercepts and Slopes
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:InterceptsSlopes"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Intercepts, HSG
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/cohort_wage_intercept_s2.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Intercepts, CG
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/cohort_wage_intercept_s4.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Slopes, HSG
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/cohort_wage_growth_s2.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Slopes, CG
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/cohort_wage_growth_s4.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Accounting for Aggregate Wages
+\end_layout
+
+\begin_layout Standard
+Show fixed weight skill prices, wages, model/data.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Aggregate-Wages"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Model replicates low frequency movements
+\end_layout
+
+\begin_layout Standard
+How?
+\end_layout
+
+\begin_layout Standard
+Skill prices look like smoothed wages.
+ Reason: h provides amplification.
+ Weak for less skilled where 
+\begin_inset Formula $\alpha_{s}$
+\end_inset
+
+ is low.
+ Stronger for college where 
+\begin_inset Formula $\alpha_{s}$
+\end_inset
+
+ is higher.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Aggregate Wages
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Aggregate-Wages"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+HSD
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/sp_skill_prices_s1.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+HSG
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/sp_skill_prices_s2.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+CD
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/sp_skill_prices_s3.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+CG
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/sp_skill_prices_s4.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+The College Wage Premium
+\end_layout
+
+\begin_layout Standard
+Model not only replicates aggregate college premium, but also evolution
+ by age.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet
+key "CardLemieux2001"
+
+\end_inset
+
+ document differential evolution for young workers (ages 
+\begin_inset Formula $\ageRangeYoung$
+\end_inset
+
+) versus older workers (ages 
+\begin_inset Formula $\ageRangeOld$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+explain how model gets this
+\end_layout
+
+\begin_layout Standard
+without imperfect substitution or changing relative prices of different
+ labor types supplied by each worker in different proportions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+College Wage Premium
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:College-Wage-Premium"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Young workers
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/aggr_coll_prem_age1.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Older workers
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/aggr_coll_prem_age3.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Selection and the College Wage Premium
+\end_layout
+
+\begin_layout Standard
+The second question I address is:
+\end_layout
+
+\begin_layout Quote
+What part of the college wage premium in a given year reflects differences
+ in the human capital of college graduates relative to high school graduates?
+\end_layout
+
+\begin_layout Standard
+This question is closely related to the much studied return to education.
+ The data show a large wage gap between college graduates and high school
+ graduates, especially in recent years.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HeckmanLT2008"
+
+\end_inset
+
+ argue that the implied returns to schooling are considerably larger than
+ the returns of common financial assets.
+ One potential resolution of this tension is that part of the college wage
+ premium is an ability premium.
+\end_layout
+
+\begin_layout Standard
+It would be tempting to ask: How much would a person with given human capital
+ earn as a high school graduate and as a college graduate? However, if high
+ school human capital is a different good than college human capital, this
+ is not a meaningful question.
+ I therefore address the question by comparing the college wage premium
+ at age 40 for the following three cases:
+\end_layout
+
+\begin_layout Enumerate
+the baseline model
+\end_layout
+
+\begin_layout Enumerate
+no selection: each person chooses each school level with the same probability
+\end_layout
+
+\begin_layout Enumerate
+equal investment: each person chooses 
+\begin_inset Formula $l_{s,t}$
+\end_inset
+
+ equal to the optimal 
+\begin_inset Formula $l_{HSG,t}$
+\end_inset
+
+.
+ [not implemented +++]
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:SelectionCollegePrem"
+
+\end_inset
+
+ shows that selection accounts for around 20 log points of the college wage
+ premium.
+ This leads to the second main finding:
+\end_layout
+
+\begin_layout Quote
+About 40% of the college wage premium in 2005 is due to differences in endowment
+s between college graduates and high school graduates.
+ For earlier years, the fraction is larger.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set003/sel_prem_s4.pdf
+	width 60text%
+	groupId oneAcross
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Cohort-specific college wage premiums
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:SelectionCollegePrem"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Why is this so big and roughly time-invariant?
+\end_layout
+
+\begin_layout Standard
+Big, roughly time invariant differences in E(a|s).
+ Ask later how robust.
+\end_layout
+
+\begin_layout Subsubsection
+Selection and lifetime earnings.
+ [not updated +++]
+\end_layout
+
+\begin_layout Standard
+The third question I ask is:
+\end_layout
+
+\begin_layout Quote
+What fraction of the lifetime earnings gap between college graduates and
+ high school graduates is due to selection?
+\end_layout
+
+\begin_layout Standard
+To address this question, I consider the same experiment as before.
+ For each school group, I compute mean log lifetime earnings for the baseline
+ model
+\begin_inset Formula 
+\begin{equation}
+Y(s,\tau)=\mathbb{E}\left\{ \ln\sum_{t=1}^{T}y(l_{t,s,\tau},h_{t,s,\tau},t,s,\tau)R^{1-t}|s,\tau\right\} 
+\end{equation}
+
+\end_inset
+
+and for a group of individuals with mean endowments, 
+\begin_inset Formula $\hat{Y}(s,\tau)$
+\end_inset
+
+.
+ The contribution of selection to the lifetime earnings of group 
+\begin_inset Formula $(s,\tau)$
+\end_inset
+
+ is then given by 
+\begin_inset Formula $Y(s,\tau)-\hat{Y}(s,\tau)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Lifetime-Earnings"
+
+\end_inset
+
+ shows the results.
+ Each solid line represents mean log lifetime earnings relative to high
+ school graduates, 
+\begin_inset Formula $Y(s,\tau)-Y(HSG,\tau)$
+\end_inset
+
+.
+ Each dashed line shows the same without selection, i.e., 
+\begin_inset Formula $\hat{Y}(s,\tau)-\hat{Y}(HSG,\tau)$
+\end_inset
+
+.
+ Selection accounts for 10 to 15 log points of the college lifetime earnings
+ premium.
+ For the early cohorts, this amounts to about half of the measured premium.
+ For the later cohorts, where the lifetime college premium is around 0.5,
+ selection accounts for only about one-quarter.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Lifetime Earnings
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Lifetime-Earnings"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+
+\size small
+The figure shows mean log lifetime earnings relative to high school graduates.
+ Dashed lines represent random school assignment.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conclusion
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Conclusion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This paper decomposes changes in measured wages into the contributions of
+ skill prices and human capital stocks.
+ The model implies that unskilled skill prices declined at a far slower
+ rate than measured wages.
+ One reason is the decline in the mean abilities of unskilled workers that
+ results from the expansion of education.
+ The model attributes about one-third of the rise in the college wage premium
+ to changing worker abilities and human capital investments.
+ It attributes about half of the college wage premium in the period around
+ 2005 to ability selection.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+ 
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/Users/lutz/Documents/econ/References"
+options "econometrica"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\start_of_appendix
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%dummy comment inserted by tex2lyx to ensure that this paragraph is not
+ empty
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Appendix: CPS Data
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AppCPS"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Refer to general appendix for construction of individual variables.
+\end_layout
+
+\begin_layout Subsection
+Sample
+\end_layout
+
+\begin_layout Standard
+CPS data are obtained from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ipums_cps"
+
+\end_inset
+
+.
+ Summary information is provided in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CPSsummary"
+
+\end_inset
+
+.
+ The sample contains men between the ages of 
+\begin_inset Formula $\cpsAgeOne$
+\end_inset
+
+ and 
+\begin_inset Formula $\cpsAgeEnd$
+\end_inset
+
+ observed in the 
+\begin_inset Formula $\dataYearOne-\dataYearEnd$
+\end_inset
+
+ waves of the March Current Population Survey.
+ Persons are dropped if at least one of the following conditions are true:
+\end_layout
+
+\begin_layout Enumerate
+weeks worked per year < 
+\begin_inset Formula $\cpsMinWeeksYear$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+hours worked per week < 
+\begin_inset Formula $\cpsMinHoursWeek$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+employment is either unpaid or in the armed forces
+\end_layout
+
+\begin_layout Enumerate
+no valid wage information is provided (see below for details).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Summary statistics for CPS data
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:CPSsummary"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset CommandInset include
+LatexCommand include
+filename "/Users/lutz/Documents/econ/hc/school_ojt/so1/out/g01/set901/cps_tb.tex"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Individual Variables
+\end_layout
+
+\begin_layout Standard
+The construction of individual variables is based on 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bowlus:2012"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Schooling:
+\end_layout
+
+\begin_layout Standard
+As discussed in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jaeger1997"
+
+\end_inset
+
+, the coding of schooling changes in 1991.
+ I use the coding scheme proposed in his tables 2 and 7 to recode HIGRADE
+ and EDUC99 into the highest degree completed and the highest grade completed.
+\end_layout
+
+\begin_layout Standard
+Hours worked per year are defined as the product of hours worked last week
+ and weeks worked last year.
+ Weeks worked per year are intervalled until 1975.
+ Each interval is assigned the average of weeks worked in years after 1975
+ in the same interval.
+ Until 1975, hours worked per week are only available for the previous week
+ (HRSWORK).
+ I regress hours worked on years of schooling and a quadratic in experience
+ to impute hours worked.
+ After 1975, I use usual hours worked per week (UHRSWRK).
+\end_layout
+
+\begin_layout Paragraph
+Income variables:
+\end_layout
+
+\begin_layout Standard
+Labor earnings are defined as the sum of wage and salary incomes (INCWAGE).
+ Wages are defined as labor earnings divided by hours worked.
+ Wages are set to missing if weeks worked are below 
+\begin_inset Formula $\cpsMinWeeksYear$
+\end_inset
+
+ or hours worked per week are below 
+\begin_inset Formula $\cpsMinHoursWeek$
+\end_inset
+
+.
+ Outliers with less than 
+\begin_inset Formula $\wageMultMin$
+\end_inset
+
+% or more than 
+\begin_inset Formula $\wageMultMax$
+\end_inset
+
+ times the median wage are dropped.
+\end_layout
+
+\begin_layout Standard
+Income variables are top-coded.
+ As discussed in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bowlus:2012"
+
+\end_inset
+
+, the frequency of top-coding and the top-coded amounts vary substantially
+ over time.
+ In addition, top-coding flags contain obvious errors.
+ In most years, fewer than 2% of labor earnings observations appear to be
+ top-coded.
+ Following 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bowlus:2012"
+
+\end_inset
+
+, I use median rather than mean log wages to avoid this problem.
+ Dollar values are deflated using the Consumer Price Index (all items, U.S.
+ city average, series Id: CUUR0000SA0; see bls.gov).
+\end_layout
+
+\begin_layout Subsection
+Aggregate Variables
+\end_layout
+
+\begin_layout Paragraph
+Schooling:
+\end_layout
+
+\begin_layout Standard
+The fraction of persons in cohort 
+\begin_inset Formula $\tau$
+\end_inset
+
+ that achieves school level 
+\begin_inset Formula $s$
+\end_inset
+
+ is calculated by averaging over ages 
+\begin_inset Formula $\schoolAgeRangeOne$
+\end_inset
+
+ through 
+\begin_inset Formula $\schoolAgeRangeTwo$
+\end_inset
+
+ (not all ages are observed for all cohorts).
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CohortSchool"
+
+\end_inset
+
+ shows these fractions.
+ Each point represents one cohort.
+ Educational attainment grows until the 1950 cohort and then levels off
+ (see 
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "GoldinKatz2008"
+
+\end_inset
+
+ for an extensive discussion of these trends).
+\end_layout
+
+\begin_layout Standard
+Out of sample: assumed constant (for now +++).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set901/cohort_school.pdf
+	width 60text%
+	groupId oneAcross
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Educational Attainment By Birth Cohort
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CohortSchool"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Age hours profiles:
+\end_layout
+
+\begin_layout Standard
+I construct the age profile of annual hours worked, 
+\begin_inset Formula $\ell_{s,t,\tau}$
+\end_inset
+
+, as follows:
+\end_layout
+
+\begin_layout Enumerate
+For combinations of 
+\begin_inset Formula $s,t,\tau$
+\end_inset
+
+ that are observed, I set 
+\begin_inset Formula $\ell_{s,t,\tau}$
+\end_inset
+
+ to the average hours worked of all persons in the cell.
+\end_layout
+
+\begin_layout Enumerate
+For each school group, I regress average hours worked in each 
+\begin_inset Formula $s,t,\tau$
+\end_inset
+
+ cell on a quartic in age and on cohort dummies.
+ Call the resulting hours values 
+\begin_inset Formula $\hat{\ell}_{s,t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For combinations of 
+\begin_inset Formula $s,t,\tau$
+\end_inset
+
+ that are not observed, I set 
+\begin_inset Formula $\ell_{s,t,\tau}$
+\end_inset
+
+ equal to 
+\begin_inset Formula $\hat{\ell}_{s,t}$
+\end_inset
+
+ which is scaled to match the level of 
+\begin_inset Formula $\ell_{s,t,\tau}$
+\end_inset
+
+ for the nearest observed age.
+\end_layout
+
+\begin_layout Enumerate
+Finally, the hours profile of each cohort is smoothed using an HP filter
+ with parameter 
+\begin_inset Formula $\hpParamHours$
+\end_inset
+
+.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Age-Hours-Profiles"
+
+\end_inset
+
+ shows the smoothed hours profiles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/lutz/Documents/econ/hc/school_ojt/so1/out/g04/set901/tg_hours.pdf
+	width 45text%
+	groupId twoAcross
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Age Hours Profiles
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Age-Hours-Profiles"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since there is generally not much variation: feed a common fitted profile
+ into the model +++
+\end_layout
+
+\begin_layout Paragraph
+Age wage profiles:
+\end_layout
+
+\begin_layout Standard
+Construct median earnings per week for each 
+\begin_inset Formula $\left(s,\age,\bYear\right)$
+\end_inset
+
+ cell.
+ This drops outliers, but retains workers who report zero hours and thus
+ zero earnings.
+ This is the target.
+\end_layout
+
+\begin_layout Standard
+Shows a very large decline after age 60.
+ Hard to interpret because hours worked decline as well (retirement).
+ For this reason, exclude observations past age 60 from the targets.
+\end_layout
+
+\begin_layout Standard
+Figure +++
+\end_layout
+
+\end_body
+\end_document
