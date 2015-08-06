@@ -11,7 +11,7 @@ IN:
 %}
 % ----------------------------------------------------------
 
-nSim = cS.gS.nSim;
+nSim = cS.nSim;
 
 if mustRedraw ~= 0  &&  mustRedraw ~= 1
    error('Invalid');

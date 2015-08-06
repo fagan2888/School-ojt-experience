@@ -10,8 +10,9 @@ if ~ischar(valueStr)
 end
 
 % Remove special characters from field names (so latex does not choke)
-fieldNameStr = regexprep(fieldNameStr, '[_\\]', '');
+% fieldNameStr = regexprep(fieldNameStr, '[_\\]', '');
 
+% add_field changes non-Latex command compatible fields
 preamble_lh.add_field(fieldNameStr,  valueStr, output_so1.var_fn(varS.vPreambleData, cS), commentStr);
 
 fprintf('Preamble: added field %s  with value %s \n',  fieldNameStr, valueStr);

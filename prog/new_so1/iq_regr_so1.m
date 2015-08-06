@@ -30,18 +30,18 @@ runSilent = 01;
 inclSchoolExper = 0;
 
 % Years of school by group
-yrSchoolV = cS.workStartAgeV - cS.age1;
+yrSchoolV = cS.demogS.workStartAgeV - cS.demogS.age1;
 
 
 %% Input check
 if cS.dbg > 10
-   if ~v_check(wage_iascM, 'f', [cS.gS.nSim, cS.ageRetire, cS.nSchool, cS.nCohorts], 1e-3, 1e3, cS.missVal)
+   if ~v_check(wage_iascM, 'f', [cS.nSim, cS.demogS.ageRetire, cS.nSchool, cS.nCohorts], 1e-3, 1e3, cS.missVal)
       error_so1('Invalid');
    end
-   if ~v_check(pSchool_iscM, 'f', [cS.gS.nSim, cS.nSchool, cS.nCohorts], 0, 1, [])
+   if ~v_check(pSchool_iscM, 'f', [cS.nSim, cS.nSchool, cS.nCohorts], 0, 1, [])
       error_so1('Invalid');
    end
-   if ~v_check(iq_icM, 'f', [cS.gS.nSim, cS.nCohorts], -4, 4, [])
+   if ~v_check(iq_icM, 'f', [cS.nSim, cS.nCohorts], -4, 4, [])
       error_so1('Invalid');
    end
 end
@@ -50,8 +50,8 @@ end
 %% Settings
 
 % Cohorts to use in regression: between 1958 and 1964 (to match nlsy)
-iCohortV = find(cS.bYearV >= 1958  &  cS.bYearV <= 1964);
-bYearV   = cS.bYearV(iCohortV);
+iCohortV = find(cS.demogS.bYearV >= 1958  &  cS.demogS.bYearV <= 1964);
+bYearV   = cS.demogS.bYearV(iCohortV);
 nCohorts = length(iCohortV);
 
 % Latest year to use (to match NLSY)
@@ -81,15 +81,15 @@ for ic = 1 : nCohorts
    iCohort = iCohortV(ic);
    for iSchool = 1 : cS.nSchool
       % Ages to include
-      maxAge = min(cS.ageRetire, age_from_year_so(bYearV(ic), maxYear, cS.ageInBirthYear));
-      ageV = cS.workStartAgeV(iSchool) : maxAge;
+      maxAge = min(cS.demogS.ageRetire, age_from_year_so(bYearV(ic), maxYear, cS.ageInBirthYear));
+      ageV = cS.demogS.workStartAgeV(iSchool) : maxAge;
       
       % Experience
-      experM(:, ageV, iSchool, ic) = ones([cS.gS.nSim, 1]) * (1 : length(ageV));
+      experM(:, ageV, iSchool, ic) = ones([cS.nSim, 1]) * (1 : length(ageV));
       
       % Year
       yearV = year_from_age_so(ageV, bYearV(ic), cS.ageInBirthYear);
-      yearM(:, ageV, iSchool, ic) = ones([cS.gS.nSim, 1]) * yearV;
+      yearM(:, ageV, iSchool, ic) = ones([cS.nSim, 1]) * yearV;
       
       % IQ
       iqM(:, ageV, iSchool, ic) = iq_icM(:,iCohort) * ones([1, length(ageV)]);

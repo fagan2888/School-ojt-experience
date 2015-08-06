@@ -68,7 +68,7 @@ dirS.tbDir  = dirS.outDir;
 dirS.preambleTexFn = fullfile(dirS.tbDir, 'preamble.tex');
 
 % Directory with figures for paper
-dirS.paperDir = fullfile(dirS.baseDir, 'PaperFigures');
+dirS.paperDir = fullfile(dirS.baseDir, 'model1', 'PaperFigures');
 
 
 end

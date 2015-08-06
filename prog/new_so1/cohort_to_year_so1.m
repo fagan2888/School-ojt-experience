@@ -46,7 +46,7 @@ for iy = 1 : nYr
 
    for iSchool = 1 : cS.nSchool
       % Working age range
-      ageRangeV = cS.workStartAgeV(iSchool) : ageMax;
+      ageRangeV = cS.demogS.workStartAgeV(iSchool) : ageMax;
       for age = ageRangeV(:)'
          % Find the cohort for this age
          %  If model has not cohort, use closest model cohort

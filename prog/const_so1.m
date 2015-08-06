@@ -70,6 +70,7 @@ cS.wageGrowthAgeV = [25, 40];
 
 
 % Compute cohort schooling over this age range
+%  make sure this is used in cps routines +++
 cS.schoolAgeRangeV = [30, 50];
 
 % Use median or mean log wage?
@@ -85,7 +86,7 @@ cS.cpsSetNoStr = 'setExperDefault';
 % cS.nlsySetNo = cS.nlsySetDefault;    % Default; all races
 
 % Cohort definitions
-cS.cohDefStr = 'annual'; 
+% cS.cohDefStr = 'annual'; 
 
 % Min no of wage obs to keep a cell
 cS.minWageObs = 50;
@@ -97,27 +98,10 @@ cS.weeklyWages = 33;
 cS.wagePeriod = cS.weeklyWages;
 
 % HP filter param for hours
+%  make sure this is used in cps +++
 cS.hpFilterHours = 20;
 
 
-
-%% Demographics
-
-% Physical age 1
-cS.age1 = 16;
-
-% Assumed work start ages for the school groups
-cS.workStartAgeV = [18, 19, 21, 23]';
-
-% How long does each school level take?
-% cS.schoolLengthV = [2, 3, 5, 7]';
-cS.schoolLengthV = cS.workStartAgeV - cS.age1;
-
-% Last work age
-cS.ageRetire = 65;
-
-% Age in year of birth
-cS.ageInBirthYear = 1;
 
 
 
@@ -126,7 +110,6 @@ cS.ageInBirthYear = 1;
 
 % Perturb guesses? For testing convergence
 cS.perturbGuesses = 0;
-
 
 % Keep type 1 pref shocks in this range (scala param)
 cS.prefScaleMin = 0.1;
@@ -142,11 +125,7 @@ cS.hMax = 1e4;
 cS.iqAge = 40;
 
 
-% ******  Schooling
-
-
 % ******  OJT
-
 
 % if 1: alpha(HSD) = alpha(HSG)  and alpha(CD) = alpha(CG)
 % if 2: all alphas are the same
@@ -173,8 +152,6 @@ cS.oneDdh   = 2;
 cS.sameDdh  = 0;
 
 
-% Last age at which positive OJT is allowed
-cS.lastOjtAge = cS.ageRetire - 1;
 
 
 % ****** Skill prices
@@ -186,11 +163,8 @@ cS.gCollPrem = 0;
 
 
 % Growth rate of skill prices assumed for steady states
-cS.ssSkillPriceGrowth = 0;
+% cS.ssSkillPriceGrowth = 0;
 
-
-
-% *****  Aggregate production function
 
 
 % *****  Other
@@ -198,35 +172,52 @@ cS.ssSkillPriceGrowth = 0;
 
 % Age range over which cohort wage profiles are compared with data
 %  can start before workStartAgeV
-cS.ageRangeV = [20, 60];
+% cS.ageRangeV = [20, 60];
 
 
 % Percentiles of the wage distribution to use for dispersion measure
 cS.wagePctV = [0.25, 0.75];
 
 
+
+%% Grouped settings
+% All of these can be overridden by groups or sets
+
+% Demographics
+cS.demogS = DemographicsSo1(18, 65, [18, 19, 21, 23]', 'annual');
+cS.nCohorts = cS.demogS.nCohorts;
+
+% Settings for skill price paths
+cS.spSpecS = skillPriceSpecs_so1('wageYears', 'sbtc', 'constGrowth', 'constGrowth');
+
+% Calibration targets
+cS.calS = CalSettingsSo1;
+
 % Calibrate base parameters only
 cS.doCalV = cS.calBase;
 
 % Also defines what is calibrated / fixed
-pvec = param_so1.pvector_default(cS);
+cS.pvector = param_so1.pvector_default(cS);
 
 %  Groups override parameters
-[cS.gS, pvec] = param_so1.group_settings(pvec, gNo);
+cS = param_so1.group_settings(cS);
 
 %  Sets override settings again
-[cS.setS, pvec] = param_so1.set_settings(pvec, cS);
-
+cS = param_so1.set_settings(cS);
 cS.dataSetNo = cS.setS.dataSetNo;
-cS.isDataSetNo = cS.setS.isDataSetNo;
 
 
 %%  Implied parameters
 
-cS.pvector = pvec;
-clear pvec;
-
 % cS.dirS = param_so1.directories(cS.gNo, cS.setNo);
+
+cS.nCohorts = cS.demogS.nCohorts;
+
+% Last age at which positive OJT is allowed
+cS.lastOjtAge = cS.demogS.ageRetire - 1;
+% Age in year of birth
+cS.ageInBirthYear = cS.demogS.ageInBirthYear;
+
 
 if cS.useMedianWage == 1
    cS.wageStr = 'Log median wage';
@@ -234,13 +225,13 @@ else
    cS.wageStr = 'Mean log wage';
 end
 
-if cS.gS.hasIQ == 0
+if cS.hasIQ == 0
    % No IQ targets => fix iq related parameters
    cS.pvector = cS.pvector.calibrate('stdIq', cS.calNever);
    cS.pvector = cS.pvector.calibrate('wtIQa', cS.calNever);
-   cS.gS.tgIq = 0;
-   cS.gS.tgBetaIq = 0;
-   cS.gS.tgBetaIqExper = 0;
+   cS.tgIq = 0;
+   cS.tgBetaIq = 0;
+   cS.tgBetaIqExper = 0;
 end
 
 % Scale factors for hours and wages
@@ -258,28 +249,12 @@ end
 
    
 
-% Cohort definitions
-[cS.bYearV, cS.bYearWindow, cS.byShowV, cS.byShow4V, cS.cohStrV] = ...
-   param_so1.cohort_defs(cS.cohDefStr);
-cS.bYearLbV = cS.bYearV - cS.bYearWindow;
-cS.bYearUbV = cS.bYearV + cS.bYearWindow;
-cS.nCohorts = length(cS.bYearV);
-% If only 1 cohort is shown, show this one
-[~, cS.resultCohort] = min(abs(cS.bYearV - 1950));
 
+% *****  Skill price related constants
+% Requires demographics to be set
+% Modifies pvector
 
-% Skill price related constants
-% Requires birth years
-cS.spS = param_so1.skill_price_const(cS);
-% Parameters to be calibrated
-nNodes = length(cS.spS.spNodeIdxV);
-for iSchool = 1 : cS.nSchool
-   nameStr = sprintf('logWNode_s%iV', iSchool);
-   symbolStr = ['logWNode', cS.schoolLabelV{iSchool}];
-   cS.pvector = cS.pvector.change(nameStr,  symbolStr, 'Skill price nodes', ...
-      zeros(nNodes, 1), -3 * ones(nNodes, 1),  4 * ones(nNodes, 1),  cS.calBase);
-end
-
+cS = param_so1.skill_price_const(cS);
 
 
 

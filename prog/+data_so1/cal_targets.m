@@ -32,11 +32,11 @@ Targets are
 cS = const_data_so1(gNo);
 varS = param_so1.var_numbers;
 
-size_ascV = [cS.ageRetire, cS.nSchool, cS.nCohorts];
+size_ascV = [cS.demogS.ageRetire, cS.nSchool, cS.nCohorts];
 
 
 %%  IQ targets
-if cS.gS.hasIQ == 1
+if cS.hasIQ == 1
    error('not updated');
    tgS.betaIQ = 0.104;
    tgS.iqAge = cS.iqAge;
@@ -61,7 +61,7 @@ if cS.gS.hasIQ == 1
    for i1 = 1 : 2
       % Assume constant after last cohort
       tgS.iqPctM(i1, :) = interp1([tgS.twIqByV, 2000], [tgS.twIqPctM(i1,:), tgS.twIqPctM(i1,end)], ...
-         cS.bYearV, 'linear');
+         cS.demogS.bYearV, 'linear');
    end
    if any(isnan(tgS.iqPctM(:)))
       error('Interpolation failed');
@@ -124,7 +124,7 @@ hS = output_so1.var_load(varS.vCohortHours, cS);
 
 hours_asM = hS.hoursFit_asM;
 validateattributes(hours_asM, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', ...
-   'size', [cS.ageRetire, cS.nSchool]});
+   'size', [cS.demogS.ageRetire, cS.nSchool]});
 tgS.hoursScaleFactor = median(hours_asM(hours_asM > 0));
 hours_asM = hours_asM ./ tgS.hoursScaleFactor;
 hours_asM(hours_asM <= 0) = cS.missVal;
@@ -145,17 +145,17 @@ validateattributes(tgS.hours_ascM, {'double'}, {'finite', 'nonnan', 'nonempty', 
 
 loadS = output_so1.var_load(varS.vAgeSchoolYearStats, cS);
 
-data_astM = log_lh(loadS.wageMedian_astuM(1:cS.ageRetire,:,:, cS.dataS.iuCpsEarn), cS.missVal);
+data_astM = log_lh(loadS.wageMedian_astuM(1:cS.demogS.ageRetire,:,:, cS.dataS.iuCpsEarn), cS.missVal);
 % Scale
 tgS.logWage_astM = matrix_lh.m_oper(data_astM, tgS.logWageScaleFactor, '-', cS.missVal, cS.dbg);
 
 validateattributes(tgS.logWage_astM, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', ...
-   'size', [cS.ageRetire, cS.nSchool, length(cS.wageYearV)]})
+   'size', [cS.demogS.ageRetire, cS.nSchool, length(cS.wageYearV)]})
 
 % Check that consistent with log wage by [a,s,c]
 for iSchool = 1 : cS.nSchool
    logWage_atM = squeeze(tgS.logWage_astM(:, iSchool, :));
-   logWage_caM = econ_lh.cohort_age_from_age_year(logWage_atM, 1 : cS.ageRetire, cS.wageYearV, cS.bYearV, ...
+   logWage_caM = econ_lh.cohort_age_from_age_year(logWage_atM, 1 : cS.demogS.ageRetire, cS.wageYearV, cS.demogS.bYearV, ...
       cS.ageInBirthYear, cS.missVal, cS.dbg);
    % This could fail with multi year birth cohorts
    if ~check_lh.approx_equal(squeeze(tgS.logWage_ascM(:, iSchool, :)), logWage_caM',  1e-2, []);
@@ -164,7 +164,7 @@ for iSchool = 1 : cS.nSchool
 end
 
 
-tgS.nObs_astM = loadS.nObs_astuM(1:cS.ageRetire, :, :, cS.dataS.iuCpsEarn);
+tgS.nObs_astM = loadS.nObs_astuM(1:cS.demogS.ageRetire, :, :, cS.dataS.iuCpsEarn);
 
 
 
@@ -177,7 +177,7 @@ tgS.nObs_astM = loadS.nObs_astuM(1:cS.ageRetire, :, :, cS.dataS.iuCpsEarn);
 % %  Held constant for all years
 % tgS.aggrDataWt_asM = output_so1.var_load(varS.vAggrCpsWeights, cS);
 % for iSchool = 1 : cS.nSchool
-%    if ~v_check(tgS.aggrDataWt_asM(cS.workStartAgeV(iSchool) : cS.ageRetire, iSchool), 'f', [], 0, 1)
+%    if ~v_check(tgS.aggrDataWt_asM(cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire, iSchool), 'f', [], 0, 1)
 %       error('Invalid');
 %    end
 % end
@@ -252,7 +252,7 @@ end
 dataS = output_so1.var_load(varS.vAgeSchoolYearStats, cS);
 
 iu = cS.dataS.iuCpsAll;
-tgS.aggrHours_astM = dataS.mass_astuM(1:cS.ageRetire,:,:,iu) .* dataS.weeksMean_astuM(1:cS.ageRetire,:,:,iu);
+tgS.aggrHours_astM = dataS.mass_astuM(1:cS.demogS.ageRetire,:,:,iu) .* dataS.weeksMean_astuM(1:cS.demogS.ageRetire,:,:,iu);
 % Scale to approximately 1
 tgS.aggrHours_astM = tgS.aggrHours_astM ./ tgS.aggrHours_astM(30, 2, 20) .* 2;
 tgS.aggrHours_astM(tgS.aggrHours_astM <= 0) = cS.missVal;
@@ -261,13 +261,13 @@ tgS.aggrHours_astM(tgS.aggrHours_astM <= 0) = cS.missVal;
 tgS.aggrHours_astM(:,:,end) = tgS.aggrHours_astM(:,:, end-1);
 
 validateattributes(tgS.aggrHours_astM, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', ...
-   'size', [cS.ageRetire, cS.nSchool, length(cS.wageYearV)]});
+   'size', [cS.demogS.ageRetire, cS.nSchool, length(cS.wageYearV)]});
 
 
 % Aggregate over ages
 tgS.aggrHours_stM = repmat(cS.missVal, [cS.nSchool, length(cS.wageYearV)]);
 for iSchool = 1 : cS.nSchool
-   ageV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+   ageV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
    tgS.aggrHours_stM(iSchool, :) = sum(max(0, tgS.aggrHours_astM(ageV, iSchool, :)), 1);
 end
 validateattributes(tgS.aggrHours_stM, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', 'positive', ...

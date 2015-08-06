@@ -2,14 +2,14 @@ function t_cs_data_so1(gNo, setNo)
 
 cS = const_so1(gNo, setNo);
 cS.dbg = 111;
-nSim = cS.gS.nSim;
+nSim = cS.nSim;
 
-indLogWage_iascM = rand([nSim, cS.ageRetire, cS.nSchool, cS.nCohorts]);
+indLogWage_iascM = rand([nSim, cS.demogS.ageRetire, cS.nSchool, cS.nCohorts]);
 pSchool_iscM = rand([nSim, cS.nSchool, cS.nCohorts]);
-indLogWageSS_iascM = rand([nSim, cS.ageRetire, cS.nSchool, 2]);
+indLogWageSS_iascM = rand([nSim, cS.demogS.ageRetire, cS.nSchool, 2]);
 pSchoolSS_iscM = rand([nSim, cS.nSchool, 2]);
 
-dataWt_asM = rand([cS.ageRetire, cS.nSchool]);
+dataWt_asM = rand([cS.demogS.ageRetire, cS.nSchool]);
 yearV = cS.wageYearV(1) : cS.wageYearV(end);
 ageMin = 30;
 ageMax = 50;
@@ -25,7 +25,7 @@ ageMax = 50;
 for ic = 1 : cS.nCohorts
    for iSchool = 1 : cS.nSchool
       for age = ageMin : ageMax
-         year1 = year_from_age_so(age, cS.bYearV(ic));
+         year1 = year_from_age_so(age, cS.demogS.bYearV(ic));
          yrIdx = find(year1 == yearV);
          if ~isempty(yrIdx)
             wInV = indLogWage_iascM(:,age,iSchool,ic);
@@ -43,9 +43,9 @@ end
 
 for iSS = 1 : 2
    if iSS == 1
-      bYear = cS.bYearLbV(1) - 1;
+      bYear = cS.demogS.bYearLbV(1) - 1;
    else
-      bYear = cS.bYearUbV(cS.nCohorts) + 1;
+      bYear = cS.demogS.bYearUbV(cS.nCohorts) + 1;
    end
    
    for iSchool = 1 : cS.nSchool

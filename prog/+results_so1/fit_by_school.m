@@ -5,14 +5,14 @@ function fit_by_school(model_ascM, data_ascM, saveFigures, cS)
 dirS = param_so1.directories(cS.gNo, cS.setNo);
 figS = const_fig_so1;
 
-% Show the first 8 cohorts
+% Cohorts to show
 nr = 3;
 nc = 3;
 byShowV = helper_so1.by_show(cS.nCohorts, nr*nc);
 
 for iSchool = 1 : cS.nSchool
    yMin = 0;   yMax = 0;
-   ageRangeV = max(cS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);   
+   ageRangeV = max(cS.demogS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);   
 
    output_so1.fig_new(saveFigures, figS.figOpt6S);
 
@@ -26,11 +26,12 @@ for iSchool = 1 : cS.nSchool
       dataWageV = data_ascM(ageRangeV, iSchool, iCohort);         
       idxV = find(dataWageV > -10);
       %meanDataWage = mean(dataWageV(idxV));
-      plot(ageRangeV(idxV), dataWageV(idxV) - dataWageV(idxV(1)),  figS.lineStyleDenseV{1}, 'Color', figS.colorM(1,:));
+      plot(ageRangeV(idxV), dataWageV(idxV),  figS.lineStyleDenseV{1}, 'Color', figS.colorM(1,:));
 
+      % Model: show all ages
       modelWageV = model_ascM(ageRangeV, iSchool, iCohort);
       %idxV = find(modelWageV > -10);
-      plot(ageRangeV(idxV), modelWageV(idxV) - dataWageV(idxV(1)), figS.lineStyleDenseV{2}, 'Color', figS.colorM(2,:));
+      plot(ageRangeV, modelWageV, figS.lineStyleDenseV{2}, 'Color', figS.colorM(2,:));
 
       % Also show wage profile for person with median h1/a
       % To see whether representative agent model has a shot
@@ -57,13 +58,13 @@ for iSchool = 1 : cS.nSchool
       yMax = max(yMax, axisV(4));
       %axis_range_lh([ageRangeV(1), ageRangeV(end), yMin, yMax]);
 
-      xlabel(['Age, ', cS.cohStrV{iCohort}, ' cohort']);
+      xlabel(['Age, ', cS.demogS.cohStrV{iCohort}, ' cohort']);
       % Show y label only for 1st column
       if rem(ic, nr) == 1
          ylabel(cS.wageStr);
       end
       if 0
-         legend({['D: ', cS.cohStrV{iCohort}], 'M'}, 'location', 'best', 'orientation', 'horizontal');
+         legend({['D: ', cS.demogS.cohStrV{iCohort}], 'M'}, 'location', 'best', 'orientation', 'horizontal');
       end
 
    end

@@ -31,7 +31,7 @@ Status
 
 startTimeV = clock;
 varS = param_so1.var_numbers;
-nc = length(cS.bYearV);
+nc = length(cS.demogS.bYearV);
 showResults = argS.showResults  ||  (startTimeV(6) < 1);
 % Must be set here b/c cS is only set once during entire calibration
 if startTimeV(6) < 1
@@ -63,7 +63,7 @@ paramS = param_derived_so1(false, paramS, cS);
 
 
 % Make guesses into skill prices by [year, school]
-outS.skillPrice_stM = calibr_so1.skill_price_comp(paramS, cS);
+outS.skillPrice_stM = calibr_so1.skill_price_comp(tgS, paramS, cS);
 
 
 
@@ -89,7 +89,7 @@ outS.lSupply_stM = calibr_so1.aggr_ls(simS.meanLPerHour_ascM,  tgS.aggrHours_ast
 
 % Production function skill weights implied by labor supplies
 %  Skill weights are computed for all spYearV years
-[outS.skillWeightTop_tlM, outS.skillWeight_tlM] = calibr_so1.skill_weights(outS.lSupply_stM, ...
+[outS.skillWeightTop_tlM, outS.skillWeight_tlM, outS.neutralAV] = calibr_so1.skill_weights(outS.lSupply_stM, ...
    outS.skillPrice_stM, paramS.aggrProdFct, cS);
 
 
@@ -111,9 +111,9 @@ outS.devVector = outS.devVector.add('wageProf', scalarMeanDev);
 % devS.scalarBetaIqExperDev = 0;
 % 
 
-if cS.gS.hasIQ == 1
+if cS.hasIQ == 1
    error('Not updated'); 
-%    if cS.gS.tgIq > 0
+%    if cS.tgIq > 0
 %       % Mean IQ percentile by [no college/collge, cohort]
 %       modelV = simS.meanIqPctM(2,:) - simS.meanIqPctM(1,:);
 %       dataV  = tgS.iqPctM(2,:) - tgS.iqPctM(1,:);
@@ -121,16 +121,16 @@ if cS.gS.hasIQ == 1
 %       outS.scalarIqDev = 15 * sum(devIqPctV .^ 2);
 %    end
 %    
-%    if cS.gS.tgBetaIq > 0
+%    if cS.tgBetaIq > 0
 %       % Beta IQ
 %       % Use cohorts that match NLSY
-%       outS.betaIq = mean(simS.betaIqV(cS.bYearV >= 1957  &  cS.bYearV <= 1965));
+%       outS.betaIq = mean(simS.betaIqV(cS.demogS.bYearV >= 1957  &  cS.demogS.bYearV <= 1965));
 %       outS.devBetaIq = outS.betaIq - tgS.betaIQ;
 %       outS.scalarBetaIqDev = 10 .* (outS.devBetaIq .^ 2);
 %    end
 % 
 %    % ******  Beta IQ by experience
-%    if cS.gS.tgBetaIqExper > 0
+%    if cS.tgBetaIqExper > 0
 %       betaV = iq_regr_so1(simS.wageM, simS.pSchoolM, simS.iqM, cS);
 %       outS.betaIqExperV = betaV(tgS.iqExperV);
 %       outS.scalarBetaIqExperDev = 10 .* sum((outS.betaIqExperV(:) - tgS.betaIqExperV(:)) .^ 2);
@@ -142,7 +142,7 @@ end
 %%  Penalties for deviation from linear relative skill weights (const SBTC)
 
 [scalarSkillWeightDev, skillPriceBeforeDev, skillPriceAfterDev] = ...
-   calibr_so1.skill_price_dev(outS.skillPrice_stM, outS.skillWeightTop_tlM, outS.skillWeight_tlM,  cS.gS.spS, cS);
+   calibr_so1.skill_price_dev(outS.skillPrice_stM, outS.skillWeightTop_tlM, outS.skillWeight_tlM,  cS.spSpecS, cS);
 
 outS.devVector = outS.devVector.add('sbtc', scalarSkillWeightDev);
 outS.devVector = outS.devVector.add('sp before', skillPriceBeforeDev);

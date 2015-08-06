@@ -9,7 +9,6 @@ fprintf('\nTesting everything\n');
 
 %% Household
 
-
 hh_so1.endow_draw_test(gNo, setNo);
 hh_so1.school_tech_test(gNo, setNo);
 hh_so1.ojt_solve_test(gNo, setNo);

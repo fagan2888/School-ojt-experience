@@ -25,7 +25,7 @@ saveFigures = 1;
 % cpsS = const_cspearn(cpsSetNo);
 
 % Keep wage data for these ages
-% dataAgeV = cS.age1 : cS.ageRetire;
+% dataAgeV = cS.demogS.age1 : cS.demogS.ageRetire;
 
 
 

@@ -41,10 +41,10 @@ if cS.dbg > 10
       error('invalid');
    end
    % Ages must be enough to compute young / old college premium
-   if ~v_check(ageMin, 'i', [1,1], cS.workStartAgeV(1), min(cS.collPremAgeM(:)))
+   if ~v_check(ageMin, 'i', [1,1], cS.demogS.workStartAgeV(1), min(cS.collPremAgeM(:)))
       error('invalid');
    end
-   if ~v_check(ageMax, 'i', [1,1], max(cS.collPremAgeM(:)), cS.ageRetire)
+   if ~v_check(ageMax, 'i', [1,1], max(cS.collPremAgeM(:)), cS.demogS.ageRetire)
       error('invalid');
    end
 end

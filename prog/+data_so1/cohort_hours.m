@@ -22,14 +22,14 @@ cS = const_so1(gNo, 1);
 cS = const_so1(gNo, cS.dataSetNo);
 varS = param_so1.var_numbers;
 
-maxAge = cS.ageRetire;  
+maxAge = cS.demogS.ageRetire;  
 
 % Smooth more strongly. We only want fairly low frequency movements
 hpFilterParam = cS.hpFilterHours;
 
 % CPS hours, raw, by [by, school, phys age]
-% byLbV = cS.bYearLbV;
-% byUbV = cS.bYearUbV;
+% byLbV = cS.demogS.bYearLbV;
+% byUbV = cS.demogS.bYearUbV;
 % nBy = length(byLbV);
 
 loadS = output_so1.var_load(varS.vBYearSchoolAgeStats, cS);
@@ -69,14 +69,14 @@ end
 %%  Fit a polynomial
 
 % Fitted profiles by [age, school]
-saveS.hoursFit_asM = repmat(cS.missVal, [cS.ageRetire, cS.nSchool]);
+saveS.hoursFit_asM = repmat(cS.missVal, [cS.demogS.ageRetire, cS.nSchool]);
 
 for iSchool = 1 : cS.nSchool
    disp(' ');
    disp(['Hours regression for school group ', cS.schoolLabelV{iSchool}]);
    
    % Potential no of obs
-   n = cS.nCohorts * (cS.ageRetire - cS.workStartAgeV(iSchool) + 1);
+   n = cS.nCohorts * (cS.demogS.ageRetire - cS.demogS.workStartAgeV(iSchool) + 1);
 
    % Regressors
    yV = zeros([n, 1]);
@@ -88,7 +88,7 @@ for iSchool = 1 : cS.nSchool
    nObs = 0;
    for iBy = 1 : cS.nCohorts
       % Ages to keep
-      ageV = (cS.workStartAgeV(iSchool) : cS.ageRetire)';
+      ageV = (cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire)';
       
       hoursV = squeeze(saveS.hoursRaw_ascM(ageV,iSchool,iBy));
       idxV = find(hoursV > 0);
@@ -134,8 +134,8 @@ end
 saveS.hours_ascM = repmat(cS.missVal, [maxAge, cS.nSchool, cS.nCohorts]);
 
 for iSchool = 1 : cS.nSchool
-   age1 = cS.workStartAgeV(iSchool);
-   age2 = cS.ageRetire;
+   age1 = cS.demogS.workStartAgeV(iSchool);
+   age2 = cS.demogS.ageRetire;
    
    % Fitted profile
    hoursFitV = saveS.hoursFit_asM(1 : age2, iSchool);
@@ -154,11 +154,11 @@ for iSchool = 1 : cS.nSchool
       smoothV(idxV) = hpfilter(hoursV(idxV), hpFilterParam);
       
       % Extend using fitted profiles
-      if idxV(1) > cS.workStartAgeV(iSchool)
+      if idxV(1) > cS.demogS.workStartAgeV(iSchool)
          smoothV(age1 : idxV(1)) = hoursFitV(age1 : idxV(1)) ./ hoursFitV(idxV(1)) .* smoothV(idxV(1));
       end
       
-      if idxV(end) < cS.ageRetire
+      if idxV(end) < cS.demogS.ageRetire
          smoothV(idxV(end) : age2) = hoursFitV(idxV(end) : age2) ./ hoursFitV(idxV(end)) .* smoothV(idxV(end));
       end
       

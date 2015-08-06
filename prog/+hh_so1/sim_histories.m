@@ -23,8 +23,8 @@ OUT:
 Checked: 
 %}
 
-nSim = cS.gS.nSim;
-nc = length(cS.bYearV);
+nSim = cS.nSim;
+nc = length(cS.demogS.bYearV);
 nSchool = cS.nSchool;
 % Calibrate school costs
 calSCost = true;
@@ -52,26 +52,26 @@ end
 % h1 endowments (mean may differ by cohort)
 simS.h1_icM = zeros([nSim, nc]);
 % Histories are saved for each person / school choice
-sizeV = [nSim, cS.ageRetire, cS.nSchool, nc];
+sizeV = [nSim, cS.demogS.ageRetire, cS.nSchool, nc];
 simS.h_itscM     = zeros(sizeV);
 simS.sTime_itscM = zeros(sizeV);
 simS.wage_itscM  = cS.missVal .* ones(sizeV);
 % Skill prices for each cohort
-simS.skillPrice_ascM = zeros([cS.ageRetire, cS.nSchool, nc]);
+simS.skillPrice_ascM = zeros([cS.demogS.ageRetire, cS.nSchool, nc]);
 % Present value of lifetime earnings, discounted to age 1
 simS.pvLtyAge1_iscM = zeros([nSim, cS.nSchool, nc]);
 % Individual school probs
 simS.pSchool_iscM = zeros([nSim, cS.nSchool, nc]);
 
-% outS.meanLogWageM = cS.missVal .* ones([cS.ageRetire, cS.nSchool, nc]);
-% outS.stdLogWageM  = cS.missVal .* ones([cS.ageRetire, cS.nSchool, nc]);
-outS.logWage_ascM = repmat(cS.missVal, [cS.ageRetire, cS.nSchool, nc]);
+% outS.meanLogWageM = cS.missVal .* ones([cS.demogS.ageRetire, cS.nSchool, nc]);
+% outS.stdLogWageM  = cS.missVal .* ones([cS.demogS.ageRetire, cS.nSchool, nc]);
+outS.logWage_ascM = repmat(cS.missVal, [cS.demogS.ageRetire, cS.nSchool, nc]);
 % Mean labor supply per hour worked. For computing aggregate labor inputs
-outS.meanLPerHour_ascM = repmat(cS.missVal, [cS.ageRetire, cS.nSchool, nc]);
+outS.meanLPerHour_ascM = repmat(cS.missVal, [cS.demogS.ageRetire, cS.nSchool, nc]);
 % School fractions
-outS.sFracM = zeros([cS.nSchool, nc]);
+outS.sFrac_scM = zeros([cS.nSchool, nc]);
 
-if cS.gS.hasIQ == 1
+if cS.hasIQ == 1
    % Mean IQ pct score [college / no college, cohort]
    outS.meanIqPctM = zeros([2, nc]);
    % Regress log wage on std normal afqt
@@ -85,11 +85,10 @@ for ic = 1 : nc
    h1Factor = exp(paramS.meanLogH1V(ic));
    % Ind endowments at age 1
    h1CohortV = h1M(:,ic) .* h1Factor;
-   %fprintf('mean h1: %6.4f    true: %6.4f \n',  mean(h1V), paramS.h1Mean);
 
-   % First year the cohort is cS.age1, cS.ageRetire
-   yrIdxV = helper_so1.year_from_age([cS.age1, cS.ageRetire], cS.bYearV(ic), cS.ageInBirthYear) - cS.spS.spYearV(1) + 1;
-   simS.skillPrice_ascM(cS.age1 : cS.ageRetire, :, ic) = skillPrice_stM(:, yrIdxV(1) : yrIdxV(2))';
+   % First year the cohort is cS.demogS.age1, cS.demogS.ageRetire
+   yrIdxV = helper_so1.year_from_age([cS.demogS.age1, cS.demogS.ageRetire], cS.demogS.bYearV(ic), cS.ageInBirthYear) - cS.spS.spYearV(1) + 1;
+   simS.skillPrice_ascM(cS.demogS.age1 : cS.demogS.ageRetire, :, ic) = skillPrice_stM(:, yrIdxV(1) : yrIdxV(2))';
 
    % Simulate cohort
    % Should have better guesses from past iterations
@@ -111,12 +110,12 @@ for ic = 1 : nc
    outS.logWage_ascM(:,:,ic) = cohS.logWage_asM;
    simS.pSchool_iscM(:,:,ic) = schoolS.pSchool_isM;
    simS.pvLtyAge1_iscM(:,:,ic)  = ojtS.pvLtyAge1_isM;
-   outS.sFracM(:, ic) = schoolS.sFracV;
+   outS.sFrac_scM(:, ic) = schoolS.sFracV;
 
 
-   if cS.gS.hasIQ == 1
+   if cS.hasIQ == 1
       error('Not updated');
-      if cS.gS.tgIq > 0
+      if cS.tgIq > 0
          % Mean IQ percentile [college / no college]
          % Prob of choosing college
          pCollegeV = simS.pSchool_iscM(:,cS.schoolCD, ic) + simS.pSchool_iscM(:, cS.schoolCG, ic);
@@ -127,7 +126,7 @@ for ic = 1 : nc
       
       % Regress mean log wage on std normal iq and school dummies
       % Use a subset of observations
-      if cS.gS.tgBetaIq > 0
+      if cS.tgBetaIq > 0
          outS.betaIqV(ic) = iq_regr_fixed_age_so1(cohS.wageM, cohS.pSchoolM, simS.iq_icM(:,ic), iqAge, cS);
       end
    end
@@ -146,9 +145,9 @@ end
 %% Self test
 if cS.dbg > 10
    validateattributes(outS.logWage_ascM, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', ...
-      'size', [cS.ageRetire, cS.nSchool, cS.nCohorts]})
+      'size', [cS.demogS.ageRetire, cS.nSchool, cS.nCohorts]})
    
-   if cS.gS.tgIq > 0
+   if cS.tgIq > 0
       if ~v_check(outS.meanIqPctM, 'f', [2, cS.nCohorts], 0, 1, [])
          error_so1('Invalid');
       end

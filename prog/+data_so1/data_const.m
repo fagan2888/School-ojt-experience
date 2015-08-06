@@ -12,4 +12,8 @@ dataS.fracBusInc = 2/3;
 % Give all cohorts the same hours profiles?
 dataS.sameHoursAllCohorts = true;
 
+% Age range that defines young / middle / old
+% arbitrary +++
+dataS.ageRangeYoungOldM = [25, 34;    35, 44;    45, 54];
+
 end

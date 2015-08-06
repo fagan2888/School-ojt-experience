@@ -23,9 +23,9 @@ if 1
    hold on;
    for iSchool = 1 : cS.nSchool
       % First 5 years of work
-      ageV = cS.workStartAgeV(iSchool) + (0 : 4);
+      ageV = cS.demogS.workStartAgeV(iSchool) + (0 : 4);
       lV = mean(squeeze(sTimeM(ageV,iSchool,:)));
-      plot(cS.bYearV, lV,  cS.lineStyleV{iSchool}, 'color', cS.colorM(iSchool,:));
+      plot(cS.demogS.bYearV, lV,  cS.lineStyleV{iSchool}, 'color', cS.colorM(iSchool,:));
    end
    
    hold off;
@@ -49,7 +49,7 @@ if saveFigures >= 0
    hold on;
    
    for iSchool = 1 : cS.nSchool
-      plot(cS.bYearV,  squeeze(simStatS.meanLogEffM(agePointV(1), iSchool, :)),  ...
+      plot(cS.demogS.bYearV,  squeeze(simStatS.meanLogEffM(agePointV(1), iSchool, :)),  ...
          cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool, :));
    end
    hold off;
@@ -66,7 +66,7 @@ if saveFigures >= 0
    hold on;
    
    for iSchool = 1 : cS.nSchool
-      plot(cS.bYearV,  squeeze(simStatS.meanLogEffM(agePointV(2), iSchool, :) - simStatS.meanLogEffM(agePointV(1), iSchool, :)),  ...
+      plot(cS.demogS.bYearV,  squeeze(simStatS.meanLogEffM(agePointV(2), iSchool, :) - simStatS.meanLogEffM(agePointV(1), iSchool, :)),  ...
          cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool, :));
    end
    hold off;
@@ -85,8 +85,8 @@ if saveFigures >= 0
    for iSchool = 1 : cS.nSchool
       subplot(2,2,iSchool);
       hold on;
-      for ic = 1 : length(cS.byShowV)
-         iCohort = cS.byShowV(ic);
+      for ic = 1 : length(cS.demogS.byShowV)
+         iCohort = cS.demogS.byShowV(ic);
          
          effV = squeeze(simStatS.meanLogEffM(:, iSchool, iCohort));
          idxV = find(effV ~= cS.missVal);
@@ -96,7 +96,7 @@ if saveFigures >= 0
       xlabel('Age');
       ylabel('Mean log efficiency');
       if iSchool == cS.nSchool
-         legend(cS.cohStrV(cS.byShowV), 'Location', 'Southeast');
+         legend(cS.demogS.cohStrV(cS.demogS.byShowV), 'Location', 'Southeast');
       end
    end
    save_fig_so1([prefixStr, 'eff_asc'], saveFigures, cS.figOpt4S, cS);
@@ -108,15 +108,15 @@ end
 % each plot is a school group
 if 01
    [~, yMax] = y_range_so1(sTimeM(:), cS.missVal);
-   age1 = cS.workStartAgeV(1);
-   age2 = cS.ageRetire;
+   age1 = cS.demogS.workStartAgeV(1);
+   age2 = cS.demogS.ageRetire;
    
    for iSchool = 1 : cS.nSchool
       fig_new_so(saveFigures);
    
       hold on;
-      for ic = 1 : length(cS.byShowV)
-         iCohort = cS.byShowV(ic);
+      for ic = 1 : length(cS.demogS.byShowV)
+         iCohort = cS.demogS.byShowV(ic);
          tEndowV = paramS.tEndow_ascM(:, iSchool, iCohort);
          lV = sTimeM(:, iSchool, iCohort);
          idxV = find(lV > 0);
@@ -129,7 +129,7 @@ if 01
       ylabel('$l / \ell$', 'interpreter', 'latex');
 
       if iSchool == 4
-         legend(cS.cohStrV(cS.byShowV), 'location', 'southwest');
+         legend(cS.demogS.cohStrV(cS.demogS.byShowV), 'location', 'southwest');
       end
 
       figure_format_so1(gca);
@@ -147,15 +147,15 @@ end
 % Normalize cohort 1 in each graph to start at 1
 if 1
    %[hMin, hMax] = y_range_so1(log_lh(hM(:), cS.missVal), cS.missVal);
-   age1 = cS.workStartAgeV(1);
-   age2 = cS.ageRetire;
+   age1 = cS.demogS.workStartAgeV(1);
+   age2 = cS.demogS.ageRetire;
    
    for iSchool = 1 : cS.nSchool
-      ageV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+      ageV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
       fig_new_so(saveFigures);
       hold on;
-      for ic = 1 : length(cS.byShowV)
-         iCohort = cS.byShowV(ic);
+      for ic = 1 : length(cS.demogS.byShowV)
+         iCohort = cS.demogS.byShowV(ic);
          
          logHV = logHM(ageV, iSchool, iCohort);
          plot(ageV, logHV - logHV(1), cS.lineStyleDenseV{ic}, 'Color', cS.colorM(ic,:));
@@ -167,7 +167,7 @@ if 1
       ylabel('log h');
 
       if iSchool == cS.nSchool
-         legend(cS.cohStrV(cS.byShowV), 'Location', 'South');
+         legend(cS.demogS.cohStrV(cS.demogS.byShowV), 'Location', 'South');
       end
 
       figure_format_so1(gca);

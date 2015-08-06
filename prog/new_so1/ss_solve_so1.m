@@ -30,7 +30,7 @@ Checked: +++
 % Construct labor supplies from h1 * hours
 guessLS_sV = zeros([cS.nSchool, 1]);
 for iSchool = 1 : cS.nSchool
-   ageRangeV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+   ageRangeV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
    guessLS_sV(iSchool) = 1.2 .* mean(h1V) .* sum(hours_asM(ageRangeV, iSchool));  
 end
 

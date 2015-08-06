@@ -34,7 +34,7 @@ varS = param_so1.var_numbers;
 %%  Load
 
 % Age range to compute
-ageMax = cS.ageRetire;
+ageMax = cS.demogS.ageRetire;
 
 % Load calibration results
 loadS = var_load_so1(varS.vCalResults, cS);
@@ -72,27 +72,19 @@ simS  = var_load_so1(varS.vSimResults, cS);
 
 %%  Skill price growth rates
 % Average over entire period with wage data
-if 0
-%    dwS = var_load_so1(varS.vAggrCpsStats, [], gNo, cS.dataSetNo);  
-%    % Use constant weights
-%    iCase = dwS.iAdj;
-%    
+if true
    % Find common year range. Data are always the constraint
    year1 = max(cS.spS.spYearV(1),   cS.wageYearV(1));
    year2 = min(cS.spS.spYearV(end), cS.wageYearV(end));
    saveS.spGrowthYearV = [year1, year2];
    dy = year2 - year1;
-%    
-%    idxV = [year1, year2] - dwS.yearV(1) + 1;
-%    % always use mean log? Probably should use median +++
-%    saveS.spDataGrowthV  = (dwS.meanLogWageSchoolM(:,idxV(2),iCase) - dwS.meanLogWageSchoolM(:,idxV(1),iCase)) ./ dy;
 
    % Data
    idxV = [year1, year2] - cS.wageYearV(1) + 1;
    saveS.spDataGrowthV = (tgS.logWage_stM(:,idxV(2)) - tgS.logWage_stM(:,idxV(1))) ./ dy;
    
    idxV = [year1, year2] - cS.spS.spYearV(1) + 1;
-   saveS.spModelGrowthV = (log(saveS.skillPrice_stM(:,idxV(2))) - log(saveS.skillPrice_stM(:,idxV(1)))) ./ dy;  
+   saveS.spModelGrowthV = (log(outS.skillPrice_stM(:,idxV(2))) - log(outS.skillPrice_stM(:,idxV(1)))) ./ dy;  
 
    if cS.dbg > 10
       if ~v_check(saveS.spDataGrowthV, 'f', [cS.nSchool, 1], -0.3, 0.3, [])
@@ -119,7 +111,7 @@ saveS.sTimeMedian_ascM = cS.missVal .* ones([ageMax, cS.nSchool, nc]);
 % % Mean effective ability by [school, cohort]
 % saveS.abilMean_scM = zeros([cS.nSchool, nc]);
 % saveS.abilStd_scM  = zeros([cS.nSchool, nc]);
-% % h1 : at cS.age1
+% % h1 : at cS.demogS.age1
 % saveS.logH1Mean_scM = repmat(cS.missVal, [cS.nSchool, nc]);
 % saveS.logH1Std_scM  = repmat(cS.missVal, [cS.nSchool, nc]);
 % % Avg fraction of time spent studying
@@ -143,7 +135,7 @@ for ic = 1 : nc
       wtV = simS.pSchool_iscM(:, iSchool, ic);
       wtV = wtV ./ sum(wtV);
       
-      ageRangeV = cS.workStartAgeV(iSchool) : ageMax;
+      ageRangeV = cS.demogS.workStartAgeV(iSchool) : ageMax;
       % Time endowment by age in range
       tEndowV = paramS.tEndow_ascM(ageRangeV, iSchool, ic);
       
@@ -155,7 +147,7 @@ for ic = 1 : nc
       % *****  Stats by cohort
       
       logH1V = log(simS.h1_icM(:, ic));
-      abilV  = simS.abil_icM(:,ic) .* paramS.theta;
+      abilV  = simS.abil_icM(:,ic) .* paramS.abilScale;
 %       pProductV = ojt_productivity_so1(simS.abilM(:,ic), iSchool, ic, paramS, cS);
       
       % A ^ (1/(1-alpha))  determines steady state h

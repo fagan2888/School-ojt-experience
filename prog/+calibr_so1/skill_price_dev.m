@@ -28,45 +28,63 @@ end
 
 
 
+%% Allocate output values
+
+scalarSkillWeightDev = 0;
+scalarBeforeDev = 0;
+scalarAfterDev = 0;
+
+if strcmpi(cS.spSpecS.inSampleType, 'dataWages')
+   % Skill prices are fixed. No penalties
+   return;
+end
+
+
 %% Deviations from constant relative skill weight growth
 % Regress log(mu(s)) - log(mu(HS)) on linear trend. Take TSS
-   
-% Year range over which const sbtc is assumed
-if strcmpi(spS.sbtcYearStr, 'spYears')
-   sbtcYearV = spYearV;
-elseif strcmpi(spS.sbtcYearStr, 'wageYears')
-   sbtcYearV = (cS.wageYearV(1) : cS.wageYearV(end))';
-else
-   error_so1('Invalid', cS);
-end
 
-% Indices into skillWeight matrices
-yrIdxV = sbtcYearV - spYearV(1) + 1;
-
-devSkillWeightV = zeros([cS.nSchool, 1]);
-% Regress on linear time trend (intercept is automatic)
-xM = sbtcYearV(:) - sbtcYearV(1);
-for iSchool = 1 : cS.nSchool
-   if iSchool == cS.iCG
-      % Top level nest
-      yV = log(skillWeightTop_tlM(yrIdxV, 2)) - log(skillWeightTop_tlM(yrIdxV,1));
+if strcmpi(cS.spSpecS.inSampleType, 'sbtc')
+   % Year range over which const sbtc is assumed
+   if strcmpi(spS.sbtcYearStr, 'spYears')
+      sbtcYearV = spYearV;
+   elseif strcmpi(spS.sbtcYearStr, 'wageYears')
+      sbtcYearV = (cS.wageYearV(1) : cS.wageYearV(end))';
    else
-      % Lower level nest
-      yV = log(skillWeight_tlM(yrIdxV,iSchool)) - log(skillWeight_tlM(yrIdxV,cS.schoolHSG));
+      error_so1('Invalid', cS);
    end
 
-   if iSchool ~= cS.schoolHSG
-      %mdl = fitlm(xM, yV);
-      %residV = mdl.Residuals.Raw;
-      [~, ~, residV] = regress(yV, xM);
-      devSkillWeightV(iSchool) = (residV(:)' * residV(:)) ./ length(residV);
+   % Indices into skillWeight matrices
+   yrIdxV = sbtcYearV - spYearV(1) + 1;
+
+   devSkillWeightV = zeros([cS.nSchool, 1]);
+   % Regress on linear time trend (intercept is automatic)
+   xM = sbtcYearV(:) - sbtcYearV(1);
+   for iSchool = 1 : cS.nSchool
+      if iSchool == cS.iCG
+         % Top level nest
+         yV = log(skillWeightTop_tlM(yrIdxV, 2)) - log(skillWeightTop_tlM(yrIdxV,1));
+      else
+         % Lower level nest
+         yV = log(skillWeight_tlM(yrIdxV,iSchool)) - log(skillWeight_tlM(yrIdxV,cS.schoolHSG));
+      end
+
+      if iSchool ~= cS.schoolHSG
+         %mdl = fitlm(xM, yV);
+         %residV = mdl.Residuals.Raw;
+         [~, ~, residV] = regress(yV, xM);
+         devSkillWeightV(iSchool) = (residV(:)' * residV(:)) ./ length(residV);
+      end
    end
+   
+   validateattributes(devSkillWeightV, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', '>=', 0, ...
+      'size', [cS.nSchool, 1]})
+   scalarSkillWeightDev = 250 * mean(devSkillWeightV);
+   
+else
+   error('Invalid');
 end
+   
 
-scalarSkillWeightDev = 250 * mean(devSkillWeightV);
-
-validateattributes(devSkillWeightV, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', '>=', 0, ...
-   'size', [cS.nSchool, 1]})
 
 
 %% Before sample
@@ -106,14 +124,15 @@ if strcmp(spS.beforeSampleType, 'constGrowth')
       beforeDevV(iSchool) = 1e3 .* sum((beforeLogSkillPrice_stM(iSchool, :) - tgLogSkillPrice_tV) .^ 2);
    end
    
+   validateattributes(beforeDevV, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', 'positive', ...
+      'size', [cS.nSchool, 1]})
+   scalarBeforeDev = mean(beforeDevV);
+   
 else
    error_so1('Invalid', cS);
 end
 
-validateattributes(beforeDevV, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', 'positive', ...
-   'size', [cS.nSchool, 1]})
-scalarBeforeDev = mean(beforeDevV);
-
+   
 
 %% After sample
 if strcmp(spS.afterSampleType, 'constGrowth')
@@ -140,14 +159,14 @@ if strcmp(spS.afterSampleType, 'constGrowth')
       afterDevV(iSchool) = 1e3 .* sum((afterLogSkillPrice_stM(iSchool, :) - tgLogSkillPrice_tV) .^ 2);
    end
    
+   validateattributes(afterDevV, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', 'positive', ...
+      'size', [cS.nSchool, 1]})
+   scalarAfterDev = mean(afterDevV);
+
 else
    error_so1('Invalid');
 end
 
-
-validateattributes(afterDevV, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', 'positive', ...
-   'size', [cS.nSchool, 1]})
-scalarAfterDev = mean(afterDevV);
 
 
 end

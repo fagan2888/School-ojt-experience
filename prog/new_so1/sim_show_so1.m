@@ -21,7 +21,7 @@ simStatS = var_load_so1(cS.vSimStats, cS);
 outS = calS.calDevS;
 
 % Effective abilities
-abilM = simS.abilM .* paramS.theta;
+abilM = simS.abilM .* paramS.abilScale;
 
 
 
@@ -32,13 +32,13 @@ if 1
       ic = cS.byShow4V(i1);
       corrM = corr([simS.abilM(:,ic), log(simS.h1M(:,ic)), simS.iqM(:,ic)]);
       fprintf('Cohort %i:  (a,h1): %4.2f    (a,iq): %4.2f    (h1,iq): %4.2f \n', ...
-         cS.bYearV(ic), corrM(1,2), corrM(1,3), corrM(2,3));
+         cS.demogS.bYearV(ic), corrM(1,2), corrM(1,3), corrM(2,3));
    end
 end
 
 
 %% IQ, ability
-if cS.gS.hasIQ == 1
+if cS.hasIQ == 1
    fig_new_so(saveFigures);
 
    for i1 = 1 : length(cS.byShow4V)
@@ -46,7 +46,7 @@ if cS.gS.hasIQ == 1
       ic = cS.byShow4V(i1);
       
       plot(abilM(:,ic), simS.iqM(:,ic), '.', 'color', cS.colorM(1,:));
-      xlabel(['Effective ability, ', cS.cohStrV{ic}]);
+      xlabel(['Effective ability, ', cS.demogS.cohStrV{ic}]);
       ylabel('IQ');
       figure_format_so(gca, setNo);
    end
@@ -55,7 +55,7 @@ end
 
 
 %% IQ, h1
-if cS.gS.hasIQ == 1
+if cS.hasIQ == 1
    fig_new_so(saveFigures);
 
    for i1 = 1 : length(cS.byShow4V)
@@ -63,7 +63,7 @@ if cS.gS.hasIQ == 1
       ic = cS.byShow4V(i1);
       
       plot(log(simS.h1M(:,ic)), simS.iqM(:,ic), '.', 'color', cS.colorM(1,:));
-      xlabel(['Log h1, ', cS.cohStrV{ic}]);
+      xlabel(['Log h1, ', cS.demogS.cohStrV{ic}]);
       ylabel('IQ');
       figure_format_so(gca, setNo);
    end
@@ -81,7 +81,7 @@ if 1
       ic = cS.byShow4V(i1);
       
       plot(abilM(:,ic), log(simS.h1M(:,ic)), '.', 'color', cS.colorM(1,:));
-      xlabel(['Effective ability, ', cS.cohStrV{ic}]);
+      xlabel(['Effective ability, ', cS.demogS.cohStrV{ic}]);
       ylabel('log h1');
       figure_format_so(gca, setNo);
    end
@@ -97,7 +97,7 @@ if 1
       ic = cS.byShow4V(i1);
       pCollegeV = sum(simS.pSchoolM(:, cS.schoolCD : cS.schoolCG, ic), 2);
       plot(abilM(:,ic), pCollegeV, '.', 'color', cS.colorM(1,:));
-      xlabel(['Effective ability, ', cS.cohStrV{ic}]);
+      xlabel(['Effective ability, ', cS.demogS.cohStrV{ic}]);
       ylabel('Prob college');
       axis_range_lh([NaN, NaN, 0, 1]);
       figure_format_so(gca, setNo);
@@ -114,7 +114,7 @@ if 1
       subplot(2,2,i1);
       pCollegeV = sum(simS.pSchoolM(:, cS.schoolCD : cS.schoolCG, ic), 2);
       plot(log(simS.h1M(:,ic)), pCollegeV, '.', 'color', cS.colorM(1,:));
-      xlabel(['Log h1, ', cS.cohStrV{ic}]);
+      xlabel(['Log h1, ', cS.demogS.cohStrV{ic}]);
       ylabel('Prob college');
       axis_range_lh([xMin, xMax, 0, 1]);
       figure_format_so(gca, setNo);
@@ -280,7 +280,7 @@ if saveFigures >= 0
    
    hold on;
    for iSchool = 1 : cS.nSchool
-      plot(cS.bYearV,  simStatS.abilMean_scM(iSchool, :),  cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool,:));
+      plot(cS.demogS.bYearV,  simStatS.abilMean_scM(iSchool, :),  cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool,:));
    end
    
    hold off;
@@ -297,7 +297,7 @@ if saveFigures >= 0
    
    hold on;
    for iSchool = 1 : cS.nSchool
-      plot(cS.bYearV,  simStatS.abilStd_scM(iSchool, :),  cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool,:));
+      plot(cS.demogS.bYearV,  simStatS.abilStd_scM(iSchool, :),  cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool,:));
    end
    
    hold off;
@@ -317,7 +317,7 @@ if saveFigures >= 0
    
    hold on;
    for iSchool = 1 : cS.nSchool
-      plot(cS.bYearV,  simStatS.logH1Mean_scM(iSchool, :),  cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool,:));
+      plot(cS.demogS.bYearV,  simStatS.logH1Mean_scM(iSchool, :),  cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool,:));
    end
    
    hold off;
@@ -334,7 +334,7 @@ if saveFigures >= 0
    
    hold on;
    for iSchool = 1 : cS.nSchool
-      plot(cS.bYearV,  simStatS.logH1Std_scM(iSchool, :),  cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool,:));
+      plot(cS.demogS.bYearV,  simStatS.logH1Std_scM(iSchool, :),  cS.lineStyleV{iSchool}, 'Color', cS.colorM(iSchool,:));
    end
    
    hold off;
@@ -356,8 +356,8 @@ if 01
       fig_new_so(saveFigures, setNo);
       meanM = cS.missVal .* ones([cS.nSchool, cS.nCohorts]);
       
-      for ic = 1 : length(cS.byShowV)
-         iCohort = cS.byShowV(ic);
+      for ic = 1 : length(cS.demogS.byShowV)
+         iCohort = cS.demogS.byShowV(ic);
          if iFig == 1
             % Ability
             xPlotV = abilM(:, iCohort);
@@ -384,7 +384,7 @@ if 01
             meanM(iSchool, iCohort) = sum(xPlotV .* wtV);
          end
          hold off;
-         xlabel([xNameStr, ' -- Cohort ', cS.cohStrV{iCohort}]);
+         xlabel([xNameStr, ' -- Cohort ', cS.demogS.cohStrV{iCohort}]);
          
          if iCohort == 1
             legend(cS.schoolLabelV, 'Location', 'Northwest');

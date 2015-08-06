@@ -1,4 +1,5 @@
-function [skillWeightTop_tlM, skillWeight_tlM] = skill_weights(lSupply_stM, skillPrice_stM, aggrProdFct, cS)
+function [skillWeightTop_tlM, skillWeight_tlM, AV] = ...
+   skill_weights(lSupply_stM, skillPrice_stM, aggrProdFct, cS)
 %{
 IN
    aggrProdFct :: ces_nested_lh
@@ -33,15 +34,11 @@ end
 %% Main
 
 % Neutral productivities do not matter
-[skillWeightTop_tlM, skillWeight_tlM] = aggrProdFct.factor_weights(ones(T,1), ...
+%  They simply multiply all skill weights
+[skillWeightTop_tlM, skillWeight_tlM, AV] = aggrProdFct.factor_weights( ...
    (lSupply_stM .* skillPrice_stM)',  lSupply_stM');
 
 
-% Drop the skill weight on CG at the lower nest (it is 1 anyway)
-% skillWeight_tlM(:, end) = [];
-
-% % Neutral productivities
-% AV = alphaTop_tsM(:, 1);
 
 
 %% Output check

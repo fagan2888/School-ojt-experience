@@ -54,14 +54,13 @@ validateattributes(tgS.logWage_stM, {'double'}, {'finite', 'nonnan', 'nonempty',
    '>', cS.missVal + 1, 'size', [cS.nSchool, dataS.ny]})
 
 % Calibrate skill weights using hours as labor supply
-[dataS.skillWeightTop_tlM, dataS.skillWeight_tlM] = calibr_so1.skill_weights(dataS.lSupply_stM, ...
+[dataS.skillWeightTop_tlM, dataS.skillWeight_tlM, AV] = calibr_so1.skill_weights(dataS.lSupply_stM, ...
    dataS.skillPrice_stM, paramS.aggrProdFct, cS);
 
 % Check that this recovers data wages
-mp_tsM = paramS.aggrProdFct.mproducts(ones(dataS.ny,1),  dataS.skillWeightTop_tlM, dataS.skillWeight_tlM, ...
+mp_tsM = paramS.aggrProdFct.mproducts(AV,  dataS.skillWeightTop_tlM, dataS.skillWeight_tlM, ...
    dataS.lSupply_stM');
 check_lh.approx_equal(mp_tsM',  dataS.skillPrice_stM, 1e-3, []);
-
 
 
 %% Compare model and data
@@ -69,6 +68,7 @@ check_lh.approx_equal(mp_tsM',  dataS.skillPrice_stM, 1e-3, []);
 plot_skill_weights(modelS, 'skill_weights', saveFigures, cS);
 plot_skill_weights(dataS, 'skill_weights_hours', saveFigures, cS);
 
+plot_model_ls(modelS, saveFigures, cS);
 plot_labor_supplies(modelS, dataS, saveFigures, cS);
 
 return;  % +++++
@@ -86,7 +86,7 @@ return;  % +++++
 %    yrIdx = find(dataYearV == yearV(iy));
 %    if length(yrIdx) == 1
 %       for iSchool = 1 : cS.nSchool
-%          ageV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+%          ageV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
 %          logWageV = dataS.meanLogWageTruncM(ageV,iSchool,yrIdx);
 %          hoursV   = dataHoursM(ageV,iSchool,yrIdx);
 %          idxV = find(logWageV ~= cS.missVal  &  hoursV > 0);
@@ -261,6 +261,26 @@ Data really means: hours as labor supplies
 % 
 % end
 
+
+%% Plot model labor supplies (all periods)
+function plot_model_ls(modelS, saveFigures, cS)
+   figS = const_fig_so1;
+   plotYearV = cS.spS.spYearV(1) : cS.spS.spYearV(end);
+   
+   output_so1.fig_new(saveFigures);
+   hold on;
+   for iSchool = 1 : cS.nSchool
+      plot(plotYearV,  log(modelS.lSupply_stM(iSchool, :) ./ modelS.lSupply_stM(iSchool, 1)),  ...
+         figS.lineStyleDenseV{iSchool}, 'color', figS.colorM(iSchool,:));
+   end
+   
+   hold off;
+   xlabel('Year');
+   ylabel('Log labor supply');
+   legend(cS.schoolLabelV, 'location', 'southoutside', 'orientation', 'horizontal');
+   output_so1.fig_format(gca, 'line');
+   output_so1.fig_save('labor_supply_model', saveFigures, cS);
+end
 
 
 %% Local:  Plot labor supplies

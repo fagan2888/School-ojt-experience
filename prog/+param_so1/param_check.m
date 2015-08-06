@@ -3,7 +3,7 @@ function param_check(paramS, cS)
 % -------------------------------------------
 
 % update later +++++
-% if ~isequal(size(paramS.tEndow_ascM),  [cS.ageRetire, cS.nSchool, cS.nCohorts])
+% if ~isequal(size(paramS.tEndow_ascM),  [cS.demogS.ageRetire, cS.nSchool, cS.nCohorts])
 %    error_so1('Invalid size of time endowments', cS);
 % end
 

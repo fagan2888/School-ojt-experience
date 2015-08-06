@@ -15,12 +15,12 @@ statS = var_load_so1(cS.vSimStats, cS);
 
 % Mean log h by [age, school, year]
 %  using adjacent cohorts +++
-[meanLogHM] = cohort_to_year_so1(statS.meanLogHM, cS.bYearV, yearV, cS);
+[meanLogHM] = cohort_to_year_so1(statS.meanLogHM, cS.demogS.bYearV, yearV, cS);
 
 % Mean log efficiency = h (\ell - l) / \ell
-[meanLogEffM] = cohort_to_year_so1(statS.meanLogEffM, cS.bYearV, yearV, cS);
+[meanLogEffM] = cohort_to_year_so1(statS.meanLogEffM, cS.demogS.bYearV, yearV, cS);
 
-meanLogWageM = cohort_to_year_so1(statS.meanLogWage_ascM, cS.bYearV, yearV, cS);
+meanLogWageM = cohort_to_year_so1(statS.meanLogWage_ascM, cS.demogS.bYearV, yearV, cS);
 
 
 %% Plot mean log h, mean log eff

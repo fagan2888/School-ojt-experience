@@ -14,7 +14,7 @@ tgS = output_so1.var_load(varS.vCalTargets, cS);
 
 
 %%  Beta IQ by experience
-if cS.gS.hasIQ == 1
+if cS.hasIQ == 1
    output_so1.fig_new(saveFigures);
    plot(tgS.iqExperV, tgS.betaIqExperV, figS.lineStyleV{1}, 'color', figS.colorM(1,:));
    xlabel('Experience');
@@ -26,7 +26,7 @@ end
 
 
 %% ***********  Taubman Wales graph
-if cS.gS.hasIQ == 1
+if cS.hasIQ == 1
    output_so1.fig_new(saveFigures);
    
    hold on;
@@ -55,7 +55,7 @@ if 01
    legendV = arrayfun(@(x) {sprintf('%d', x)}, yearV);
   
    for iSchool = 1 : cS.nSchool
-      ageV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+      ageV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
       output_so1.fig_new(saveFigures);
       hold on;
       
@@ -87,7 +87,7 @@ if 0
       
       for iSchool = 1 : cS.nSchool
          % Ages over which to compare model with data
-         xV = max(cS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);
+         xV = max(cS.demogS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);
          yV = tgS.ssS.logWage_astM(xV,iSchool,iy);
          idxV = find(yV ~= cS.missVal);
          plot(xV(idxV), yV(idxV), figS.lineStyleDenseV{iSchool}, 'color', figS.colorM(iSchool,:));
@@ -108,7 +108,7 @@ end
 if 1
    figRows = 3;
    figCols = 2;
-   byShowV = cS.byShowV;
+   byShowV = cS.demogS.byShowV;
    nc = length(byShowV);
 
    for iPlot = 1 : 2
@@ -116,13 +116,13 @@ if 1
          % Mean log wage
          yLabelStr = cS.wageStr;
          figFn = 'tg_wages';
-         ageRangeV = [min(cS.workStartAgeV), cS.ageRetire];
+         ageRangeV = [min(cS.demogS.workStartAgeV), cS.demogS.ageRetire];
          wageM = tgS.logWage_ascM;
          [yMin, yMax] = output_so1.y_range(wageM(:), cS.missVal);
       elseif iPlot == 2
          yLabelStr = 'Mean hours worked';
          figFn = 'tg_hours';
-         ageRangeV = [min(cS.workStartAgeV), cS.ageRetire];
+         ageRangeV = [min(cS.demogS.workStartAgeV), cS.demogS.ageRetire];
          wageM = tgS.hours_ascM;
          [yMin, yMax] = output_so1.y_range(wageM(:), cS.missVal);
          
@@ -139,14 +139,14 @@ if 1
          hold on;
          for iSchool = 1 : cS.nSchool
             wageV = wageM(:, iSchool, ic);
-            wageV(1 : (cS.workStartAgeV(iSchool))) = cS.missVal;
+            wageV(1 : (cS.demogS.workStartAgeV(iSchool))) = cS.missVal;
             idxV = find(wageV ~= cS.missVal);
             plot(idxV, wageV(idxV), figS.lineStyleDenseV{iSchool}, 'Color', figS.colorM(iSchool, :));
          end
 
          hold off;
          axis([ageRangeV(1), ageRangeV(2), yMin, yMax]);
-         xlabel(['Age  -  cohort ', cS.cohStrV{ic}]);
+         xlabel(['Age  -  cohort ', cS.demogS.cohStrV{ic}]);
          ylabel(yLabelStr);
          if i1 == 1
             legend(cS.schoolLabelV, 'Location', 'South');

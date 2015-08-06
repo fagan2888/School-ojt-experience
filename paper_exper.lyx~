@@ -326,16 +326,12 @@ Endowments:
 \end_layout
 
 \begin_layout Standard
-At birth, agents draw three random endowments: 
+At birth, agents draw two random endowments: 
 \begin_inset Formula $\ability$
 \end_inset
 
- , 
+, 
 \begin_inset Formula $h_{1}$
-\end_inset
-
-, and 
-\begin_inset Formula $p_{s}$
 \end_inset
 
 .
@@ -388,32 +384,6 @@ I normalize
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $p_{s}$
-\end_inset
-
- is a 
-\begin_inset Quotes eld
-\end_inset
-
-psychic cost
-\begin_inset Quotes erd
-\end_inset
-
- that determines how much the individual enjoys schooling level 
-\begin_inset Formula $s$
-\end_inset
-
-.
- 
-\begin_inset Formula $p_{s}$
-\end_inset
-
- is drawn from a Gumbel distribution, which simplifies the school choice
- problem.
- +++
-\end_layout
-
-\begin_layout Standard
 In each period, a person supplies 
 \begin_inset Formula $\tEndow_{s,\birthYear,\pYear}$
 \end_inset
@@ -460,7 +430,7 @@ Human capital is produced in school and on the job.
 \end_inset
 
  years and results in 
-\begin_inset Formula $h_{\sDuration+1}=F(h_{1},\ability,s)$
+\begin_inset Formula $h_{\sDuration+1}=\schoolProdFct_{s}(h_{1},\ability)$
 \end_inset
 
  units of type 
@@ -509,7 +479,7 @@ Aggregate output and skill prices:
 Output is produced from human capital augmented labor according to
 \begin_inset Formula 
 \begin{equation}
-Q_{\tau}=\left[G_{\tau}^{\rho_{CG}}+(\omega_{CG,\tau}L_{CG,\tau})^{\rho_{CG}}\right]^{1/\rho_{CG}}
+\aggrOutput_{\tau}=\neutralProd_{\pYear}\left[G_{\tau}^{\rho_{CG}}+(\omega_{CG,\tau}L_{CG,\tau})^{\rho_{CG}}\right]^{1/\rho_{CG}}
 \end{equation}
 
 \end_inset
@@ -523,8 +493,20 @@ G_{\tau}=\left[\sum_{s=HSD}^{CD}(\omega_{s,\tau}L_{s,\tau})^{\rho_{HS}}\right]^{
 \end_inset
 
 is a CES aggregator for unskilled labor (with less than a college degree).
- Skill prices equal marginal products: 
-\begin_inset Formula $\sPrice\left(s,\pYear\right)=\partial Q_{\tau}/\partial L_{s,\tau}$
+ 
+\end_layout
+
+\begin_layout Standard
+Normalize 
+\begin_inset Formula $\skillWeight_{s,\pYear}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Skill prices equal marginal products: 
+\begin_inset Formula $\sPrice\left(s,\pYear\right)=\partial\aggrOutput_{\tau}/\partial L_{s,\tau}$
 \end_inset
 
 .
@@ -533,7 +515,7 @@ is a CES aggregator for unskilled labor (with less than a college degree).
 \end_inset
 
  denotes aggregate labor supply in efficiency units 
-\begin_inset Formula $(e_{s,c,t})$
+\begin_inset Formula $\left(\effUnits\right)$
 \end_inset
 
  of school group 
@@ -545,31 +527,7 @@ is a CES aggregator for unskilled labor (with less than a college degree).
 \end_inset
 
 .
- Slightly abusing notation, this is given by
-\begin_inset Formula 
-\begin{equation}
-L_{s,\tau}=\sum_{t=T_{s}+1}^{T}\sum_{i=1}^{N_{c(t,\tau)}}p_{i,s,c}e_{i,s,c,t}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-where 
-\begin_inset Formula $p_{i,s,c}$
-\end_inset
-
- is the (endogenous) probability that agent 
-\begin_inset Formula $i$
-\end_inset
-
- chooses schooling level 
-\begin_inset Formula $s$
-\end_inset
-
-.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -591,7 +549,7 @@ He first chooses a school level
 \end_inset
 
  and then spends 
-\begin_inset Formula $T_{s}$
+\begin_inset Formula $\sDuration_{s}$
 \end_inset
 
  years in school, where he produces human capital 
@@ -620,7 +578,7 @@ Work phase:
 
 \begin_layout Standard
 At the start of work, the agent is endowed with 
-\begin_inset Formula $h_{T_{s}+1}$
+\begin_inset Formula $h_{\sDuration_{s}+1}$
 \end_inset
 
  units of type 
@@ -635,11 +593,19 @@ At the start of work, the agent is endowed with
  He maximizes the discounted present value of lifetime earnings
 \begin_inset Formula 
 \begin{equation}
-V(h_{T_{s}+1},\ability,s,\bYear)=\mbox{\max}_{\{l_{t}\}}\sum_{\age=\sDuration+1}^{\lifeSpan}R^{-\age}\earn(l_{\age},h_{\age},\age,s,\bYear)
+V(h_{T_{s}+1},\ability,s,\bYear)=\mbox{\max}_{\{l_{t}\}}\sum_{\age=\sDuration_{s}+1}^{\lifeSpan}R^{-\age}\earn(l_{\age},h_{\age},\age,s,\bYear)
 \end{equation}
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+this is discounted to age 1
+\end_layout
+
+\begin_layout Standard
 subject to the law of motion for 
 \begin_inset Formula $h$
 \end_inset
@@ -774,15 +740,6 @@ Individuals start their lives as high school students.
 \end_layout
 
 \begin_layout Standard
-While in school, human capital accumulation is described by the function
- 
-\begin_inset Formula $h_{s}\left(h_{1},\ability,\bYear\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 They graduate with probability 
 \begin_inset Formula $\probHSG\left(\ability\right)$
 \end_inset
@@ -797,7 +754,7 @@ Then they decide whether or not to enter college.
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\max\left\{ V\left(h_{HSG}\left(h_{1},\ability,\bYear\right),\ability,HSG,\bYear\right)+\prefShockEntryMean-\prefScale\prefShockEntry,V_{coll}\left(h_{1},\ability,\bYear\right)-\prefScale\prefShockEntry\right\} 
+\max\left\{ \ln V\left(\schoolProdFct_{HSG}\left(h_{1},\ability,\bYear\right),\ability,HSG,\bYear\right)+\prefShockEntryMean_{\bYear}-\prefScale\prefShockEntry,\ln V_{coll}\left(h_{1},\ability,\bYear\right)-\prefScale\prefShockEntry\right\} 
 \end{equation}
 
 \end_inset
@@ -835,7 +792,7 @@ In college: stay for 2 years.
 The value of college entry is therefore given by
 \begin_inset Formula 
 \begin{equation}
-V_{coll}\left(h_{1},\ability,\bYear\right)=\probCG\left(\ability\right)R^{-4}V\left(h_{CG}\left(h_{1},\ability,\bYear\right),\ability,\bYear\right)+\left(1-\probCG\left[\ability\right]\right)R^{-2}V\left(h_{CD}\left(h_{1},\ability,\bYear\right),\ability,\bYear\right)
+V_{coll}\left(h_{1},\ability,\bYear\right)=\probCG\left(\ability\right)V\left(\schoolProdFct_{CG}\left(h_{1},\ability,\bYear\right),\ability,\bYear\right)+\left(1-\probCG\left[\ability\right]\right)V\left(\schoolProdFct_{CD}\left(h_{1},\ability,\bYear\right),\ability,\bYear\right)
 \end{equation}
 
 \end_inset
@@ -890,7 +847,7 @@ Target Moments
 \begin_layout Standard
 The main calibration targets are constructed from the March CPS files for
  
-\begin_inset Formula $\dataYearOne-\dataYearEnd$
+\begin_inset Formula $\dataYearOne-\dataYearLast$
 \end_inset
 
  
@@ -1370,7 +1327,7 @@ Aggregation:
 \begin_layout Standard
 The algorithm computes equilibrium prices and quantities for all years during
  which one of the model cohorts works (
-\begin_inset Formula $\spYearOne-\spYearEnd$
+\begin_inset Formula $\spYearOne-\spYearLast$
 \end_inset
 
 ).
@@ -1398,7 +1355,7 @@ skill weights:
 \begin_deeper
 \begin_layout Enumerate
 during the lifetimes of the model agents, 
-\begin_inset Formula $\spYearOne-\spYearEnd$
+\begin_inset Formula $\spYearOne-\spYearLast$
 \end_inset
 
 , relative skill weights grow at a constant rate (constant SBTC)
@@ -1406,7 +1363,7 @@ during the lifetimes of the model agents,
 
 \begin_layout Enumerate
 outside of the period 
-\begin_inset Formula $\wageYearOne-\wageYearEnd$
+\begin_inset Formula $\wageYearOne-\wageYearLast$
 \end_inset
 
 , skill weights grow at a constant rate
@@ -1415,7 +1372,7 @@ outside of the period
 \begin_layout Enumerate
 these rates are set to the model implied average skill weight growth rates
  over the period 
-\begin_inset Formula $\wageYearOne-\wageYearEnd$
+\begin_inset Formula $\wageYearOne-\wageYearLast$
 \end_inset
 
 
@@ -1449,7 +1406,7 @@ relative skill prices are set at the levels
 \end_inset
 
  and 
-\begin_inset Formula $\spYearEnd$
+\begin_inset Formula $\spYearLast$
 \end_inset
 
 .
@@ -1624,16 +1581,7 @@ key "HeckmanLochnerT1998"
  in 1960 and observed until age 35.
  My estimate uses longitudinal wage profiles for several cohorts, most of
  which are observed until age 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-wageAgeRangeTwo
-\end_layout
-
+\begin_inset Formula $\wageAgeRangeLast$
 \end_inset
 
 .
@@ -2808,15 +2756,15 @@ reference "tab:CPSsummary"
 
 .
  The sample contains men between the ages of 
-\begin_inset Formula $\cpsAgeOne$
+\begin_inset Formula $\ageOne$
 \end_inset
 
  and 
-\begin_inset Formula $\cpsAgeEnd$
+\begin_inset Formula $\ageRetire$
 \end_inset
 
  observed in the 
-\begin_inset Formula $\dataYearOne-\dataYearEnd$
+\begin_inset Formula $\dataYearOne-\dataYearLast$
 \end_inset
 
  waves of the March Current Population Survey.
@@ -2824,19 +2772,11 @@ reference "tab:CPSsummary"
 \end_layout
 
 \begin_layout Enumerate
-weeks worked per year < 
-\begin_inset Formula $\cpsMinWeeksYear$
-\end_inset
-
- 
+weeks worked per year < +++ 
 \end_layout
 
 \begin_layout Enumerate
-hours worked per week < 
-\begin_inset Formula $\cpsMinHoursWeek$
-\end_inset
-
-
+hours worked per week < +++
 \end_layout
 
 \begin_layout Enumerate
@@ -2941,24 +2881,10 @@ Income variables:
 \begin_layout Standard
 Labor earnings are defined as the sum of wage and salary incomes (INCWAGE).
  Wages are defined as labor earnings divided by hours worked.
- Wages are set to missing if weeks worked are below 
-\begin_inset Formula $\cpsMinWeeksYear$
-\end_inset
-
- or hours worked per week are below 
-\begin_inset Formula $\cpsMinHoursWeek$
-\end_inset
-
-.
- Outliers with less than 
-\begin_inset Formula $\wageMultMin$
-\end_inset
-
-% or more than 
-\begin_inset Formula $\wageMultMax$
-\end_inset
-
- times the median wage are dropped.
+ Wages are set to missing if weeks worked are below +++ or hours worked
+ per week are below +++.
+ Outliers with less than +++% or more than +++ times the median wage are
+ dropped.
 \end_layout
 
 \begin_layout Standard
@@ -3009,7 +2935,7 @@ The fraction of persons in cohort
 \end_inset
 
  through 
-\begin_inset Formula $\schoolAgeRangeTwo$
+\begin_inset Formula $\schoolAgeRangeLast$
 \end_inset
 
  (not all ages are observed for all cohorts).

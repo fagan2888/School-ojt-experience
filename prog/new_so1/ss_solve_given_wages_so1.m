@@ -36,7 +36,7 @@ Checked: +++
 
 %% Input check
 if cS.dbg > 10
-   if ~v_check(wt_asM, 'f', [cS.ageRetire, cS.nSchool], 0, [], [])
+   if ~v_check(wt_asM, 'f', [cS.demogS.ageRetire, cS.nSchool], 0, [], [])
       error_so1('Invalid');
    end
 end
@@ -89,7 +89,7 @@ if 0
    for iSchool = 1 : cS.nSchool
       subplot(2,2,iSchool);
       % Ages for which to compare
-      ageV = max(cS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);
+      ageV = max(cS.demogS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);
       plot(ageV, logWage_asM(ageV,iSchool), '-',  ageV, modelWage_asM(ageV,iSchool), '--');
    end
    keyboard;
@@ -128,10 +128,10 @@ end
       
       % Deviations from tg age wage profiles
       devV = zeros([cS.nSchool, 1]);
-      modelWage_asM = zeros([cS.ageRetire, cS.nSchool]);
+      modelWage_asM = zeros([cS.demogS.ageRetire, cS.nSchool]);
       for iSchool2 = 1 : cS.nSchool
          % Ages for which to compare
-         age2V = max(cS.workStartAgeV(iSchool2), cS.ageRangeV(1)) : cS.ageRangeV(2);
+         age2V = max(cS.demogS.workStartAgeV(iSchool2), cS.ageRangeV(1)) : cS.ageRangeV(2);
          % Implied age wage profiles of representative cohort
          if cS.useMedianWage == 1
             modelV = cohS.logMedianWage_asM(age2V, iSchool2);

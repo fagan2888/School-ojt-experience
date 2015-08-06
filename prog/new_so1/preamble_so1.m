@@ -37,7 +37,7 @@ fprintf(fp, '\\newcommand{\\nSpParams}{%i}\n', nSplineParams);
 fprintf(fp, '\\newcommand{\\nCalParamsNet}{%i}\n', nCalParams - nSplineParams);
 
 
-fprintf(fp, '\\newcommand{\\pTheta}{%4.2f}\n', paramS.theta);
+fprintf(fp, '\\newcommand{\\pTheta}{%4.2f}\n', paramS.abilScale);
 %fprintf(fp, '\\newcommand{\\pAlpha}{%4.2f}\n', paramS.alpha);
 fprintf(fp, '\\newcommand{\\gHEndow}{%3.1f}\n', 100 .* paramS.gH1);
 %fprintf(fp, '\\newcommand{\\ddh}{%4.1f}\n', 100 .* (1 - paramS.ddh1));

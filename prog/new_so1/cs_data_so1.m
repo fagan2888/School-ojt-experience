@@ -5,7 +5,7 @@ function [logWageM, wtM] = cs_data_so1(indLogWage_iascM, pSchool_iscM, indLogWag
 This is used to compute cross-sectional stats, exactly as they are computed in the data
 The stats use fixed [age, school] weights
 
-Each year has cS.gS.nSim * nAge persons
+Each year has cS.nSim * nAge persons
 Only ages in ageMin:ageMax have data filled in
 
 Uses steady state cohorts to fill in non-modeled cohorts
@@ -35,22 +35,22 @@ Checked: 2014-apr-8
 %% Input check
 
 nYr = length(yearV);
-nBy = length(cS.bYearV);
+nBy = length(cS.demogS.bYearV);
 if cS.dbg > 10
-   if ~v_check(indLogWage_iascM, 'f', [cS.gS.nSim, cS.ageRetire, cS.nSchool, nBy], [], [])
+   if ~v_check(indLogWage_iascM, 'f', [cS.nSim, cS.demogS.ageRetire, cS.nSchool, nBy], [], [])
       error_so1('Invalid wageM', cS);
    end
-   if ~v_check(pSchool_iscM, 'f', [cS.gS.nSim, cS.nSchool, nBy], 0, 1)
+   if ~v_check(pSchool_iscM, 'f', [cS.nSim, cS.nSchool, nBy], 0, 1)
       error_so1('Invalid pSchool_iscM', cS);
    end
-   if ~v_check(indLogWageSS_iascM, 'f', [cS.gS.nSim, cS.ageRetire, cS.nSchool, 2], [], [])
+   if ~v_check(indLogWageSS_iascM, 'f', [cS.nSim, cS.demogS.ageRetire, cS.nSchool, 2], [], [])
       error_so1('Invalid wageM', cS);
    end
-   if ~v_check(pSchoolSS_iscM, 'f', [cS.gS.nSim, cS.nSchool, 2], 0, 1)
+   if ~v_check(pSchoolSS_iscM, 'f', [cS.nSim, cS.nSchool, 2], 0, 1)
       error_so1('Invalid pSchool_iscM', cS);
    end
    % Weights can be 0 for ages before work starts
-   if ~v_check(dataWt_asM, 'f', [cS.ageRetire, cS.nSchool], 0, 1)
+   if ~v_check(dataWt_asM, 'f', [cS.demogS.ageRetire, cS.nSchool], 0, 1)
       error_so1('Invalid weights', cS);
    end
 end
@@ -58,7 +58,7 @@ end
 
 %% Loop over years
 
-sizeV = [cS.gS.nSim, ageMax, cS.nSchool, nYr];
+sizeV = [cS.nSim, ageMax, cS.nSchool, nYr];
 logWageM  = repmat(cS.missVal, sizeV);
 wtM       = zeros(sizeV);
 
@@ -66,20 +66,20 @@ for iy = 1 : nYr
    year1 = yearV(iy);
    
    % Age of each model cohort
-   % cohAgeV = age_from_year_so(cS.bYearV, year1, cS.ageInBirthYear);
+   % cohAgeV = age_from_year_so(cS.demogS.bYearV, year1, cS.ageInBirthYear);
    
    for iSchool = 1 : cS.nSchool
       % Working age range
-      ageRangeV = max(ageMin, cS.workStartAgeV(iSchool)) : ageMax;
+      ageRangeV = max(ageMin, cS.demogS.workStartAgeV(iSchool)) : ageMax;
       % Birth year for each age
       bYearV    = byear_from_age_so(ageRangeV, year1, cS.ageInBirthYear);
       
       for iAge = 1 : length(ageRangeV)
          age = ageRangeV(iAge);
-         if bYearV(iAge) < cS.bYearLbV(1)
+         if bYearV(iAge) < cS.demogS.bYearLbV(1)
             % Early cohorts: use initial SS
             iSS = 1;
-         elseif bYearV(iAge) > cS.bYearUbV(cS.nCohorts)
+         elseif bYearV(iAge) > cS.demogS.bYearUbV(cS.nCohorts)
             % Late cohorts: use terminal SS
             iSS = 2;
          else
@@ -93,7 +93,7 @@ for iy = 1 : nYr
          else
             % Find the cohort for this age
             %  If model has not cohort, use closest model cohort
-            [~, iCohort] = min(abs(bYearV(iAge) - cS.bYearV));
+            [~, iCohort] = min(abs(bYearV(iAge) - cS.demogS.bYearV));
             logWageV = indLogWage_iascM(:, age, iSchool, iCohort);
             wtV = pSchool_iscM(:, iSchool, iCohort);
          end

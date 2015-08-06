@@ -10,7 +10,7 @@ figS = const_fig_so1;
 loadS = output_so1.var_load(varS.vCohortHours, cS);
 
 % Show these cohorts
-byShowV = cS.byShowV(1:5);
+byShowV = cS.demogS.byShowV(1:5);
 
 if cS.wagePeriod == cS.hourlyWages
    yMin = 1600;
@@ -46,9 +46,9 @@ if 1
       xlabel('Age');
       ylabel('Hours');
       if iSchool == cS.nSchool
-         legend(cS.cohStrV(byShowV), 'Location', 'South');
+         legend(cS.demogS.cohStrV(byShowV), 'Location', 'South');
       end
-      figures_lh.axis_range_lh([cS.workStartAgeV(1), cS.ageRetire, yMin, yMax]);
+      figures_lh.axis_range_lh([cS.demogS.workStartAgeV(1), cS.demogS.ageRetire, yMin, yMax]);
       output_so1.fig_format(gca, 'line');
    end
 

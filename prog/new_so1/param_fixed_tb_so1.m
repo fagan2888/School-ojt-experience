@@ -41,13 +41,13 @@ tbM{ir,cValue} = 'Value';
 ir = ir + 1;
 tbM{ir,cName} = '$T$';
 tbM{ir,cRole} = 'Lifespan';
-tbM{ir,cValue} = sprintf('%i', cS.ageRetire);
+tbM{ir,cValue} = sprintf('%i', cS.demogS.ageRetire);
 
 % Cohorts
 ir = ir + 1;
 tbM{ir, cName} = '$c$';
 tbM{ir, cRole} = 'Birth cohorts';
-vStr = [sprintf('%i, ', cS.bYearV(1:3)), '...', sprintf(', %i', cS.bYearV((cS.nCohorts-2) : cS.nCohorts))];
+vStr = [sprintf('%i, ', cS.demogS.bYearV(1:3)), '...', sprintf(', %i', cS.demogS.bYearV((cS.nCohorts-2) : cS.nCohorts))];
 tbM{ir, cValue} = vStr;
  
 % 
@@ -60,7 +60,7 @@ tbM{ir, cValue} = vStr;
 ir = ir + 1;
 tbM{ir,cName} = '$T_{s}$';
 tbM{ir,cRole} = 'School duration';
-TsStr = sprintf('%i, ', cS.workStartAgeV - cS.age1);
+TsStr = sprintf('%i, ', cS.demogS.workStartAgeV - cS.demogS.age1);
 tbM{ir,cValue} = TsStr(1 : (end-2));
 
 

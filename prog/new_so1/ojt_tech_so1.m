@@ -12,7 +12,7 @@ IN:
 GV = pProductV .* (hV .^ pAlpha) .* (sTimeV .^ pBeta);
 
 % Impose h range
-%ageNext = min(age + 1, cS.ageRetire);
+%ageNext = min(age + 1, cS.demogS.ageRetire);
 hPrimeV = (1-ddh) .* hV(:) + GV(:);
 %if imposeBounds == 1
 %   hPrimeV = max(paramS.hRangeM(1,ageNext,iSchool,iCohort),  ...

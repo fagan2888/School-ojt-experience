@@ -15,7 +15,7 @@ disp(['  Description:  ', cS.setStr]);
 %       disp('  Psy cost is independent of ability');
 %    end
 
-% if cS.gS.tgBetaIqExper > 0
+% if cS.tgBetaIqExper > 0
 %    disp('  Target IQ by experience');
 % end
 % if cS.tgSkewness > 0

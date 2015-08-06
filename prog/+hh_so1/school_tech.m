@@ -30,7 +30,7 @@ hV = h1V;
 sTimeV = ones(size(hV));
 
 % Accumulate for duration of school
-for t = 1 : cS.schoolLengthV(iSchool)
+for t = 1 : cS.demogS.schoolLengthV(iSchool)
    % For now: use OJT technology
    %    hV = ojt_tech_so1(hV, sTimeV, pProductV, paramS.alphaV(iSchool), paramS.alphaV(iSchool), paramS.ddhV(iSchool));
    hV = hV .* (1 - ddh) + pProductV .* ((hV .* sTimeV) .^ pAlpha);

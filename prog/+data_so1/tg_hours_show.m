@@ -3,12 +3,12 @@ function tg_hours_show(saveFigures, gNo)
 cS = const_data_so1(gNo);
 varS = param_so1.var_numbers;
 figS = const_fig_so1;
-byShowV = cS.byShowV(1:5);
+byShowV = cS.demogS.byShowV(1:5);
 
 tgS = output_so1.var_load(varS.vCalTargets, cS);
 
 xMin = 15;
-xMax = cS.ageRetire;
+xMax = cS.demogS.ageRetire;
 
 
 %% One cohort
@@ -20,7 +20,7 @@ if cS.dataS.sameHoursAllCohorts
    hold on;
    for iSchool = 1 : cS.nSchool
       hoursV = squeeze(tgS.hours_ascM(:, iSchool, byShowV(iBy)));    %  .* cS.hoursScale;
-      idxV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+      idxV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
       plot(idxV, hoursV(idxV), figS.lineStyleDenseV{iSchool}, 'color', figS.colorM(iSchool,:));
    end
    
@@ -45,7 +45,7 @@ for iSchool = 1 : cS.nSchool
    hold on;
    for iBy = 1 : length(byShowV)
       hoursV = squeeze(tgS.hours_ascM(:, iSchool, byShowV(iBy)));    %  .* cS.hoursScale;
-      idxV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+      idxV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
       plot(idxV, hoursV(idxV), figS.lineStyleDenseV{iBy}, 'color', figS.colorM(iBy,:));
    end
    
@@ -53,7 +53,7 @@ for iSchool = 1 : cS.nSchool
    xlabel('Age');
    ylabel('Hours worked');
    if iSchool == cS.nSchool
-      legend(cS.cohStrV(byShowV), 'Location', 'South');
+      legend(cS.demogS.cohStrV(byShowV), 'Location', 'South');
    end
    figures_lh.axis_range_lh([xMin, xMax, 0, NaN]);
    output_so1.fig_format(gca, 'line');

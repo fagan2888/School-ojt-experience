@@ -24,7 +24,7 @@ for iCohort = iCohortV
 
    % Plot all school groups; data and model
    for iSchool = 1 : cS.nSchool
-      ageRangeV = max(cS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);   
+      ageRangeV = max(cS.demogS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);   
 
       modelWageV = model_ascM(ageRangeV, iSchool, iCohort);
       idxV = find(modelWageV > -10);
@@ -38,7 +38,7 @@ for iCohort = iCohortV
    hold off;
    figures_lh.axis_range_lh([cS.ageRangeV(1), ageRangeV(end), yMin, yMax]);
 
-   xlabel(['Age  --  Cohort ', cS.cohStrV{iCohort}]);
+   xlabel(['Age  --  Cohort ', cS.demogS.cohStrV{iCohort}]);
    ylabel('Log wage');
 
    %if iPlot == 1
@@ -49,7 +49,7 @@ for iCohort = iCohortV
    % Close and save plot
    if iPlot == maxPlot  ||  iCohort == iCohortV(end)
       iFig = iFig + 1;
-      figFn = [dirS.fitDir, 'wage_as_', sprintf('c%i', iFig)];
+      figFn = fullfile(dirS.fitDir, ['wage_as_', sprintf('c%i', iFig)]);
       output_so1.fig_save(figFn, saveFigures, cS);
       iPlot = 0;
    end

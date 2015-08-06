@@ -571,7 +571,7 @@ We want labor supply in efficiency units by
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\lSupply_{s,\pYear}=\sum_{\age}\aggrHours_{\age,s,\bYear\left(\age,\pYear\right)}\effUnits$
+\begin_inset Formula $\lSupply_{s,\pYear}=\sum_{\age}\aggrHours_{\age,s,\pYear}\effUnits_{\age,s,\bYear\left(\age,\pYear\right)}$
 \end_inset
 
 
@@ -619,6 +619,19 @@ Assumption: for cohorts not modeled, efficiency looks like the nearest
 
 \begin_layout Itemize
 now we have efficiency for all cohorts needed.
+\end_layout
+
+\begin_layout Standard
+Code: aggr_ls
+\end_layout
+
+\begin_layout Standard
+Testing:
+\end_layout
+
+\begin_layout Itemize
+don't see a way of testing construction of hours without simply repeating
+ code.
 \end_layout
 
 \begin_layout Section

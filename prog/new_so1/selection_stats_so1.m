@@ -24,15 +24,15 @@ ageMin = cS.aggrAgeRangeV(1);
 ageMax = cS.aggrAgeRangeV(end);
 
 % Take out school selection
-pSchoolM = (1 ./ cS.nSchool) .* ones([cS.gS.nSim, cS.nSchool, cS.nCohorts]);
+pSchoolM = (1 ./ cS.nSchool) .* ones([cS.nSim, cS.nSchool, cS.nCohorts]);
 
 
 % Profiles to use for cohorts before / after 1st modeled cohorts
    if 1  % +++++ trying alternative comp of non modeled cohorts
-      logWageSS_iascM = repmat(cS.missVal, [cS.gS.nSim, cS.ageRetire, cS.nSchool, 2]);
+      logWageSS_iascM = repmat(cS.missVal, [cS.nSim, cS.demogS.ageRetire, cS.nSchool, 2]);
       logWageSS_iascM(:,:,:,1) = log_lh(simS.wageM(:,:,:,1), cS.missVal);
       logWageSS_iascM(:,:,:,2) = log_lh(simS.wageM(:,:,:,end), cS.missVal);
-      pSchoolSS_iscM  = (1 ./ cS.nSchool) .* ones([cS.gS.nSim, cS.nSchool, 2]);
+      pSchoolSS_iscM  = (1 ./ cS.nSchool) .* ones([cS.nSim, cS.nSchool, 2]);
    else
       error('not implemented');
    end

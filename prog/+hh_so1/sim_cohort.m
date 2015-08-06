@@ -11,7 +11,7 @@ Two cases
 IN
    skillPrice_asM(age, school)
    h1CohortV
-      at cS.age1
+      at cS.demogS.age1
       random endowments
    prHsgABar, prCgABar, prefScaleEntryMean
       guesses for parameters that govern school choice
@@ -43,7 +43,7 @@ Change:
 %%  Input check
 
 if cS.dbg > 10
-   if ~isequal(size(skillPrice_asM), [cS.ageRetire, cS.nSchool])
+   if ~isequal(size(skillPrice_asM), [cS.demogS.ageRetire, cS.nSchool])
       error_so1('skill prices should be by model age', cS);
    end
    check_lh.prob_check(tgSFracV, 1e-5);
@@ -62,7 +62,6 @@ ojtS = hh_so1.ojt_solve(h1CohortV, abilV, skillPrice_asM, iCohort, paramS, cS);
    
 %%  School choice
 
-% should objective be LOG(pv lty)? +++++
 if calSCost
    % Calibrate school costs
    [pSchool_isM, schoolS.sFracV, schoolS.prHsgABar, schoolS.prCgABar, schoolS.prefScaleEntryMean] = ...
@@ -104,7 +103,7 @@ end
 
 %%  Cohort stats
 
-ageRetire = cS.ageRetire;
+ageRetire = cS.demogS.ageRetire;
 % outS.meanLogWageM = cS.missVal .* ones([ageRetire, cS.nSchool]);
 % outS.stdLogWageM  = cS.missVal .* ones([ageRetire, cS.nSchool]);
 % This is log median or mean log, depending settings
@@ -112,7 +111,7 @@ outS.logWage_asM = cS.missVal .* ones([ageRetire, cS.nSchool]);
 outS.meanLPerHour_asM  = cS.missVal .* ones([ageRetire, cS.nSchool]); 
 
 for iSchool = 1 : cS.nSchool
-   workAgeV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+   workAgeV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
    % Mass of persons in this school group
    massV = schoolS.pSchool_isM(:,iSchool);
    massV = massV ./ sum(massV);

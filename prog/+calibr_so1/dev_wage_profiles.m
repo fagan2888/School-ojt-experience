@@ -38,7 +38,7 @@ ssd_scM = zeros([cS.nSchool, nc]);
 for ic = 1 : nc
    for iSchool = 1 : cS.nSchool
       % Ages for which wages are compared
-      ageRangeV = max(cS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);
+      ageRangeV = max(cS.demogS.workStartAgeV(iSchool), cS.ageRangeV(1)) : cS.ageRangeV(2);
 
       modelWageV  = model_ascM(ageRangeV, iSchool, ic);
       dataWageV   = data_ascM(ageRangeV, iSchool, ic);

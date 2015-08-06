@@ -14,7 +14,7 @@ nInd = 1e2;
 abilV = linspace(-1, 1, nInd)';
 h1V   = linspace(1, 2, nInd)';
 
-hours_asM = linspace(1, 2, cS.ageRetire)' * linspace(2, 3, cS.nSchool);
+hours_asM = linspace(1, 2, cS.demogS.ageRetire)' * linspace(2, 3, cS.nSchool);
 
 tic
 ss_solve_so1(skillWeightV, gSp, tgSFracV, hours_asM, abilV, h1V, paramS, cS)

@@ -8,7 +8,7 @@ Checked: 2014-mar-21
 fprintf('Computing cohort school fractions \n');
 cS = const_data_so1(gNo);
 varS = param_so1.var_numbers;
-nBy = length(cS.bYearV);
+nBy = length(cS.demogS.bYearV);
 
 loadS = output_so1.var_load(varS.vBYearSchoolAgeStats, cS);
 

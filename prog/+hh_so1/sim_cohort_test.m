@@ -10,7 +10,7 @@ n = 1e2;
 h1CohortV = 1 + rand([n,1]);
 abilV = randn([n,1]);
 % Skill price by phy age
-T = cS.ageRetire;
+T = cS.demogS.ageRetire;
 skillPrice_asM = linspace(1,2,T)' * ones([1, cS.nSchool]);
 sFracV = ones([cS.nSchool,1]);
 tgSFracV = sFracV ./ sum(sFracV);

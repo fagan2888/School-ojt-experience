@@ -21,15 +21,15 @@ OUT:
 %% Input check
 
 nSim = length(abilV);
-ageRetire = cS.ageRetire;
+ageRetire = cS.demogS.ageRetire;
 
 if cS.dbg > 10
    validateattributes(h1CohortV, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', 'positive', ...
       'size', [nSim,1]})
    validateattributes(abilV, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', ...
       '>', -5,  '<', 5,  'size', [nSim,1]})
-   validateattributes(skillPrice_asM(cS.age1:end, :), {'double'}, {'finite', 'nonnan', 'nonempty', 'real', 'positive', ...
-      'size', [cS.ageRetire - cS.age1 + 1, cS.nSchool]})
+   validateattributes(skillPrice_asM(cS.demogS.age1:end, :), {'double'}, {'finite', 'nonnan', 'nonempty', 'real', 'positive', ...
+      'size', [cS.demogS.ageRetire - cS.demogS.age1 + 1, cS.nSchool]})
 end
 
 
@@ -42,7 +42,7 @@ outS.sTime_itsM = zeros([nSim, ageRetire, cS.nSchool]);
 outS.wage_itsM = zeros([nSim, ageRetire, cS.nSchool]);
 
 for iSchool = 1 : cS.nSchool
-   workAgeV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+   workAgeV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
    
    % Compute h at start of work
    outS.hWorkStart_isM(:,iSchool) = hh_so1.school_tech(h1CohortV, abilV, iSchool, iCohort, paramS, cS);
@@ -63,8 +63,9 @@ for iSchool = 1 : cS.nSchool
    % Present value of lifetime earnings, discounted to first work age
    T = length(workAgeV);
    pvLtyV = sum(earn_itM .* (ones([nSim,1]) * ((1/paramS.R) .^ (0 : T-1))), 2);
+   %outS.pvLty_isM(:, iSchool) = pvLtyV;
    % Discount to age 1
-   outS.pvLtyAge1_isM(:, iSchool) = pvLtyV .* ((1 / paramS.R) ^ (workAgeV(1) - cS.age1 + 1));
+   outS.pvLtyAge1_isM(:, iSchool) = pvLtyV .* ((1 / paramS.R) ^ (workAgeV(1) - cS.demogS.age1 + 1));
 end
 
 

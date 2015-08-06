@@ -9,7 +9,7 @@ h1:
 % Random seed -- must be set for all cohorts jointly
 rng(32);
 
-nSim = cS.gS.nSim;
+nSim = cS.nSim;
 nc = cS.nCohorts;
 
 % Log Ability. Normal(0,1)
@@ -43,7 +43,7 @@ end
 iq_icM = [];
 iqPct_icM = [];
 
-if cS.gS.hasIQ == 1
+if cS.hasIQ == 1
    %  Scale such that stdIq is noise to signal ratio
    stdIq = (paramS.wtIQa .^ 2 + (1 - paramS.wtIQa) .^ 2) .^ 0.5;
    iq_icM = double( (paramS.wtIQa .* randn(nSim,nc)  +  (1 - paramS.wtIQa) .* randn(nSim,nc)) ./ stdIq  ...
@@ -54,7 +54,7 @@ if cS.gS.hasIQ == 1
 
    % Make IQ percentiles
    iqPct_icM = zeros([nSim, cS.nCohorts]);
-   if cS.gS.tgIq > 0
+   if cS.tgIq > 0
       error('not updated'); 
       for ic = 1 : cS.nCohorts
          iqPct_icM(:,ic) = pct_assign_lh(iq_icM(:,ic), [], cS.dbg);

@@ -1,5 +1,10 @@
 function symS = symbols
 % Define symbols for preamble and figure formatting
+%{
+Each symbol is written into preamble
+Can also define notation for calibrated parameters
+They are also written into preamble, but there will not be duplicates
+%}
 
 
 %% General notation
@@ -11,7 +16,8 @@ symS.pYear = 't';
 %% Demographics
 
 symS.age = 'a';
-symS.birthYear = 'c';
+symS.bYear = 'c';
+symS.birthYear = symS.bYear;
 symS.lifeSpan = 'T';
 symS.tEndow = '\ell';
 
@@ -25,12 +31,14 @@ symS.stdIq = '\sigma_{IQ}';
 %% Schooling
 
 % Durations
-symS.sDuration = 'T_{s}';
+symS.sDuration = 'T';
 % Preference shocks at college entry
 symS.prefScale = '\gamma';
 symS.prefShockEntry = '\eta';
 % Mean pref for work as HSG (to get college entry rate right)
 symS.prefShockEntryMean = '\bar{\eta}';
+% Production function in schoool
+symS.schoolProdFct = 'F';
 
 % Function that governs high school graduation (as function of ability)
 symS.probHSG = '\pi';
@@ -63,6 +71,10 @@ symS.lSupply = 'H';
 symS.aggrHours = 'L';
 % Neutral productivity
 symS.neutralProd = 'A';
+% Skill weights
+symS.skillWeight = '\omega';
+% Aggregate output
+symS.aggrOutput = 'Q';
 
 
 

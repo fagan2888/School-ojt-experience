@@ -16,7 +16,7 @@ hold on;
 for iSchool = 1 : cS.nSchool
    sFracV = squeeze(tgS.sFrac_scM(iSchool,:));
    idxV = find(sFracV > 0);
-   plot(cS.bYearV(idxV), sFracV, figS.lineStyleDenseV{iSchool}, 'color', figS.colorM(iSchool,:));
+   plot(cS.demogS.bYearV(idxV), sFracV, figS.lineStyleDenseV{iSchool}, 'color', figS.colorM(iSchool,:));
 end
 
 hold off;

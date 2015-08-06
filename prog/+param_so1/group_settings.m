@@ -1,38 +1,36 @@
-function [gS, pvec] = group_settings(pvecIn, gNo)
+function cS = group_settings(cInS)
 %{
-Groups determine
-- calibration targets
-- data construction
-- restriction on the model (e.g. g(A) = 0, alpha(HS)=alpha(HSD))
-- tgIq: weight on IQ targets
+Groups determine data construction
+Everything else can be changed by sets
 
 IN
    pvec :: pvectorLH
 
 %}
 
-pvec = pvecIn;
+cS = cInS;
+gNo = cS.gNo;
 
 
 %% Group numbers
 
-gS.gDefault = 1;
+cS.gDefault = 1;
 % 2 alphas, 2 deltas
-gS.gTwoAlpha = 2;
+cS.gTwoAlpha = 2;
 % Same with IQ targets
-gS.gIqTg = 3;
+cS.gIqTg = 3;
 % Testing
-gS.gTest = 4;
+cS.gTest = 4;
 
 
 %% Default Model Features
 
 % No of persons to simulate in each cohort
-gS.nSim = 1e3;
+cS.nSim = 1e3;
 
 
 % Does model have any IQ targets?
-gS.hasIQ = 0;
+cS.hasIQ = 0;
 
 % % Year range over which constant sbtc is assumed
 % gS.sbtcAllYears = 21;
@@ -47,33 +45,22 @@ gS.hasIQ = 0;
 % gS.spOutOfSample = gS.spOutOfSampleSbtc;
 
 
-% Settings for skill price paths
-gS.spS = skillPriceSpecs_so1('wageYears', 'constGrowth', 'constGrowth');
 
+%% Group settings
 
-%% Default calibration targets
-
-% tgStdLogWage: weight on std log wage targets
-
-% Target constant growth of all skill weights
-gS.tgGSkillWeight = false;
-
-% gS.calWtIQa = 0;
-% Target IQ percentiles
-gS.tgIq = 0;
-%  Tg beta iq
-gS.tgBetaIq = 0;
-%  Tg betaIQ by experience
-gS.tgBetaIqExper = 0;
-
-
-
-if gNo == gS.gDefault
+if gNo == cS.gDefault
+   % change later +++++
+   cS.pvector = cS.pvector.change('seCG',  [], [],  3, 0.5, 10, cS.calNever);
+   cS.pvector = cS.pvector.change('seHS',  [], [],  5, 0.5, 10, cS.calNever);
    
-elseif gNo == gS.gTest
-   gS.nSim = 100;
+elseif gNo == cS.gTest
+   cS.nSim = 500;
+   % Settings for skill price paths
+   cS.spSpecS = skillPriceSpecs_so1('wageYears', 'dataWages', 'fixedGrowth', 'fixedGrowth');
+   cS.pvector = cS.pvector.change('seCG',  [], [],  3, 0.5, 10, cS.calNever);
+   cS.pvector = cS.pvector.change('seHS',  [], [],  5, 0.5, 10, cS.calNever);
    
-elseif gNo == gS.gTwoAlpha  ||  gNo == 3  ||  gNo == 4
+elseif gNo == cS.gTwoAlpha  ||  gNo == 3  ||  gNo == 4
    % Restrictive case. To check convergence / identification
    gS.sameAlpha = gS.twoAlphas;
    gS.sameDdh   = gS.twoDdh;

@@ -15,7 +15,7 @@ IN:
 % --------------------------------------------------
 
 nInd = length(abilV);
-dTsV = cS.schoolLengthV - cS.schoolLengthV(1);
+dTsV = cS.demogS.schoolLengthV - cS.demogS.schoolLengthV(1);
 util_isM = logVSchool_isM  +  ones([nInd,1]) * sCostV(:)'  + ...
    paramS.wtPA .* ((abilV + cS.abilMean) * dTsV(:)');
 

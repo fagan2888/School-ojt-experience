@@ -11,6 +11,28 @@ IN
 
 % paramS = param0S;
 
+
+% ***** Make sure that skill price nodes have right length
+fieldStr = sprintf('logWNode_s%iV', 1);
+% Does this case have nodes?
+if isfield(param0S, fieldStr)
+   nNodes = length(cS.spS.spNodeIdxV);
+   % Are they of the right length?
+   if length(param0S.(fieldStr)) ~= nNodes
+      for iSchool = 1 : cS.nSchool
+         fieldStr = sprintf('logWNode_s%iV', iSchool);
+         oldV = param0S.(fieldStr);
+         if length(oldV) > nNodes
+            oldV((nNodes+1) : end) = [];
+         else
+            oldV = [oldV(:);  oldV(end) * ones(nNodes - length(oldV), 1)];
+         end
+         param0S.(fieldStr) = oldV;
+      end
+   end
+end
+
+
 % Fix all parameters that are not calibrated (doCal no in cS.doCalV)
 %  also add missing params
 paramS = cS.pvector.struct_update(param0S, cS.doCalV);
@@ -39,7 +61,7 @@ end
 % by [phys age, school, cohort], in model units
 if ~isfield(paramS, 'tEndow_ascM')
    updateTimeM = true;
-elseif ~isequal(size(paramS.tEndow_ascM), [cS.ageRetire, cS.nSchool, cS.nCohorts])
+elseif ~isequal(size(paramS.tEndow_ascM), [cS.demogS.ageRetire, cS.nSchool, cS.nCohorts])
    updateTimeM = true;
 end
 if updateTimeM
@@ -53,14 +75,14 @@ if updateTimeM
 end
 
 validateattributes(paramS.tEndow_ascM, {'double'}, {'finite', 'nonnan', 'nonempty', 'real', 'positive', ...
-   '<', 10,  'size', [cS.ageRetire, cS.nSchool, cS.nCohorts]})
+   '<', 10,  'size', [cS.demogS.ageRetire, cS.nSchool, cS.nCohorts]})
 
 
 %% Schooling
 
 % Pref scale by cohort
 %  bound from below; otherwise trouble with school choice calibration
-paramS.prefScaleCohortV = max(cS.prefScaleMin, paramS.prefScale .* (1 + paramS.gPrefScale) .^ (cS.bYearV - cS.bYearV(1)));
+paramS.prefScaleCohortV = max(cS.prefScaleMin, paramS.prefScale .* (1 + paramS.gPrefScale) .^ (cS.demogS.bYearV - cS.demogS.bYearV(1)));
 
 
 %%  OJT
@@ -111,7 +133,7 @@ paramS.meanLogH1V = zeros([cS.nCohorts, 1]);
 % Loop over cohorts
 for iCohort = 1 : cS.nCohorts
    % Mean log h1 grows at gH1 per year
-   paramS.meanLogH1V(iCohort) = paramS.h1Mean + paramS.gH1 * (cS.bYearV(iCohort) - cS.bYearV(1));
+   paramS.meanLogH1V(iCohort) = paramS.h1Mean + paramS.gH1 * (cS.demogS.bYearV(iCohort) - cS.demogS.bYearV(1));
 end
 
 

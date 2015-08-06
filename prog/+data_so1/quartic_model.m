@@ -24,7 +24,7 @@ nx = 4;
 
 % Age Range
 ageMax = 60;      % Later ages have big drop-offs in wages
-age1V  = cS.workStartAgeV;
+age1V  = cS.demogS.workStartAgeV;
 
 fprintf('\n\nQuartic wage regressions\n\n');
 
@@ -81,12 +81,12 @@ for iSchool = 1 : cS.nSchool
       wt_caM = [];
    end
 
-   regrS  =  regress_lh.regr_cohort_age(y_caM, wt_caM, cS.bYearV, ageV, ...
+   regrS  =  regress_lh.regr_cohort_age(y_caM, wt_caM, cS.demogS.bYearV, ageV, ...
       optS, cS.missVal, cS.dbg);
    regrV{iSchool} = regrS;
 
 %    [predV, pred_caM, rsS, regrS.tdYearV, regrS.tdBetaV, regrS.cdIdxV, regrS.cdBetaV] = ...
-%       regr_cohort_age_so(yM, wtM, cS.bYearV, ageV, useTimeDummies, useCohDummies, cS);
+%       regr_cohort_age_so(yM, wtM, cS.demogS.bYearV, ageV, useTimeDummies, useCohDummies, cS);
    
    % Age profile (pure age coefficients)
    pred_asM(ageV, iSchool) = regrS.ageProfileV;
@@ -96,7 +96,7 @@ for iSchool = 1 : cS.nSchool
    
    % Predicted profile for each cohort
 %    ageFirstYear = 1;
-%    pred_caM = econ_lh.cohort_age_from_age_year(pred_acM, ageV, cS.wageYearV, cS.bYearV, ageFirstYear, ...
+%    pred_caM = econ_lh.cohort_age_from_age_year(pred_acM, ageV, cS.wageYearV, cS.demogS.bYearV, ageFirstYear, ...
 %       cS.missVal, cS.dbg);
    for ic = 1 : cS.nCohorts
       pred_ascM(ageV,iSchool,ic) = pred_acM(:, ic);
@@ -113,7 +113,7 @@ fprintf('\n');
 
 %% Show quartic age profiles
 if 1
-   baseAge = max(cS.workStartAgeV);
+   baseAge = max(cS.demogS.workStartAgeV);
    fh = output_so1.fig_new(saveFigures, []);
    hold on;
    for iSchool = 1 : cS.nSchool
@@ -169,12 +169,12 @@ end
 if 1
    for iSchool = 1 : cS.nSchool
       % Ages to plot
-      ageV = cS.workStartAgeV(iSchool) : ageMax;
+      ageV = cS.demogS.workStartAgeV(iSchool) : ageMax;
       
       % One subplot per cohort
       fh = output_so1.fig_new(saveFigures, figS.figOpt6S);
-      for iSub = 1 : min(6, length(cS.byShowV))
-         iBy = cS.byShowV(iSub);
+      for iSub = 1 : min(6, length(cS.demogS.byShowV))
+         iBy = cS.demogS.byShowV(iSub);
          model_aV = pred_ascM(ageV, iSchool, iBy);
          data_aV  = tgS.logWage_ascM(ageV, iSchool, iBy);         
          idxV = find(model_aV ~= cS.missVal  &  data_aV ~= cS.missVal);
@@ -190,7 +190,7 @@ if 1
             figS.lineStyleDenseV{iLine},  'color', figS.colorM(iLine,:));
 
          hold off;
-         xlabel(sprintf('Age  --  cohort %i',  cS.bYearV(iBy)));
+         xlabel(sprintf('Age  --  cohort %i',  cS.demogS.bYearV(iBy)));
          ylabel('Log wage');
          legend({'Quartic', 'Data'});
          output_so1.fig_format(fh, 'line');
@@ -217,7 +217,7 @@ if useCohDummies
       fig_new_so(saveFigures);
       hold on;
       for iSchool = 1 : cS.nSchool
-         plot(cS.bYearV, cohEffect_scM(iSchool, :), cS.lineStyleDenseV{iSchool}, 'color', cS.colorM(iSchool,:));
+         plot(cS.demogS.bYearV, cohEffect_scM(iSchool, :), cS.lineStyleDenseV{iSchool}, 'color', cS.colorM(iSchool,:));
       end
       hold off;
       xlabel('Year');
@@ -271,11 +271,11 @@ yrIdxV = find(tgS.aggrHoursS.yearV >= spYearV(1)  &  tgS.aggrHoursS.yearV <= spY
 
 meanLPerHour_astM = repmat(cS.missVal, [ageMax, cS.nSchool, ny]);
 for iSchool = 1 : cS.nSchool   
-   for age = cS.workStartAgeV(iSchool) : ageMax
+   for age = cS.demogS.workStartAgeV(iSchool) : ageMax
       for iy = 1 : ny
          bYear = byear_from_age_so(age, spYearV(iy), cS.ageInBirthYear);
          % Find nearest cohort with data
-         [~, byIdx] = min(abs(bYear - cS.bYearV));
+         [~, byIdx] = min(abs(bYear - cS.demogS.bYearV));
          meanLPerHour_astM(age, iSchool, iy) = exp(cohEffect_scM(iSchool, byIdx) + pred_saM(iSchool,age));
       end
    end

@@ -34,7 +34,7 @@ nInd = length(abilV);
 
 if cS.dbg > 10
    for iSchool = 1 : cS.nSchool
-      if ~v_check(hours_asM(cS.workStartAgeV(iSchool) : cS.ageRetire, iSchool), 'f', [], 1e-3, 1e3, [])
+      if ~v_check(hours_asM(cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire, iSchool), 'f', [], 1e-3, 1e3, [])
          error_so1('Invalid');
       end
    end
@@ -48,7 +48,7 @@ end
 % The skill price levels do not matter. Only relative levels and growth rates
 
 % Skill prices by MODEL age, school
-T = cS.ageRetire - cS.age1 + 1;
+T = cS.demogS.ageRetire - cS.demogS.age1 + 1;
 grFactorV = (1 + gSp) .^ (0 : (T-1))';
 skillPriceM = grFactorV * spV(:)';
 
@@ -68,7 +68,7 @@ cohS = sim_cohort_so1(h1V, abilV, skillPriceM, tgSFracV, sCostGuessV,  ...
 LS_sV = zeros([cS.nSchool, 1]);
 
 for iSchool = 1 : cS.nSchool
-   ageRangeV = cS.workStartAgeV(iSchool) : cS.ageRetire;
+   ageRangeV = cS.demogS.workStartAgeV(iSchool) : cS.demogS.ageRetire;
    
    % Labor efficiency by [age, school]
    effV = cohS.meanLPerHour_asM(ageRangeV,iSchool);

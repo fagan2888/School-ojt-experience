@@ -26,7 +26,7 @@ end
 %% Plot theta
 if 1
    fig_new_so(saveFigures);
-   plot(1:iter, cellfun(@(x) x.paramS.theta, resultV), '.');
+   plot(1:iter, cellfun(@(x) x.paramS.abilScale, resultV), '.');
    title('Theta');
    save_fig_so('hist_theta', saveFigures, [], cS);
 end

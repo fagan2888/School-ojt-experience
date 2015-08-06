@@ -1,11 +1,11 @@
-% Ability scale factor
-\newcommand{\theta}{\theta}
-% mean log h1
-\newcommand{\h1Mean}{h1Mean}
-% Growth rate of h1
-\newcommand{\gH1}{gH1}
 % Symbol
-\newcommand{\h1Std}{\sigma_{h1}}
+\newcommand{\abilScale}{\theta}
+% mean log h1
+\newcommand{\hOneMean}{h1Mean}
+% Growth rate of h1
+\newcommand{\gHOne}{gH1}
+% Symbol
+\newcommand{\hOneStd}{\sigma_{h1}}
 % wtHA
 \newcommand{\wtHA}{wtHA}
 % wtIQa
@@ -49,17 +49,19 @@
 % Substitution elasticity
 \newcommand{\seHS}{\rho_{HS}}
 % Skill price nodes
-\newcommand{\logWNodes1V}{logWNodeHSD}
+\newcommand{\logWNodesOneV}{logWNodeHSD}
 % Skill price nodes
-\newcommand{\logWNodes2V}{logWNodeHSG}
+\newcommand{\logWNodesTwoV}{logWNodeHSG}
 % Skill price nodes
-\newcommand{\logWNodes3V}{logWNodeCD}
+\newcommand{\logWNodesThreeV}{logWNodeCD}
 % Skill price nodes
-\newcommand{\logWNodes4V}{logWNodeCG}
+\newcommand{\logWNodesFourV}{logWNodeCG}
 % Symbol
 \newcommand{\pYear}{t}
 % Symbol
 \newcommand{\age}{a}
+% Symbol
+\newcommand{\bYear}{c}
 % Symbol
 \newcommand{\birthYear}{c}
 % Symbol
@@ -67,19 +69,19 @@
 % Symbol
 \newcommand{\tEndow}{\ell}
 % Symbol
-\newcommand{\sDuration}{T_{s}}
+\newcommand{\sDuration}{T}
 % Symbol
 \newcommand{\prefShockEntry}{\eta}
 % Symbol
 \newcommand{\prefShockEntryMean}{\bar{\eta}}
+% Symbol
+\newcommand{\schoolProdFct}{F}
 % Symbol
 \newcommand{\probHSG}{\pi}
 % Symbol
 \newcommand{\probCG}{\phi}
 % Symbol
 \newcommand{\ability}{x}
-% Symbol
-\newcommand{\abilScale}{\theta}
 % Symbol
 \newcommand{\pProduct}{A}
 % Symbol
@@ -94,3 +96,71 @@
 \newcommand{\aggrHours}{L}
 % Symbol
 \newcommand{\neutralProd}{A}
+% Symbol
+\newcommand{\skillWeight}{\omega}
+% Symbol
+\newcommand{\aggrOutput}{Q}
+% CPI base year
+\newcommand{\cpiBaseYear}{2010}
+% Data year 1
+\newcommand{\dataYearOne}{1965}
+% Data year N
+\newcommand{\dataYearLast}{2011}
+% Wage year 1
+\newcommand{\wageYearOne}{1964}
+% Wage year N
+\newcommand{\wageYearLast}{2010}
+% Birth year 1
+\newcommand{\bYearFirst}{1935}
+% Birth year N
+\newcommand{\bYearLast}{1969}
+% No of cohorts
+\newcommand{\nCohorts}{35}
+% Age 1
+\newcommand{\ageOne}{18}
+% Retirement age
+\newcommand{\ageRetire}{65}
+% Work start
+\newcommand{\ageOneHSD}{i}
+% Work start
+\newcommand{\ageOneHSG}{i}
+% Work start
+\newcommand{\ageOneCG}{i}
+% Young ages
+\newcommand{\ageRangeYoung}{25-34}
+% Middle ages
+\newcommand{\ageRangeMiddle}{35-44}
+% Old ages
+\newcommand{\ageRangeOld}{45-54}
+% Smoothing hours
+\newcommand{\hpParamHours}{20}
+% sp year 1
+\newcommand{\spYearOne}{1952}
+% sp year N
+\newcommand{\spYearLast}{2033}
+% No of sp nodes
+\newcommand{\nSpNodes}{82}
+% No of sim households
+\newcommand{\nSim}{1000}
+% wage age 1
+\newcommand{\wageAgeRangeOne}{20}
+% wage age N
+\newcommand{\wageAgeRangeLast}{60}
+% for school aggregation
+\newcommand{\schoolAgeRangeOne}{30}
+% for school aggregation
+\newcommand{\schoolAgeRangeLast}{50}
+% Gross interest rate
+\newcommand{\grossInt}{1.04}
+% No of calibrated params
+\newcommand{\nCalParams}{58}
+% No of spline params
+\newcommand{\nSpParams}{328}
+% Min alpha
+\newcommand{\alphaLow}{0.3}
+% Max alpha
+\newcommand{\alphaHigh}{0.6}
+% Min delta
+\newcommand{\ddhLow}{3.4}
+% Max delta
+\newcommand{\ddhHigh}{5.7}

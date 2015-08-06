@@ -9,7 +9,7 @@ cS = const_so1(gNo, setNo);
 expRangeV = 1 : 30;
 nx = length(expRangeV);
 % Show the NLSY cohort
-[~, iCohort] = min(abs(cS.bYearV - 1960));
+[~, iCohort] = min(abs(cS.demogS.bYearV - 1960));
 
 simS = var_load_so1(cS.vSimResults, cS);
 tgS  = var_load_so1(cS.vCalTargets, [], gNo, cS.dataSetNo);
@@ -30,9 +30,9 @@ corrAbilM = zeros([nx, cS.nSchool]);
 pSchoolM = simS.pSchoolM(:, :, iCohort);
 for ix = 1 : nx
    % Log wage by [ind, school]
-   logWageM = zeros([cS.gS.nSim, cS.nSchool]);
+   logWageM = zeros([cS.nSim, cS.nSchool]);
    for iSchool = 1 : cS.nSchool
-      age = cS.workStartAgeV(iSchool) + ix - 1;
+      age = cS.demogS.workStartAgeV(iSchool) + ix - 1;
       logWageM(:,iSchool) = squeeze(log(simS.wageM(:, age, iSchool, iCohort)));
    end
   

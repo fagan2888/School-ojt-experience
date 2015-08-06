@@ -6,8 +6,8 @@ cS = const_so1(gNo, setNo);
 saveFigures = 1;
 
 
+% Check that calibration is "correct"
 
-%% Results
 
 % Delete existing output files
 minAge = 7;
@@ -21,8 +21,21 @@ results_so1.preamble_init(cS);
 %    cal_hist_show_so1(saveFigures, gNo, setNo);
 % 
 
-% How well does model match data?
+
+%% Fit
+
+% Age wage profiles by cohort
 results_so1.show_fit(saveFigures, gNo, setNo);
+% Schooling by cohort
+results_so1.fit_school_cohort(saveFigures, gNo, setNo);
+% Aggregate wage stats
+% +++++  results_so1.fit_aggr_wages(saveFigures, gNo, setNo);
+
+
+%% Parameters
+
+results_so1.skill_prices_show(saveFigures, gNo, setNo);
+
 %    cal_show_so1(saveFigures, gNo, setNo);
 %    % Mean log wage profiles + wage growth over life-cycle
 %    cal_fit_so1(saveFigures, gNo, setNo);

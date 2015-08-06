@@ -97,7 +97,7 @@ for iSet = 1 : nSet
    wtHAV(iSet) = paramS.wtHA;
    gH1V(iSet)  = 100 .* paramS.gH1;
    h1StdV(iSet)   = paramS.h1Std;
-   thetaV(iSet)   = paramS.theta;
+   thetaV(iSet)   = paramS.abilScale;
    
    % ****  Fit
    [calStatS, success, versionV(iSet)] = var_load_so1(cSetS.vCalResults, cSetS);
@@ -129,7 +129,7 @@ for iSet = 1 : nSet
          selH1V(iSet)   = mean(simStatS.logH1Mean_scM(cS.schoolCG, :) - simStatS.logH1Mean_scM(cS.schoolHSG, :));
          selAbilV(iSet) = mean(simStatS.abilMean_scM(cS.schoolCG, :) - simStatS.abilMean_scM(cS.schoolHSG, :));
          gH1M(:, iSet)  = 100 .* (simStatS.logH1Mean_scM(:, cS.nCohorts) - simStatS.logH1Mean_scM(:, 1)) ...
-            ./ (cS.bYearV(cS.nCohorts) - cS.bYearV(1));
+            ./ (cS.demogS.bYearV(cS.nCohorts) - cS.demogS.bYearV(1));
          
          % Avg fraction of time spend studying
          aggrSTimeM(:,iSet) = mean(simStatS.meanSTimeFracM, 2);
@@ -137,7 +137,7 @@ for iSet = 1 : nSet
          
          % Avg h growth
          for iSchool = 1 : cS.nSchool
-            %ageV = cS.workStartAgeV(iSchool) - 1 + cS.wageGrowthExperV;
+            %ageV = cS.demogS.workStartAgeV(iSchool) - 1 + cS.wageGrowthExperV;
             %growthV = squeeze(simStatS.meanLogHM(ageV(2),iSchool,:) - simStatS.meanLogHM(ageV(1),iSchool,:));
             aggrHGrowthM(iSchool, iSet) = mean(simStatS.hGrowthM(iSchool, :));
          end
@@ -352,13 +352,13 @@ if 1
 %    plot(xV, devStdV, cS.lineStyleV{iLine}, 'color', cS.colorM(iLine,:));
 %    legendV{iLine} = 'Std';
    
-%    if any(iqDevV > 0)  &&  cS.gS.tgIq > 0
+%    if any(iqDevV > 0)  &&  cS.tgIq > 0
 %       iLine = iLine + 1;
 %       plot(xV, iqDevV, cS.lineStyleV{iLine}, 'color', cS.colorM(iLine,:));
 %       legendV{iLine} = 'IQ';
 %    end
    
-%    if any(devIqExperV > 0)  &&  cS.gS.tgBetaIqExper > 0
+%    if any(devIqExperV > 0)  &&  cS.tgBetaIqExper > 0
 %       iLine = iLine + 1;
 %       plot(xV, devIqExperV, cS.lineStyleV{iLine}, 'color', cS.colorM(iLine,:));
 %       legendV{iLine} = 'IQ exp';
@@ -383,7 +383,7 @@ figure_format_so(gca, setNo);
 save_fig_so([figDir, 'dev'], saveFigures, [], cS);
 
 
-% if cS.gS.tgIq > 0
+% if cS.tgIq > 0
 %    % IQ deviation
 %    fig_new_so(saveFigures);
 %    plot(xV, iqDevV, cS.lineStyleV{1});
@@ -392,7 +392,7 @@ save_fig_so([figDir, 'dev'], saveFigures, [], cS);
 %    figure_format_so(gca, setNo);
 %    save_fig_so([figDir, 'dev_iq'], saveFigures, [], cS);
 % end
-% if cS.gS.tgBetaIq > 0
+% if cS.tgBetaIq > 0
 %    % beta IQ
 %    fig_new_so(saveFigures);
 %    plot(xV, betaIqV, cS.lineStyleV{1});

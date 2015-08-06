@@ -6,7 +6,7 @@ cS = const_data_so1(gNo);
 dirS = param_so1.directories(gNo, cS.setNo);
 varS = param_so1.var_numbers;
 % Keep wage data for these ages
-dataAgeV = cS.age1 : cS.ageRetire;
+dataAgeV = cS.demogS.age1 : cS.demogS.ageRetire;
 
 % Make earnings data accessible
 go_cpsearn;
@@ -22,7 +22,7 @@ cpsS = const_cpsearn(cpsSetNo);
 fltS = import_cpsearn.filter_settings(cpsS.fltExperDefault, cpsS);
 
 % Add some slack at the top (b/c one cpsearn routine wants it)
-fltS.ageMax = cS.ageRetire + 4;
+fltS.ageMax = cS.demogS.ageRetire + 4;
 
 % Very little filtering
 fltS.hoursMin = [];
@@ -43,6 +43,8 @@ output_cpsearn.var_save(fltS, cpsS.vFilterSettings, [], cpsSetNo);
 % Not directly used below. Just for checking results
 
 profS = profiles_cpsearn.settings('exper');
+profS.ageWorkStart_sV = cS.demogS.ageWorkStartV;
+% profS.R = +++
 output_cpsearn.var_save(profS, cpsS.vProfileSettings, [], cpsSetNo);
 
 
@@ -55,7 +57,7 @@ run_all_cpsearn(cpsSetNo);
 
 % Get age profiles
 %  only for requested ages, by [by, school, age]
-outS = aggr_cpsearn.byear_school_age_stats(cS.bYearLbV, cS.bYearUbV, dataAgeV, cpsSetNo);
+outS = aggr_cpsearn.byear_school_age_stats(cS.demogS.bYearLbV, cS.demogS.bYearUbV, dataAgeV, cpsSetNo);
 output_so1.var_save(outS, varS.vBYearSchoolAgeStats, cS);
 
 % Stats by [age, school, year]

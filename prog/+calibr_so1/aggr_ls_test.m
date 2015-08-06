@@ -5,12 +5,12 @@ cS.dbg = 111;
 
 
 % spYearV = cS.spS.spYearV(1) : cS.spS.spYearV(end);
-meanLPerHour_ascM = 1 + rand([cS.ageRetire, cS.nSchool, cS.nCohorts]);
+meanLPerHour_ascM = 1 + rand([cS.demogS.ageRetire, cS.nSchool, cS.nCohorts]);
 
-aggrHours_astM = 3 + rand([cS.ageRetire, cS.nSchool, length(cS.wageYearV)]);
+aggrHours_astM = 3 + rand([cS.demogS.ageRetire, cS.nSchool, length(cS.wageYearV)]);
 
 for iSchool = 1 : cS.nSchool
-   ageV = 1 : (cS.workStartAgeV(iSchool) - 1);
+   ageV = 1 : (cS.demogS.workStartAgeV(iSchool) - 1);
    meanLPerHour_ascM(ageV,iSchool,:) = cS.missVal;
    aggrHours_astM(ageV,iSchool,:) = cS.missVal;
 end

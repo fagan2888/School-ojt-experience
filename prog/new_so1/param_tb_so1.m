@@ -23,7 +23,7 @@ if 1
    fig_new_so(saveFigures);
    hold on;
    for iSchool = 1 : cS.nSchool
-      plot(cS.bYearV,  loadS.sCostM(iSchool,:), cS.lineStyleV{iSchool}, 'color', cS.colorM(iSchool,:));
+      plot(cS.demogS.bYearV,  loadS.sCostM(iSchool,:), cS.lineStyleV{iSchool}, 'color', cS.colorM(iSchool,:));
    end
    
    hold off;
@@ -132,7 +132,7 @@ if cS.calTheta == 1
    ir = ir + 1;
    tbM{ir,cName} = '$\theta$';
    tbM{ir,cRole} = 'Ability scale factor';
-   tbM{ir,cValue} = sprintf('%4.3f', paramS.theta);
+   tbM{ir,cValue} = sprintf('%4.3f', paramS.abilScale);
 end
 if cS.calPrefScale == 1
    ir = ir + 1;

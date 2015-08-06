@@ -571,6 +571,9 @@ We want labor supply in efficiency units by
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula $\lSupply_{s,\pYear}=\sum_{\age}\aggrHours_{\age,s,\pYear}\effUnits_{\age,s,\bYear\left(\age,\pYear\right)}$
+\end_inset
+
 
 \end_layout
 

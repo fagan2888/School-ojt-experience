@@ -30,7 +30,7 @@ end
 % Reshape model wages by [age, school, cohort] into [age, school, year]
 % Only keep years with data wages
 
-[~, logWageM] = cohort_to_year_so1(logWage_ascM, cS.bYearV, wageYearV, cS);
+[~, logWageM] = cohort_to_year_so1(logWage_ascM, cS.demogS.bYearV, wageYearV, cS);
 
 % logWageM = cS.missVal .* ones([maxAge, cS.nSchool, ny]);
 % 
@@ -41,7 +41,7 @@ end
 %       % Log model wage by cohort
 %       mLogWageV = squeeze(simS.meanLogWageM(age, iSchool, :));
 %       % Years for each cohort
-%       yearV = year_from_age_so1(age, cS.bYearV, cS.ageInBirthYear);
+%       yearV = year_from_age_so1(age, cS.demogS.bYearV, cS.ageInBirthYear);
 %       % Indices into wageYearV
 %       yrIdxV = yearV - wageYearV(1) + 1;
 %       % Keep valid indices

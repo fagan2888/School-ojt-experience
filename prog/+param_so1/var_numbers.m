@@ -15,7 +15,7 @@ cS.vRandomVars = 2;
 % Sim stats. Computed after calibration is done
 cS.vSimStats = 11;
 % Aggregate stats implied by model
-cS.vAggrStats = 17;
+% cS.vAggrStats = 20;
 % Aggregate study times
 cS.vAggrSTime = 18;
 
@@ -57,10 +57,10 @@ cS.vPreambleData = 17;
 % *******  Saved as single, loaded as double: 151-199
 % Save / load with the usual function
 
-% Simulated histories
+% Simulated histories (created by sim_histories)
 cS.vSimResults = 151;
 % Simulated steady state solutions
-cS.vSteadyStates = 152;
+% cS.vSteadyStates = 152;
 
 
 

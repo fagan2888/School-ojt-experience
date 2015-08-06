@@ -1,7 +1,67 @@
 % Symbol
+\newcommand{\abilScale}{\theta}
+% mean log h1
+\newcommand{\hOneMean}{h1Mean}
+% Growth rate of h1
+\newcommand{\gHOne}{gH1}
+% Symbol
+\newcommand{\hOneStd}{\sigma_{h1}}
+% wtHA
+\newcommand{\wtHA}{wtHA}
+% wtIQa
+\newcommand{\wtIQa}{wtIQa}
+% Symbol
+\newcommand{\stdIq}{\sigma_{IQ}}
+% Symbol
+\newcommand{\prefScale}{\gamma}
+% Growth of scale param
+\newcommand{\gPrefScale}{g(\gamma)}
+% Scale parameter
+\newcommand{\prHsgMult}{prHsgMult}
+% Scale parameter
+\newcommand{\prCgMult}{prCgMult}
+% Curvature
+\newcommand{\alphaHSD}{\alpha_{HSD}}
+% Curvature
+\newcommand{\alphaHSG}{\alpha_{HSG}}
+% Curvature
+\newcommand{\alphaCD}{\alpha_{CD}}
+% Curvature
+\newcommand{\alphaCG}{\alpha_{CG}}
+% Depreciation
+\newcommand{\ddhHSD}{\delta_{HSD}}
+% Depreciation
+\newcommand{\ddhHSG}{\delta_{HSG}}
+% Depreciation
+\newcommand{\ddhCD}{\delta_{CD}}
+% Depreciation
+\newcommand{\ddhCG}{\delta_{CG}}
+% Max training time
+\newcommand{\trainTimeMax}{lMax}
+% Min training time
+\newcommand{\trainTimeMin}{lMin}
+% Log(A)
+\newcommand{\logAV}{log(A)}
+% Growth of A
+\newcommand{\gA}{g(A)}
+% Substitution elasticity
+\newcommand{\seCG}{\rho_{CG}}
+% Substitution elasticity
+\newcommand{\seHS}{\rho_{HS}}
+% Skill price nodes
+\newcommand{\logWNodesOneV}{logWNodeHSD}
+% Skill price nodes
+\newcommand{\logWNodesTwoV}{logWNodeHSG}
+% Skill price nodes
+\newcommand{\logWNodesThreeV}{logWNodeCD}
+% Skill price nodes
+\newcommand{\logWNodesFourV}{logWNodeCG}
+% Symbol
 \newcommand{\pYear}{t}
 % Symbol
 \newcommand{\age}{a}
+% Symbol
+\newcommand{\bYear}{c}
 % Symbol
 \newcommand{\birthYear}{c}
 % Symbol
@@ -9,11 +69,7 @@
 % Symbol
 \newcommand{\tEndow}{\ell}
 % Symbol
-\newcommand{\stdIq}{\sigma_{IQ}}
-% Symbol
-\newcommand{\sDuration}{T_{s}}
-% Symbol
-\newcommand{\prefScale}{\gamma}
+\newcommand{\sDuration}{T}
 % Symbol
 \newcommand{\prefShockEntry}{\eta}
 % Symbol
@@ -25,14 +81,92 @@
 % Symbol
 \newcommand{\ability}{x}
 % Symbol
-\newcommand{\abilScale}{\theta}
-% Symbol
 \newcommand{\pProduct}{A}
-% Symbol
-\newcommand{\h1Std}{\sigma_{h1}}
 % Symbol
 \newcommand{\sPrice}{w}
 % Symbol
 \newcommand{\earn}{y}
 % Symbol
 \newcommand{\effUnits}{e}
+% Symbol
+\newcommand{\lSupply}{H}
+% Symbol
+\newcommand{\aggrHours}{L}
+% Symbol
+\newcommand{\neutralProd}{A}
+% Symbol
+\newcommand{\skillWeight}{\omega}
+% Symbol
+\newcommand{\aggrOutput}{Q}
+% Data year 1
+\newcommand{\dataYearOne}{1965}
+% Data year N
+\newcommand{\dataYearLast}{2011}
+% Wage year 1
+\newcommand{\wageYearOne}{1964}
+% Wage year N
+\newcommand{\wageYearLast}{2010}
+% Birth year 1
+\newcommand{\bYearFirst}{1935}
+% Birth year N
+\newcommand{\bYearLast}{1969}
+% No of cohorts
+\newcommand{\nCohorts}{35}
+% sp year 1
+\newcommand{\spYearOne}{1952}
+% sp year N
+\newcommand{\spYearLast}{2033}
+% No of sp nodes
+\newcommand{\nSpNodes}{82}
+% No of sim households
+\newcommand{\nSim}{1000}
+% No of calibrated params
+\newcommand{\nCalParams}{58}
+% No of spline params
+\newcommand{\nSpParams}{328}
+% Min alpha
+\newcommand{\alphaLow}{0.3}
+% Max alpha
+\newcommand{\alphaHigh}{0.7}
+% Min delta
+\newcommand{\ddhLow}{3.0}
+% Max delta
+\newcommand{\ddhHigh}{6.8}
+% CPI base year
+\newcommand{\cpiBaseYear}{2010}
+% Age 1
+\newcommand{\ageOne}{18}
+% Retirement age
+\newcommand{\ageRetire}{65}
+% Work start
+\newcommand{\oneOneHSD}{i}
+% Work start
+\newcommand{\oneOneHSG}{i}
+% Work start
+\newcommand{\oneOneCG}{i}
+% Gross interest rate
+\newcommand{\grossInt}{1.04}
+% Work start
+\newcommand{\ageOneHSD}{i}
+% Work start
+\newcommand{\ageOneHSG}{i}
+% Work start
+\newcommand{\ageOneCG}{i}
+% Young ages
+\newcommand{\ageRangeYoung}{25-34}
+% Middle ages
+\newcommand{\ageRangeMiddle}{35-44}
+% Old ages
+\newcommand{\ageRangeOld}{45-54}
+% wage age 1
+\newcommand{\wageAgeRangeOne}{20}
+% wage age N
+\newcommand{\wageAgeRangeLast}{60}
+% for school aggregation
+\newcommand{\schoolAgeRangeOne}{30}
+% for school aggregation
+\newcommand{\schoolAgeRangeLast}{50}
+% Smoothing hours
+\newcommand{\hpParamHours}{20}
+% Symbol
+\newcommand{\schoolProdFct}{F}

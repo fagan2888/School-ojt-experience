@@ -1,4 +1,4 @@
-function spS = skill_price_const(cS)
+function cS = skill_price_const(cInS)
 % Constants relating to skill prices
 %{
 OUT
@@ -8,13 +8,19 @@ OUT
       index values of spline nodes to be calibrated
 %}
 
+cS = cInS;
+
+
+%% Skill price year range
+
 spNodeGap = 8;
 
 % Years for which skill prices must be computed
 %  length 2!
 %  easiest to keep this the same for all s
-spS.spYearV = [helper_so1.year_from_age(cS.age1, cS.bYearV(1), cS.ageInBirthYear); ...
-   helper_so1.year_from_age(cS.ageRetire, cS.bYearV(cS.nCohorts), cS.ageInBirthYear)];
+spYear1 = min(cS.demogS.workYear1_scM(:));
+spYear2 = max(cS.demogS.workYear2_scM(:));
+spS.spYearV = [spYear1; spYear2];
 nsp = spS.spYearV(end) - spS.spYearV(1) + 1;
 spS.nsp = nsp;
 
@@ -51,5 +57,28 @@ spS.spNodeIdxV = round(linspace(1, nsp, nNodes));
 % spS.spLevelYear = round(spS.spNodeV(spS.spLevelYrIdx));
 
 
+%%  Parameters to be calibrated
+
+if strcmpi(cS.spSpecS.inSampleType, 'sbtc')
+   nNodes = length(spS.spNodeIdxV);
+   for iSchool = 1 : cS.nSchool
+      nameStr = sprintf('logWNode_s%iV', iSchool);
+      symbolStr = ['logWNode', cS.schoolLabelV{iSchool}];
+      cS.pvector = cS.pvector.change(nameStr,  symbolStr, 'Skill price nodes', ...
+         zeros(nNodes, 1), -3 * ones(nNodes, 1),  4 * ones(nNodes, 1),  cS.calBase);
+   end
+   
+elseif strcmpi(cS.spSpecS.inSampleType, 'dataWages')
+   % Calibrate a single level parameter for each s
+   cS.pvector = cS.pvector.change('spLevel_sV',  'spLevel', 'Skill price levels', ...
+      zeros(cS.nSchool, 1), -3 * ones(cS.nSchool, 1),  3 * ones(cS.nSchool, 1),  cS.calBase);
+else
+   error_so1('Invalid', cS);
+end
+
+
+
+
+cS.spS = spS;
 
 end

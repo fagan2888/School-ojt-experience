@@ -8,8 +8,8 @@ rhoHS = 0.3;
 yearV = (1970 : 2000)';
 nYr   = length(yearV);
 skillPriceM = 10 + rand([cS.nSchool, nYr]);
-aggrHoursM  = 10 + rand([cS.ageRetire, cS.nSchool, nYr]);
-meanEffM    = 5  + rand([cS.ageRetire, cS.nSchool, nYr]);
+aggrHoursM  = 10 + rand([cS.demogS.ageRetire, cS.nSchool, nYr]);
+meanEffM    = 5  + rand([cS.demogS.ageRetire, cS.nSchool, nYr]);
 
 
 [muM, LS2M, meanEffSY2M] = ge_cal_weights_so1(yearV, skillPriceM, aggrHoursM, meanEffM, rhoHS, rhoCG, cS);

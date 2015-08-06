@@ -1,7 +1,7 @@
 function saveS = aggr_stats_from_cells_so1(in_ascM, wt_asM, cS)
 % Compute aggregate wage stats from [age, school, cohort] cell data
 %{
-Cohorts are cS.bYearV
+Cohorts are cS.demogS.bYearV
 
 IN
    in_ascM(age, school, cohort)
@@ -21,7 +21,7 @@ OUT
 %}
 % -----------------------------------------------------------
 
-nBy = length(cS.bYearV);
+nBy = length(cS.demogS.bYearV);
 ageMax = size(in_ascM, 1);
 % Indexed by cS.wageYearV
 nYr = length(cS.wageYearV);
@@ -32,7 +32,7 @@ if cS.dbg > 10
    if ~v_check(in_ascM, 'f', [ageMax, cS.nSchool, nBy], [], [])
       error('Invalid');
    end
-   if ~v_check(wt_asM, 'f', [cS.ageRetire, cS.nSchool], 0, 1)
+   if ~v_check(wt_asM, 'f', [cS.demogS.ageRetire, cS.nSchool], 0, 1)
       error('Invalid');
    end
 end
@@ -53,11 +53,11 @@ for iy = 1 : nYr
    year1 = cS.wageYearV(iy);
    
    % Age of each model cohort
-   cohAgeV = age_from_year_so(cS.bYearV, year1, cS.ageInBirthYear);
+   cohAgeV = age_from_year_so(cS.demogS.bYearV, year1, cS.ageInBirthYear);
    
    for iSchool = 1 : cS.nSchool
       % Data by age for this year
-      data_aV = repmat(cS.missVal, [cS.ageRetire, 1]);
+      data_aV = repmat(cS.missVal, [cS.demogS.ageRetire, 1]);
       for age = ageRangeV(:)'
          % Find the cohort for this age
          %  If model has not cohort, use closest model cohort

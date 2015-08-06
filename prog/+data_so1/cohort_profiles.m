@@ -18,8 +18,8 @@ varS = param_so1.var_numbers;
 % Years with wage data
 saveS.wageYearV = cS.wageYearV;
 % Keep wage data for these ages
-dataAgeV = cS.age1 : cS.ageRetire;
-nBy = length(cS.bYearV);
+dataAgeV = cS.demogS.age1 : cS.demogS.ageRetire;
+nBy = length(cS.demogS.bYearV);
 
 
 % ***  Load data
@@ -35,7 +35,7 @@ end
 
 % Size of outputs
 % Save by physical age
-sizeV = [cS.ageRetire, cS.nSchool, length(cS.bYearV)];
+sizeV = [cS.demogS.ageRetire, cS.nSchool, length(cS.demogS.bYearV)];
 
 
 srcFieldV = {'wageMedian', 'earnMedian', 'nObs', 'mass', 'weeksMean'};
@@ -91,7 +91,7 @@ end
 % if ~v_check(idxPctV, 'f', [nPct, 1], 1, 100)
 %    error('Invalid idxPctV');
 % end
-% saveS.wagePctM = repmat(cS.missVal, [nPct, cS.ageRetire, cS.nSchool, cS.nCohorts]);
+% saveS.wagePctM = repmat(cS.missVal, [nPct, cS.demogS.ageRetire, cS.nSchool, cS.nCohorts]);
 % 
 % % Hp filter
 % for iSchool = 1 : cS.nSchool
@@ -139,7 +139,7 @@ end
 %       % *****  Wage distribution
 %       for iPct = 1 : nPct
 %          % outS. is indexed differently; by dataAgeV
-%          profileV = repmat(cS.missVal, [cS.ageRetire, 1]);
+%          profileV = repmat(cS.missVal, [cS.demogS.ageRetire, 1]);
 %          profileV(dataAgeV) = squeeze(outS.wagePctM(idxPctV(iPct), iBy, iSchool, :));
 %          % Observations should really be by percentile cell
 %          nObsV = saveS.nObsM(:, iSchool, iBy);

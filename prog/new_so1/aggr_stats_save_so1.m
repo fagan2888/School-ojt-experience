@@ -31,16 +31,16 @@ paramS = var_load_so1(cS.vParams, cS);
 %% Collect steady state matrices
 
 ssCohortV = [1, cS.nCohorts];
-logWageSS_iascM = repmat(cS.missVal, [cS.gS.nSim, cS.ageRetire, cS.nSchool, 2]);
-sTimeSS_iascM   = repmat(cS.missVal, [cS.gS.nSim, cS.ageRetire, cS.nSchool, 2]);
-tEndowSS_iascM  = repmat(cS.missVal, [cS.gS.nSim, cS.ageRetire, cS.nSchool, 2]);
-pSchoolSS_iscM  = repmat(cS.missVal, [cS.gS.nSim, cS.nSchool, 2]);
+logWageSS_iascM = repmat(cS.missVal, [cS.nSim, cS.demogS.ageRetire, cS.nSchool, 2]);
+sTimeSS_iascM   = repmat(cS.missVal, [cS.nSim, cS.demogS.ageRetire, cS.nSchool, 2]);
+tEndowSS_iascM  = repmat(cS.missVal, [cS.nSim, cS.demogS.ageRetire, cS.nSchool, 2]);
+pSchoolSS_iscM  = repmat(cS.missVal, [cS.nSim, cS.nSchool, 2]);
 for iSS = 1 : 2
    logWageSS_iascM(:,:,:,iSS) = log_lh(ssV{iSS}.cohS.wageM, cS.missVal);
    pSchoolSS_iscM(:,:,iSS) = ssV{iSS}.cohS.pSchoolM;
    sTimeSS_iascM(:,:,:,iSS)  = ssV{iSS}.cohS.sTimeM;
    for iSchool = 1 : cS.nSchool
-      tEndowSS_iascM(:,:,iSchool,iSS) = ones([cS.gS.nSim,1]) * paramS.tEndow_ascM(:,iSchool,ssCohortV(iSS))';
+      tEndowSS_iascM(:,:,iSchool,iSS) = ones([cS.nSim,1]) * paramS.tEndow_ascM(:,iSchool,ssCohortV(iSS))';
    end
 end
 
@@ -76,7 +76,7 @@ var_save_so1(aggrS, cS.vAggrStats, cS);
 tEndowM = zeros(size(simS.sTimeM));
 for iCohort = 1 : cS.nCohorts
    for iSchool = 1 : cS.nSchool
-      tEndowM(:,:,iSchool,iCohort) = ones([cS.gS.nSim,1]) * paramS.tEndow_ascM(:,iSchool,iCohort)';
+      tEndowM(:,:,iSchool,iCohort) = ones([cS.nSim,1]) * paramS.tEndow_ascM(:,iSchool,iCohort)';
    end
 end
 % Outputs are by [ind, age, school, year]

@@ -10,13 +10,13 @@ cS = const_so1(gNo, cS.dataSetNo);
 varS = param_so1.var_numbers;
 figS = const_fig_so1;
 
-byShowV = cS.byShowV(1 : 5);
+byShowV = cS.demogS.byShowV(1 : 5);
 
 % Load cohort profiles
 tgS = output_so1.var_load(varS.vCalTargets, cS);
 [nAge, nSchool, nBy] = size(tgS.logWage_ascM);
 
-if nSchool ~= cS.nSchool  ||  nBy ~= length(cS.bYearV)
+if nSchool ~= cS.nSchool  ||  nBy ~= length(cS.demogS.bYearV)
    error_so1('Invalid', cS);
 end
 
@@ -49,7 +49,7 @@ if 1
       idxV = find(min(logWageM) > cS.missVal);
       % Wage growth for these cohorts
       wGrowthV = logWageM(2,idxV) - logWageM(1,idxV);
-      plot(cS.bYearV(idxV),  wGrowthV,  figS.lineStyleV{iSchool}, 'color', figS.colorM(iSchool,:));
+      plot(cS.demogS.bYearV(idxV),  wGrowthV,  figS.lineStyleV{iSchool}, 'color', figS.colorM(iSchool,:));
    end
    
    hold off;
@@ -86,7 +86,7 @@ for iSchool = 1 : cS.nSchool
       smoothV = squeeze(tgS.logWage_ascM(:, iSchool, iBy));
       idxV = find(smoothV ~= cS.missVal);
       % Drop ages before assumed work start
-      idxV(idxV < cS.workStartAgeV(iSchool)) = [];
+      idxV(idxV < cS.demogS.workStartAgeV(iSchool)) = [];
       
       if length(idxV) < 2
          error_so1('no data to show', cS);
@@ -105,7 +105,7 @@ for iSchool = 1 : cS.nSchool
    ylabel(wStr);
    figures_lh.axis_range_lh([xMin, xMax, yMin, yMax]);
    if iSchool == cS.schoolCG
-      legend(cS.cohStrV(byShowV), 'Location', 'southeast');
+      legend(cS.demogS.cohStrV(byShowV), 'Location', 'southeast');
    end
       
    % save
@@ -120,7 +120,7 @@ if 1
    fprintf('    by cohort / school.   mean / min / max across ages \n');
    
    for iBy = 1 : nBy
-      fprintf('\nCohort %i\n',  cS.bYearV(iBy));
+      fprintf('\nCohort %i\n',  cS.demogS.bYearV(iBy));
       
       for iSchool = 1 : cS.nSchool
          nObsV = squeeze(tgS.nObs_ascM(:, iSchool, iBy));

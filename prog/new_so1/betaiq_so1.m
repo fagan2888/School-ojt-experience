@@ -32,7 +32,7 @@ end
 %% Main
 
 % Keep this many observations
-nObs = min(cS.gS.nSim, 2e3);
+nObs = min(cS.nSim, 2e3);
 
 % School dummies
 sDummyM = zeros([cS.nSchool * nObs, cS.nSchool-1]);

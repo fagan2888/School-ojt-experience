@@ -10,6 +10,6 @@ skillPrice_stM = 1 + rand(cS.nSchool, nsp);
 skillWeightTop_tlM = 1 + rand(nsp, 2);
 skillWeight_tlM = 1 + rand(nsp, cS.nSchool);
 
-calibr_so1.skill_price_dev(skillPrice_stM, skillWeightTop_tlM, skillWeight_tlM,  cS.gS.spS, cS);
+calibr_so1.skill_price_dev(skillPrice_stM, skillWeightTop_tlM, skillWeight_tlM,  cS.spSpecS, cS);
 
 end
